@@ -1,8 +1,16 @@
+/*
+ * ---------------------------
+ * File : splah_controller.dart
+ * ---------------------------
+ * Author : Eren Tatar (ganderwa)
+ * Email : dev.ganderwa@gmail.com
+ * ---------------------------
+ */
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:movie_app/src/ui/landing_page/landing_view.dart';
 
 import '../../router/router_helper.dart';
-import '../home/home_view.dart';
 
 final splashProvider = ChangeNotifierProvider(
   (ref) {
@@ -18,7 +26,7 @@ class SplashController extends ChangeNotifier {
 
   void init() async {
     await Future.delayed(const Duration(seconds: 1));
-    R.instance.replaceAll(object: const HomeView());
+    R.instance.replaceAll(object: const LandingView());
     
   }
 }

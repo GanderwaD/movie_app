@@ -1,3 +1,11 @@
+/*
+ * ---------------------------
+ * File : home_view.dart
+ * ---------------------------
+ * Author : Eren Tatar (ganderwa)
+ * Email : dev.ganderwa@gmail.com
+ * ---------------------------
+ */
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -16,7 +24,7 @@ class HomeView extends ConsumerWidget with RouterObject {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final controller = ref.watch(homeViewProvider);
+    final controller = ref.watch(homeProvider);
     return const Center(child: Text('HomeView'));
   }
 }

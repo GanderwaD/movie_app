@@ -1,4 +1,11 @@
-// ignore_for_file: unused_local_variable
+/*
+ * ---------------------------
+ * File : splash_view.dart
+ * ---------------------------
+ * Author : Eren Tatar (ganderwa)
+ * Email : dev.ganderwa@gmail.com
+ * ---------------------------
+ */
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,6 +13,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../constants/app_path.dart';
 import '../../router/router_constants.dart';
 import '../../router/router_object.dart';
+import '../shared/base_scaffold.dart';
+import '../shared/widget_key_constants.dart';
 import 'splah_controller.dart';
 
 class SplashView extends ConsumerWidget with RouterObject {
@@ -20,7 +29,8 @@ class SplashView extends ConsumerWidget with RouterObject {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
    final c =  ref.watch(splashProvider);
-    return Scaffold(
+    return BaseScaffold(
+      key: wKeySplashView,
       body: Center(
         child: Image.asset(APath.iconLogo()),
       ),
