@@ -42,7 +42,7 @@ class LandingView extends ConsumerWidget with RouterObject {
         children: [
           const Spacer(),
           PageSlider(
-            controller: landingController.sliderController,
+            controller: landingController.landingSliderController,
             onPageChanged: (index) => landingController.updatePageIndex(index),
             enableAutoSlider: landingController.isAutoPlay,
             slideTransform: const CubeTransform(),

@@ -23,7 +23,7 @@ class LandingController extends ChangeNotifier {
     init();
   }
   List<LandingItem> landingItems = [];
-  PageSliderController sliderController = PageSliderController();
+  PageSliderController landingSliderController = PageSliderController();
   int currentLandingPageIndex = 0;
   bool isAutoPlay = true;
 
@@ -58,7 +58,7 @@ class LandingController extends ChangeNotifier {
 
   skipLast() {
     currentLandingPageIndex = landingItems.length - 1;
-    sliderController.jumpToPage(currentLandingPageIndex);
+    landingSliderController.jumpToPage(currentLandingPageIndex);
     notifyListeners();
   }
 }
