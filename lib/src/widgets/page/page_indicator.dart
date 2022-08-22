@@ -19,7 +19,7 @@ class PageIndicator extends StatelessWidget {
 
   const PageIndicator({
     Key? key,
-    this.currentIndex,
+    required this.currentIndex,
     required this.count,
     this.selectedColor = Colors.black,
     this.unselectedColor  = Colors.grey,

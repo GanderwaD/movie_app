@@ -15,7 +15,7 @@ import '../../router/router_constants.dart';
 import '../../router/router_object.dart';
 import '../shared/base_scaffold.dart';
 import '../shared/widget_key_constants.dart';
-import 'splah_controller.dart';
+import 'splash_controller.dart';
 
 class SplashView extends ConsumerWidget with RouterObject {
   const SplashView({Key? key}) : super(key: key);

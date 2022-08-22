@@ -22,7 +22,7 @@ class HomeController extends ChangeNotifier {
   }
   List<HomeSliderItem> homeSliderItems = [];
   PageSliderController homeSliderController = PageSliderController();
-  int currentLandingPageIndex = 0;
+  int currentHomePageIndex = 0;
   bool isAutoPlay = true;
 
   void init(){
@@ -40,12 +40,13 @@ class HomeController extends ChangeNotifier {
   }
 
   updatePageIndex(int index) {
-    currentLandingPageIndex = index;
-    if (currentLandingPageIndex == 2) {
-      setAutoPlay(false);
-    } else {
-      setAutoPlay(true);
-    }
+    currentHomePageIndex = index;
+    setAutoPlay(true);
+    // if (currentHomePageIndex == 2) {
+    //   setAutoPlay(true);
+    // } else {
+    //   setAutoPlay(true);
+    // }
     notifyListeners();
   }
 

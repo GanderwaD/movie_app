@@ -8,7 +8,7 @@
  */
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:movie_app/src/ui/landing_page/landing_view.dart';
+import 'package:movie_app/src/ui/home/home_view.dart';
 
 import '../../router/router_helper.dart';
 
@@ -26,7 +26,7 @@ class SplashController extends ChangeNotifier {
 
   void init() async {
     await Future.delayed(const Duration(seconds: 1));
-    R.instance.replaceAll(object: const LandingView());
+    R.instance.replaceAll(object: const HomeView());
     
   }
 }

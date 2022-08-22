@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/src/ui/drawer/drawer.dart';
 
 import '../../utils/keyboard_utils.dart';
 import '../../widgets/text_widget/text_widget.dart';
@@ -10,11 +11,14 @@ class BaseScaffold extends StatelessWidget {
     this.appBar,
     this.appBarTitle,
     this.showBackButton = true,
+    this.drawer,
   });
   final Widget body;
   final AppBar? appBar;
   final String? appBarTitle;
+  final Drawer? drawer;
   final bool showBackButton;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +29,7 @@ class BaseScaffold extends StatelessWidget {
           title: TextWidget(appBarTitle!),
           automaticallyImplyLeading: showBackButton,
         )),
+        drawer: drawer,
         body: body,
       ),
     );

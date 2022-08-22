@@ -40,7 +40,6 @@ class AppRouterDelegate extends RouterDelegate<RouterAction>
     return _remove(result);
   }
 
-    ///back button //TODO: fansupport daki pop ozelligine gore debugla
   @override
   Future<bool> popRoute() {
     if (_remove(null)) {
