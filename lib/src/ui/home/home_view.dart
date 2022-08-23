@@ -9,10 +9,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:movie_app/src/ui/drawer/drawer.dart';
 import 'package:movie_app/src/ui/home/home_slider_card.dart';
+import 'package:movie_app/src/ui/profile/profile_view.dart';
+import 'package:movie_app/src/ui/search/search_view.dart';
 import 'package:movie_app/src/ui/shared/base_scaffold.dart';
+import 'package:movie_app/src/ui/shared/drawer.dart';
 import 'package:movie_app/src/widgets/animations/slide_transform/default_transform.dart';
+import 'package:movie_app/src/widgets/navbar/bottom_navbar.dart';
 import 'package:movie_app/src/widgets/text_widget/text_size.dart';
 
 import '../../router/router_constants.dart';
@@ -35,14 +38,19 @@ class HomeView extends ConsumerWidget with RouterObject {
     final homeViewController = ref.watch(homeProvider);
     final size = MediaQuery.of(context).size;
     return BaseScaffold(
-      body: NestedScrollView(
+      body:NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           _getMovieSlider(context, homeViewController, innerBoxIsScrolled),
         ],
         body: _getBody(context, homeViewController),
       ),
       drawer: const Drawer(
-        child: DrawerWidget(),
+        child: GetDrawer(),
+      ),
+      navbar: BottomNavbar(
+        items: homeViewController.navbarItems,
+        selectedIndex: homeViewController.currentNavBarIndex,
+        onItemSelected: (index) => homeViewController.navbarSelected(index),
       ),
     );
   }
@@ -55,7 +63,7 @@ class HomeView extends ConsumerWidget with RouterObject {
       pinned: true,
       leading: IconButton(
         onPressed: () => Scaffold.of(context).openDrawer(),
-        icon: Icon(Icons.menu),
+        icon: Icon(Icons.menu,size: 30.0),
       ),
       backgroundColor: Colors.red,
       title: const TextWidget('Movie',

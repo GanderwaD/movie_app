@@ -7,7 +7,13 @@
  * ---------------------------
  */
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:movie_app/src/router/router_helper.dart';
+import 'package:movie_app/src/ui/search/search_view.dart';
+import 'package:movie_app/src/widgets/navbar/navbar_item.dart';
+import 'package:movie_app/src/widgets/text_widget/text_size.dart';
+import 'package:movie_app/src/widgets/text_widget/text_widget.dart';
 
 import '../../models/home_slider_item.dart';
 import '../../widgets/page/page_slider_controller.dart';
@@ -23,9 +29,35 @@ class HomeController extends ChangeNotifier {
   List<HomeSliderItem> homeSliderItems = [];
   PageSliderController homeSliderController = PageSliderController();
   int currentHomePageIndex = 0;
+  int currentNavBarIndex = 0;
   bool isAutoPlay = true;
+  List<NavbarItem> navbarItems = [
+    const NavbarItem(
+      title: TextWidget(
+        "Home",
+        textSize: TextSize.medium,
+        color: Colors.blue,
+      ),
+    ),
+    const NavbarItem(
+      title: TextWidget(
+        "Search",
+        textSize: TextSize.medium,
+        color: Colors.blue,
+      ),
+      icon: Icon(Icons.search_outlined),
+    ),
+    const NavbarItem(
+      title: TextWidget(
+        "Account",
+        textSize: TextSize.medium,
+        color: Colors.blue,
+      ),
+      icon: Icon(Icons.account_box),
+    ),
+  ];
 
-  void init(){
+  void init() {
     homeSliderItems = [
       HomeSliderItem(description: '1', title: "1"),
       HomeSliderItem(description: '2', title: "2"),
@@ -33,7 +65,7 @@ class HomeController extends ChangeNotifier {
     ];
     notifyListeners();
   }
-  
+
   setAutoPlay(bool val) {
     isAutoPlay = val;
     notifyListeners();
@@ -50,4 +82,14 @@ class HomeController extends ChangeNotifier {
     notifyListeners();
   }
 
+  navbarSelected(int index) {
+    currentNavBarIndex = index;
+    // switch (index) {
+    //   case 1:
+    //     R.instance.add(object: SearchView());
+    //     break;
+    //   default:
+    // }
+    notifyListeners();
+  }
 }

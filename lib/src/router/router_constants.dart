@@ -19,3 +19,10 @@ const String splashPath = '/splash';
 const String homeKey = 'home_key';
 const String homePath = '/home';
 
+///search view
+const String searchKey = 'search_key';
+const String searchPath = '/search';
+
+///profile view
+const String profileKey = 'profile_key';
+const String profilePath = '/profile';
