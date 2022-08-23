@@ -7,6 +7,8 @@
  * ---------------------------
  */
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_app/src/ui/home/home_slider_card.dart';
@@ -42,8 +44,7 @@ class HomeView extends ConsumerWidget with RouterObject {
       body: homeViewController.currentNavBarIndex == 0
           ? NestedScrollView(
               headerSliverBuilder: (context, innerBoxIsScrolled) => [
-                _getMovieSlider(
-                    context, homeViewController, innerBoxIsScrolled),
+                _getMovieSlider(context, homeViewController),
               ],
               body: _getBody(context, homeViewController),
             )
@@ -62,45 +63,38 @@ class HomeView extends ConsumerWidget with RouterObject {
     );
   }
 
-  _getMovieSlider(
-      BuildContext context, homeViewController, bool innerBoxIsScrolled) {
+  _getMovieSlider(BuildContext context, homeViewController) {
     return SliverAppBar(
       centerTitle: true,
-      expandedHeight: 300,
+      expandedHeight: 250,
       pinned: true,
       leading: IconButton(
         onPressed: () => Scaffold.of(context).openDrawer(),
-        icon: Icon(Icons.menu, size: 30.0),
+        icon: const Icon(Icons.menu, size: 30.0),
       ),
       backgroundColor: blueYonder,
       title: const TextWidget('Movie',
           color: Colors.blue, maxLines: 1, textSize: TextSize.uLarge),
       flexibleSpace: FlexibleSpaceBar(
-        background: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                margin: const EdgeInsets.only(top: 70,bottom: 10),
-                child: PageSlider(
-                  viewportFraction: 0.4,
-                  controller: homeViewController.homeSliderController,
-                  infiniteScroll: true,
-                  onPageChanged: (index) =>
-                      homeViewController.updatePageIndex(index),
-                  //enableAutoSlider: homeViewController.isAutoPlay,
-                  enableAutoSlider: true,
-                  slideTransform: const DefaultTransform(),
-                  pageBuilder: (index) {
-                    return HomeSliderItemCard(
-                        item: homeViewController.homeSliderItems[index]);
-                  },
-                  itemCount: homeViewController.homeSliderItems.length,
+        background: Container(
+          margin: const EdgeInsets.only(top: 70, bottom: 10),
+          child: PageSlider(
+            viewportFraction: 0.4,
+            controller: homeViewController.homeSliderController,
+            infiniteScroll: true,
+            onPageChanged: (index) => homeViewController.updatePageIndex(index),
+            //enableAutoSlider: homeViewController.isAutoPlay,
+            enableAutoSlider: true,
+            slideTransform: const DefaultTransform(),
+            pageBuilder: (index) {
+              return GestureDetector(
+                onTap: () => log("$index"),
+                child: HomeSliderItemCard(
+                  item: homeViewController.homeSliderItems[index],
                 ),
-              ),
-              Container(
-                child: TextWidget("asd"),
-              ),
-            ],
+              );
+            },
+            itemCount: homeViewController.homeSliderItems.length,
           ),
         ),
       ),
@@ -119,10 +113,13 @@ class HomeView extends ConsumerWidget with RouterObject {
                 crossAxisSpacing: 6.0),
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
-                return Container(
-                  alignment: Alignment.center,
-                  color: Colors.teal,
-                  child: Text('Movie Banner ${index + 1}'),
+                return GestureDetector(
+                  onTap: () => log("$index"),
+                  child: Container(
+                    alignment: Alignment.center,
+                    color: Colors.teal,
+                    child: Text('Movie Banner $index'),
+                  ),
                 );
               },
               childCount: 10,

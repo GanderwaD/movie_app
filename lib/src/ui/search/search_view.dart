@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_app/src/ui/shared/base_scaffold.dart';
@@ -47,7 +49,7 @@ class SearchView extends ConsumerWidget with RouterObject {
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.all(2.0),
-              child: TextFormField(
+              child: TextFormField( 
                 cursorColor: Colors.black,
                 decoration: InputDecoration(
                   fillColor: Colors.blue,
@@ -71,10 +73,13 @@ class SearchView extends ConsumerWidget with RouterObject {
                 crossAxisSpacing: 6.0),
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
-                return Container(
-                  alignment: Alignment.center,
-                  color: modernGray,
-                  child: Text('Movie Banner ${index+1}'),
+                return GestureDetector(
+                  onTap: () => log("$index"),
+                  child: Container(
+                    alignment: Alignment.center,
+                    color: modernGray   ,
+                    child: Text('Movie Banner $index'),
+                  ),
                 );
               },
               childCount: 10,
