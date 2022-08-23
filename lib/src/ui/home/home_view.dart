@@ -38,12 +38,17 @@ class HomeView extends ConsumerWidget with RouterObject {
     final homeViewController = ref.watch(homeProvider);
     final size = MediaQuery.of(context).size;
     return BaseScaffold(
-      body:NestedScrollView(
-        headerSliverBuilder: (context, innerBoxIsScrolled) => [
-          _getMovieSlider(context, homeViewController, innerBoxIsScrolled),
-        ],
-        body: _getBody(context, homeViewController),
-      ),
+      body: homeViewController.currentNavBarIndex == 0
+          ? NestedScrollView(
+              headerSliverBuilder: (context, innerBoxIsScrolled) => [
+                _getMovieSlider(
+                    context, homeViewController, innerBoxIsScrolled),
+              ],
+              body: _getBody(context, homeViewController),
+            )
+          : homeViewController.currentNavBarIndex == 1
+              ? SearchView()
+              : ProfileView(),
       drawer: const Drawer(
         child: GetDrawer(),
       ),
@@ -63,7 +68,7 @@ class HomeView extends ConsumerWidget with RouterObject {
       pinned: true,
       leading: IconButton(
         onPressed: () => Scaffold.of(context).openDrawer(),
-        icon: Icon(Icons.menu,size: 30.0),
+        icon: Icon(Icons.menu, size: 30.0),
       ),
       backgroundColor: Colors.red,
       title: const TextWidget('Movie',
