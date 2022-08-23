@@ -1,6 +1,6 @@
 /*
  * ---------------------------
- * File : carousel_slider.dart
+ * File : Page_slider.dart
  * ---------------------------
  * Author : Eren Tatar (ganderwa)
  * Email : dev.ganderwa@gmail.com
@@ -141,7 +141,7 @@ class PageSliderState extends State<PageSlider> {
     if (oldWidget.itemCount != widget.itemCount) {
       _initPageController();
     }
-    _initCarouselSliderController();
+    _initPageSliderController();
   }
 
   @override
@@ -156,12 +156,12 @@ class PageSliderState extends State<PageSlider> {
     super.initState();
     _isPlaying = widget.enableAutoSlider;
     _currentPage = widget.initialPage;
-    _initCarouselSliderController();
+    _initPageSliderController();
     _initPageController();
     setAutoSliderEnabled(_isPlaying);
   }
 
-  void _initCarouselSliderController() {
+  void _initPageSliderController() {
     if (widget.controller != null) {
       widget.controller!.state = this;
     }
