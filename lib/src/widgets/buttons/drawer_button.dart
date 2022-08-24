@@ -4,8 +4,6 @@ import '../image/asset_image.dart';
 import '../text_widget/text_widget.dart';
 import 'flat_button_widget.dart';
 
-
-
 /*
  * ---------------------------
  * Project : Fan Support Mobile
@@ -19,12 +17,13 @@ import 'flat_button_widget.dart';
  */
 
 class DrawerButton extends StatelessWidget {
-  final String? text;
+  final Widget? text;
   final String? iconPath;
   final VoidCallback? onPressed;
   final bool divider;
   final Widget? icon;
   final Widget? endingIcon;
+  final String defaultText;
 
   const DrawerButton({
     Key? key,
@@ -34,6 +33,7 @@ class DrawerButton extends StatelessWidget {
     this.divider = false,
     this.icon,
     this.endingIcon,
+    this.defaultText = '',
   }) : super(key: key);
 
   @override
@@ -69,9 +69,9 @@ class DrawerButton extends StatelessWidget {
                         ),
                     Container(width: 16.0),
                     Expanded(
-                      child: TextWidget(text ?? ''),
+                      child: text ?? TextWidget(''),
                     ),
-                      endingIcon ?? const SizedBox.shrink(),
+                    endingIcon ?? const SizedBox.shrink(),
                     divider
                         ? Icon(Icons.arrow_forward_ios,
                             size: 20.0, color: Colors.grey)
@@ -81,7 +81,6 @@ class DrawerButton extends StatelessWidget {
                 ),
               ),
             ),
-          
             Container(
                 width: divider ? size.width : 0,
                 height: 1.0,

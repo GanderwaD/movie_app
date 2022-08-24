@@ -454,9 +454,9 @@ abstract class LoadIndicatorState<T extends LoadIndicator> extends State<T>
   }
 }
 mixin IndicatorStateMixin<T extends StatefulWidget, V> on State<T> {
-  PaginatedRefresher? refresher;
+  PaginatedList? refresher;
   RefreshConfiguration? configuration;
-  PaginatedRefresherState? refresherState;
+  PaginatedListState? refresherState;
   bool _floating = false;
   set floating(floating) => _floating = floating;
   get floating => _floating;
@@ -489,8 +489,8 @@ mixin IndicatorStateMixin<T extends StatefulWidget, V> on State<T> {
   }
   void _updateListener() {
     configuration = RefreshConfiguration.of(context);
-    refresher = PaginatedRefresher.of(context);
-    refresherState = PaginatedRefresher.ofState(context);
+    refresher = PaginatedList.of(context);
+    refresherState = PaginatedList.ofState(context);
     RefreshNotifier<V>? newMode = V == RefreshStatus
         ? refresher!.controller.headerMode as RefreshNotifier<V>?
         : refresher!.controller.footerMode as RefreshNotifier<V>?;
@@ -511,7 +511,7 @@ mixin IndicatorStateMixin<T extends StatefulWidget, V> on State<T> {
   void initState() {
     
     if (V == RefreshStatus) {
-      PaginatedRefresher.of(context)?.controller.headerMode?.value =
+      PaginatedList.of(context)?.controller.headerMode?.value =
           RefreshStatus.idle;
     }
     super.initState();

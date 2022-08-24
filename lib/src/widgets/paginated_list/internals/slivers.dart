@@ -34,7 +34,7 @@ class SliverRefresh extends SingleChildRenderObjectWidget {
   void updateRenderObject(
       BuildContext context, covariant RenderSliverRefresh renderObject) {
     final RefreshStatus mode =
-        PaginatedRefresher.of(context)!.controller.headerMode!.value;
+        PaginatedList.of(context)!.controller.headerMode!.value;
     renderObject
       ..refreshIndicatorLayoutExtent = refreshIndicatorLayoutExtent
       ..hasLayoutExtent = floating

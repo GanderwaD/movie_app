@@ -9,9 +9,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:movie_app/src/router/router_helper.dart';
-import 'package:movie_app/src/ui/search/search_view.dart';
 import 'package:movie_app/src/widgets/navbar/navbar_item.dart';
+import 'package:movie_app/src/widgets/paginated_list/paginated_list.dart';
 import 'package:movie_app/src/widgets/text_widget/text_size.dart';
 import 'package:movie_app/src/widgets/text_widget/text_widget.dart';
 
@@ -28,6 +27,7 @@ class HomeController extends ChangeNotifier {
   }
   List<HomeSliderItem> homeSliderItems = [];
   PageSliderController homeSliderController = PageSliderController();
+  PaginatedController homePaginatedController = PaginatedController();
   int currentHomePageIndex = 0;
   int currentNavBarIndex = 0;
   bool isAutoPlay = true;
@@ -90,6 +90,12 @@ class HomeController extends ChangeNotifier {
     //     break;
     //   default:
     // }
+    notifyListeners();
+  }
+
+  onRefresh() async {
+    await Future.delayed(const Duration(seconds: 1));
+    homePaginatedController.refreshCompleted();
     notifyListeners();
   }
 }

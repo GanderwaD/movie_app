@@ -18,7 +18,7 @@ typedef PaginatedBuilder = Widget Function(BuildContext context, RefreshPhysics 
 
 
 
-class PaginatedRefresher extends StatefulWidget {
+class PaginatedList extends StatefulWidget {
   final Widget? child;
   final Widget? header;
   final Widget? footer;
@@ -39,7 +39,7 @@ class PaginatedRefresher extends StatefulWidget {
   final int? semanticChildCount;
   final DragStartBehavior? dragStartBehavior;
 
-   const PaginatedRefresher(
+   const PaginatedList(
       {Key? key,
       required this.controller,
       this.child,
@@ -62,7 +62,7 @@ class PaginatedRefresher extends StatefulWidget {
       : builder = null,
         super(key: key);
 
-  const PaginatedRefresher.builder({
+  const PaginatedList.builder({
     super.key,
     required this.controller,
     required this.builder,
@@ -84,21 +84,21 @@ class PaginatedRefresher extends StatefulWidget {
         cacheExtent = null,
         primary = null;
 
-  static PaginatedRefresher? of(BuildContext? context) {
-    return context!.findAncestorWidgetOfExactType<PaginatedRefresher>();
+  static PaginatedList? of(BuildContext? context) {
+    return context!.findAncestorWidgetOfExactType<PaginatedList>();
   }
 
-  static PaginatedRefresherState? ofState(BuildContext? context) {
-    return context!.findAncestorStateOfType<PaginatedRefresherState>();
+  static PaginatedListState? ofState(BuildContext? context) {
+    return context!.findAncestorStateOfType<PaginatedListState>();
   }
 
   @override
   State<StatefulWidget> createState() {
-    return PaginatedRefresherState();
+    return PaginatedListState();
   }
 }
 
-class PaginatedRefresherState extends State<PaginatedRefresher> {
+class PaginatedListState extends State<PaginatedList> {
   RefreshPhysics? _physics;
   bool _updatePhysics = false;
   double viewportExtent = 0;
@@ -306,7 +306,7 @@ class PaginatedRefresherState extends State<PaginatedRefresher> {
   }
 
   @override
-  void didUpdateWidget(PaginatedRefresher oldWidget) {
+  void didUpdateWidget(PaginatedList oldWidget) {
     if (widget.controller != oldWidget.controller) {
       widget.controller.headerMode!.value =
           oldWidget.controller.headerMode!.value;
@@ -369,7 +369,7 @@ class PaginatedRefresherState extends State<PaginatedRefresher> {
 }
 
 class PaginatedController {
-  PaginatedRefresherState? _refresherState;
+  PaginatedListState? _refresherState;
 
   RefreshNotifier<RefreshStatus>? headerMode;
 
@@ -401,7 +401,7 @@ class PaginatedController {
     footerMode = RefreshNotifier(initialLoadStatus ?? LoadStatus.idle);
   }
 
-  void _bindState(PaginatedRefresherState state) {
+  void _bindState(PaginatedListState state) {
     assert(_refresherState == null,
         "Don't use one refreshController to multiple SmartRefresher,It will cause some unexpected bugs mostly in TabBarView");
     _refresherState = state;

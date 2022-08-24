@@ -137,7 +137,7 @@ class TwoLevelHeader extends StatelessWidget {
       iconPos: iconPos,
       outerBuilder: (child) {
         final RefreshStatus? mode =
-            PaginatedRefresher.of(context)!.controller.headerStatus;
+            PaginatedList.of(context)!.controller.headerStatus;
         final bool isTwoLevel = (mode == RefreshStatus.twoLevelClosing ||
             mode == RefreshStatus.twoLeveling ||
             mode == RefreshStatus.twoLevelOpening);
@@ -146,7 +146,7 @@ class TwoLevelHeader extends StatelessWidget {
             decoration: !isTwoLevel
                 ? (decoration ?? const BoxDecoration(color: Colors.redAccent))
                 : null,
-            height: PaginatedRefresher.ofState(context)!.viewportExtent,
+            height: PaginatedList.ofState(context)!.viewportExtent,
             alignment: isTwoLevel ? null : Alignment.bottomCenter,
             child: isTwoLevel
                 ? twoLevelWidget

@@ -18,6 +18,7 @@ import 'package:movie_app/src/ui/shared/base_scaffold.dart';
 import 'package:movie_app/src/ui/shared/drawer.dart';
 import 'package:movie_app/src/widgets/animations/slide_transform/default_transform.dart';
 import 'package:movie_app/src/widgets/navbar/bottom_navbar.dart';
+import 'package:movie_app/src/widgets/paginated_list/paginated_list.dart';
 import 'package:movie_app/src/widgets/text_widget/text_size.dart';
 
 import '../../router/router_constants.dart';
@@ -63,7 +64,7 @@ class HomeView extends ConsumerWidget with RouterObject {
     );
   }
 
-  _getMovieSlider(BuildContext context, homeViewController) {
+  _getMovieSlider(BuildContext context,HomeController homeViewController) {
     return SliverAppBar(
       centerTitle: true,
       expandedHeight: 250,
@@ -104,28 +105,32 @@ class HomeView extends ConsumerWidget with RouterObject {
   _getBody(BuildContext context, HomeController homeViewController) {
     return Container(
       color: blueYonder,
-      child: CustomScrollView(
-        slivers: [
-          SliverGrid(
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 200.0,
-                mainAxisSpacing: 6.0,
-                crossAxisSpacing: 6.0),
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                return GestureDetector(
-                  onTap: () => log("$index"),
-                  child: Container(
-                    alignment: Alignment.center,
-                    color: Colors.teal,
-                    child: Text('Movie Banner $index'),
-                  ),
-                );
-              },
-              childCount: 10,
-            ),
-          )
-        ],
+      child: PaginatedList(
+        controller: homeViewController.homePaginatedController,
+        onRefresh: () => homeViewController.onRefresh(),
+        child: CustomScrollView(
+          slivers: [
+            SliverGrid(
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 200.0,
+                  mainAxisSpacing: 6.0,
+                  crossAxisSpacing: 6.0),
+              delegate: SliverChildBuilderDelegate(
+                (BuildContext context, int index) {
+                  return GestureDetector(
+                    onTap: () => log("$index"),
+                    child: Container(
+                      alignment: Alignment.center,
+                      color: Colors.teal,
+                      child: Text('Movie Banner $index'),
+                    ),
+                  );
+                },
+                childCount: 10,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

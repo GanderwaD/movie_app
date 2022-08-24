@@ -13,5 +13,7 @@ import 'package:flutter/cupertino.dart';
 import '../router/router_delegate.dart';
 
 
-void get hideKeyboard => FocusScope.of(appNavigatorKey.currentContext!).unfocus();
+void hideKeyboard(BuildContext context) {
+    FocusScope.of(context).unfocus();
+  }
 

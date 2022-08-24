@@ -26,3 +26,7 @@ const String searchPath = '/search';
 ///profile view
 const String profileKey = 'profile_key';
 const String profilePath = '/profile';
+
+///all movies
+const String allMovieKey = 'all_movies_key';
+const String allMoviePath = '/allMovie';
