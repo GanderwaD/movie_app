@@ -9,7 +9,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:movie_app/src/models/movie.dart';
 import 'package:movie_app/src/widgets/navbar/navbar_item.dart';
 import 'package:movie_app/src/widgets/paginated_list/paginated_list.dart';
 import 'package:movie_app/src/widgets/text_widget/text_size.dart';
@@ -32,7 +31,6 @@ class HomeController extends ChangeNotifier {
   int currentHomePageIndex = 0;
   int currentNavBarIndex = 0;
   bool isAutoPlay = true;
-
 
   List<NavbarItem> navbarItems = [
     const NavbarItem(
@@ -60,14 +58,7 @@ class HomeController extends ChangeNotifier {
     ),
   ];
 
-  void init() {
-    homeSliderItems = [
-      HomeSliderItem(description: '1', title: "1"),
-      HomeSliderItem(description: '2', title: "2"),
-      HomeSliderItem(description: '3', title: "3"),
-    ];
-    notifyListeners();
-  }
+  void init() {}
 
   setAutoPlay(bool val) {
     isAutoPlay = val;

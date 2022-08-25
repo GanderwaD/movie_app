@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:movie_app/src/ui/movies/movie_controller.dart';
 
 import '../../router/router_constants.dart';
 import '../../router/router_object.dart';
@@ -28,13 +29,13 @@ class MoviesView extends ConsumerWidget with RouterObject {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final homeViewController = ref.watch(homeProvider);
-    final movieListWatcher = ref.watch(movieListProvider);
+    final movieController = ref.watch(movieControllerProvider);
     return BaseScaffold(
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
-          _getMovieSlider(context, homeViewController, movieListWatcher),
+          _getMovieSlider(context, homeViewController, movieController),
         ],
-        body: _getBody(context, homeViewController, movieListWatcher),
+        body: _getBody(context, homeViewController, movieController),
       ),
       drawer: const Drawer(
         child: GetDrawer(),
@@ -43,7 +44,7 @@ class MoviesView extends ConsumerWidget with RouterObject {
   }
 
   _getMovieSlider(BuildContext context, HomeController homeViewController,
-      MovieList movieListController) {
+      MovieController movieController) {
     return SliverAppBar(
       centerTitle: true,
       expandedHeight: 250,
@@ -58,55 +59,68 @@ class MoviesView extends ConsumerWidget with RouterObject {
       flexibleSpace: FlexibleSpaceBar(
         background: Container(
           margin: const EdgeInsets.only(top: 70, bottom: 10),
-          child: PageSlider(
-            viewportFraction: 0.4,
-            controller: homeViewController.homeSliderController,
-            infiniteScroll: true,
-            onPageChanged: (index) => homeViewController.updatePageIndex(index),
-            //enableAutoSlider: homeViewController.isAutoPlay,
-            enableAutoSlider: true,
-            slideTransform: const DefaultTransform(),
-            pageBuilder: (index) {
-              var movie = movieListController.movieList[index];
-              return GestureDetector(
-                onTap: () => log("Slider $index"),
-                child: MovieBox(movie: movie),
-              );
-            },
-            itemCount: 5,
-          ),
+          child: movieController.loadingTopMovies
+              ? const Center(
+                  child: CircularProgressIndicator(color: Colors.red),
+                )
+              : PageSlider(
+                  viewportFraction: 0.4,
+                  controller: homeViewController.homeSliderController,
+                  infiniteScroll: true,
+                  onPageChanged: (index) =>
+                      homeViewController.updatePageIndex(index),
+                  //enableAutoSlider: homeViewController.isAutoPlay,
+                  enableAutoSlider: true,
+                  slideTransform: const DefaultTransform(),
+                  pageBuilder: (index) {
+                    var movie = movieController.topMovies[index];
+                    return GestureDetector(
+                      onTap: () => log("Slider $index"),
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 5.0),
+                        child: MovieBox(movie: movie),
+                      ),
+                    );
+                  },
+                  itemCount: 5,
+                ),
         ),
       ),
     );
   }
 
   _getBody(BuildContext context, HomeController homeViewController,
-      MovieList movieListController) {
+      MovieController movieController) {
     return Container(
       color: blueYonder,
       child: PaginatedList(
-        controller: homeViewController.homePaginatedController,
-        onRefresh: () => homeViewController.onRefresh(),
-        child: CustomScrollView(
-          slivers: [
-            SliverGrid(
-              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 200.0,
-                  mainAxisSpacing: 6.0,
-                  crossAxisSpacing: 6.0),
-              delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
-                  var movie = movieListController.movieList[index];
-                  return GestureDetector(
-                    onTap: () => log("$index"),
-                    child: MovieBox(movie: movie),
-                  );
-                },
-                childCount: 10,
+        controller: movieController.moviePaginatedController,
+        onRefresh: () => movieController.onRefresh(),
+        child: movieController.loadingTopMovies
+            ? const Center(
+                child: CircularProgressIndicator(color: Colors.red),
+              )
+            : CustomScrollView(
+                slivers: [
+                  SliverGrid(
+                    gridDelegate:
+                        const SliverGridDelegateWithMaxCrossAxisExtent(
+                            maxCrossAxisExtent: 200.0,
+                            mainAxisSpacing: 6.0,
+                            crossAxisSpacing: 6.0),
+                    delegate: SliverChildBuilderDelegate(
+                      (BuildContext context, int index) {
+                        var movie = movieController.popularMovies[index];
+                        return GestureDetector(
+                          onTap: () => log("$index"),
+                          child: MovieBox(movie: movie),
+                        );
+                      },
+                      childCount: 10,
+                    ),
+                  )
+                ],
               ),
-            )
-          ],
-        ),
       ),
     );
   }

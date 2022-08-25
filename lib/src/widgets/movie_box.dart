@@ -11,20 +11,25 @@ class MovieBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Image.network(
-          movie.fullImageUrl,
-          fit: BoxFit.cover,
-          width: double.infinity,
-        ),
-        Positioned(
-          bottom: 0,
-          left: 0,
-          right: 0,
-          child: _FrontBanner(text: movie.title),
-        ),
-      ],
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(8.0),
+      child: Stack(
+        children: [
+          Container(
+            width: 200,
+            child: Image.network(
+              movie.fullImageUrl,
+              fit: BoxFit.cover,
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: _FrontBanner(text: movie.title),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -44,7 +49,7 @@ class _FrontBanner extends StatelessWidget {
         filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
         child: Container(
           color: Colors.grey.shade200.withOpacity(0.5),
-          height: 60,
+          height: 40,
           child: Center(
             child: Text(
               text,
