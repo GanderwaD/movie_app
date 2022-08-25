@@ -9,6 +9,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:movie_app/src/models/movie.dart';
 import 'package:movie_app/src/widgets/navbar/navbar_item.dart';
 import 'package:movie_app/src/widgets/paginated_list/paginated_list.dart';
 import 'package:movie_app/src/widgets/text_widget/text_size.dart';
@@ -31,6 +32,8 @@ class HomeController extends ChangeNotifier {
   int currentHomePageIndex = 0;
   int currentNavBarIndex = 0;
   bool isAutoPlay = true;
+
+
   List<NavbarItem> navbarItems = [
     const NavbarItem(
       title: TextWidget(
@@ -74,22 +77,11 @@ class HomeController extends ChangeNotifier {
   updatePageIndex(int index) {
     currentHomePageIndex = index;
     setAutoPlay(true);
-    // if (currentHomePageIndex == 2) {
-    //   setAutoPlay(true);
-    // } else {
-    //   setAutoPlay(true);
-    // }
     notifyListeners();
   }
 
   navbarSelected(int index) {
     currentNavBarIndex = index;
-    // switch (index) {
-    //   case 1:
-    //     R.instance.add(object: SearchView());
-    //     break;
-    //   default:
-    // }
     notifyListeners();
   }
 

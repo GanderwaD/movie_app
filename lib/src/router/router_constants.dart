@@ -19,6 +19,10 @@ const String splashPath = '/splash';
 const String homeKey = 'home_key';
 const String homePath = '/home';
 
+///movies view
+const String moviesKey = 'movies_key';
+const String moviesPath = '/movies';
+
 ///search view
 const String searchKey = 'search_key';
 const String searchPath = '/search';

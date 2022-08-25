@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_app/src/ui/drawers/all_movies_controller.dart';
-import 'package:movie_app/src/ui/shared/base_scaffold.dart';
+import 'package:movie_app/src/widgets/base_scaffold.dart';
 import 'package:movie_app/src/widgets/paginated_list/paginated_list.dart';
 import 'package:movie_app/src/widgets/text_widget/text_widget.dart';
 

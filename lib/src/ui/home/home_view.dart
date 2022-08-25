@@ -6,26 +6,17 @@
  * Email : dev.ganderwa@gmail.com
  * ---------------------------
  */
-
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:movie_app/src/ui/home/home_slider_card.dart';
-import 'package:movie_app/src/ui/profile/profile_view.dart';
-import 'package:movie_app/src/ui/search/search_view.dart';
-import 'package:movie_app/src/ui/shared/base_scaffold.dart';
-import 'package:movie_app/src/ui/shared/drawer.dart';
-import 'package:movie_app/src/widgets/animations/slide_transform/default_transform.dart';
-import 'package:movie_app/src/widgets/navbar/bottom_navbar.dart';
-import 'package:movie_app/src/widgets/paginated_list/paginated_list.dart';
-import 'package:movie_app/src/widgets/text_widget/text_size.dart';
 
 import '../../router/router_constants.dart';
 import '../../router/router_object.dart';
-import '../../widgets/page/page_slider.dart';
-import '../../widgets/text_widget/text_widget.dart';
-import '../../widgets/theme/colors.dart';
+import '../../widgets/base_scaffold.dart';
+import '../../widgets/drawer.dart';
+import '../../widgets/navbar/bottom_navbar.dart';
+import '../movies/movies_view.dart';
+import '../profile/profile_view.dart';
+import '../search/search_view.dart';
 import 'home_controller.dart';
 
 class HomeView extends ConsumerWidget with RouterObject {
@@ -43,94 +34,18 @@ class HomeView extends ConsumerWidget with RouterObject {
     final size = MediaQuery.of(context).size;
     return BaseScaffold(
       body: homeViewController.currentNavBarIndex == 0
-          ? NestedScrollView(
-              headerSliverBuilder: (context, innerBoxIsScrolled) => [
-                _getMovieSlider(context, homeViewController),
-              ],
-              body: _getBody(context, homeViewController),
-            )
+          ? const MoviesView()
           : homeViewController.currentNavBarIndex == 1
-              ? SearchView()
-              : ProfileView(),
+              ? const SearchView()
+              : const ProfileView(),
       drawer: const Drawer(
         child: GetDrawer(),
       ),
       navbar: BottomNavbar(
-        backgroundColor: black,
+        backgroundColor: Colors.black,
         items: homeViewController.navbarItems,
         selectedIndex: homeViewController.currentNavBarIndex,
         onItemSelected: (index) => homeViewController.navbarSelected(index),
-      ),
-    );
-  }
-
-  _getMovieSlider(BuildContext context,HomeController homeViewController) {
-    return SliverAppBar(
-      centerTitle: true,
-      expandedHeight: 250,
-      pinned: true,
-      leading: IconButton(
-        onPressed: () => Scaffold.of(context).openDrawer(),
-        icon: const Icon(Icons.menu, size: 30.0),
-      ),
-      backgroundColor: blueYonder,
-      title: const TextWidget('Movie',
-          color: Colors.blue, maxLines: 1, textSize: TextSize.uLarge),
-      flexibleSpace: FlexibleSpaceBar(
-        background: Container(
-          margin: const EdgeInsets.only(top: 70, bottom: 10),
-          child: PageSlider(
-            viewportFraction: 0.4,
-            controller: homeViewController.homeSliderController,
-            infiniteScroll: true,
-            onPageChanged: (index) => homeViewController.updatePageIndex(index),
-            //enableAutoSlider: homeViewController.isAutoPlay,
-            enableAutoSlider: true,
-            slideTransform: const DefaultTransform(),
-            pageBuilder: (index) {
-              return GestureDetector(
-                onTap: () => log("$index"),
-                child: HomeSliderItemCard(
-                  item: homeViewController.homeSliderItems[index],
-                ),
-              );
-            },
-            itemCount: homeViewController.homeSliderItems.length,
-          ),
-        ),
-      ),
-    );
-  }
-
-  _getBody(BuildContext context, HomeController homeViewController) {
-    return Container(
-      color: blueYonder,
-      child: PaginatedList(
-        controller: homeViewController.homePaginatedController,
-        onRefresh: () => homeViewController.onRefresh(),
-        child: CustomScrollView(
-          slivers: [
-            SliverGrid(
-              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 200.0,
-                  mainAxisSpacing: 6.0,
-                  crossAxisSpacing: 6.0),
-              delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
-                  return GestureDetector(
-                    onTap: () => log("$index"),
-                    child: Container(
-                      alignment: Alignment.center,
-                      color: Colors.teal,
-                      child: Text('Movie Banner $index'),
-                    ),
-                  );
-                },
-                childCount: 10,
-              ),
-            )
-          ],
-        ),
       ),
     );
   }

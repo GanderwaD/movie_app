@@ -18,8 +18,8 @@ import 'package:movie_app/src/widgets/text_widget/text_widget.dart';
 import '../../router/router_constants.dart';
 import '../../router/router_object.dart';
 import '../../widgets/page/page_slider.dart';
-import '../shared/base_scaffold.dart';
-import '../shared/widget_key_constants.dart';
+import '../../widgets/base_scaffold.dart';
+import '../../constants/widget_key_constants.dart';
 import 'landing_controller.dart';
 
 class LandingView extends ConsumerWidget with RouterObject {

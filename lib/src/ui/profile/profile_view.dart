@@ -5,8 +5,8 @@ import '../../router/router_constants.dart';
 import '../../router/router_object.dart';
 import '../../widgets/text_widget/text_size.dart';
 import '../../widgets/text_widget/text_widget.dart';
-import '../shared/base_scaffold.dart';
-import '../shared/drawer.dart';
+import '../../widgets/base_scaffold.dart';
+import '../../widgets/drawer.dart';
 
 class ProfileView extends ConsumerWidget with RouterObject {
   const ProfileView({Key? key}) : super(key: key);
