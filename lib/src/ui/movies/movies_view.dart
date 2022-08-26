@@ -2,21 +2,21 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:movie_app/src/ui/movies/movie_controller.dart';
-import 'package:movie_app/src/widgets/paginated_list/indicator/classic_indicator.dart';
 
 import '../../router/router_constants.dart';
 import '../../router/router_object.dart';
-import '../../widgets/animations/slide_transform/default_transform.dart';
-import '../../widgets/base_scaffold.dart';
-import '../../widgets/drawer.dart';
-import '../../widgets/movie_box.dart';
-import '../../widgets/page/page_slider.dart';
-import '../../widgets/paginated_list/paginated_list.dart';
-import '../../widgets/text_widget/text_size.dart';
-import '../../widgets/text_widget/text_widget.dart';
-import '../../widgets/theme/colors.dart';
 import '../home/home_controller.dart';
+import '../widgets/animations/slide_transform/default_transform.dart';
+import '../widgets/base_scaffold.dart';
+import '../widgets/drawer.dart';
+import '../widgets/movie_box.dart';
+import '../widgets/page/page_slider.dart';
+import '../widgets/paginated_list/indicator/classic_indicator.dart';
+import '../widgets/paginated_list/paginated_list.dart';
+import '../widgets/text_widget/text_size.dart';
+import '../widgets/text_widget/text_widget.dart';
+import '../widgets/theme/colors.dart';
+import 'movie_controller.dart';
 
 class MoviesView extends ConsumerWidget with RouterObject {
   const MoviesView({Key? key}) : super(key: key);
@@ -97,7 +97,7 @@ class MoviesView extends ConsumerWidget with RouterObject {
       child: PaginatedList(
         controller: movieController.moviePaginatedController,
         onRefresh: () => movieController.onRefresh(),
-        header: ClassicHeader(),
+        header: const ClassicHeader(),
         child: movieController.loadingPopularMovies
             ? const Center(
                 child: CircularProgressIndicator(color: Colors.red),

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:movie_app/app_config.dart';
+import '../../../app_config.dart';
 
 import '../../models/movie.dart';
 

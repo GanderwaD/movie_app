@@ -2,17 +2,17 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:movie_app/src/ui/search/search_controller.dart';
-import 'package:movie_app/src/widgets/base_scaffold.dart';
-import 'package:movie_app/src/utils/keyboard_utils.dart';
-import 'package:movie_app/src/widgets/paginated_list/paginated_list.dart';
-import 'package:movie_app/src/widgets/text_widget/text_widget.dart';
 
 import '../../router/router_constants.dart';
 import '../../router/router_object.dart';
-import '../../widgets/text_widget/text_size.dart';
-import '../../widgets/theme/colors.dart';
-import '../../widgets/drawer.dart';
+import '../../utils/keyboard_utils.dart';
+import '../widgets/base_scaffold.dart';
+import '../widgets/drawer.dart';
+import '../widgets/paginated_list/paginated_list.dart';
+import '../widgets/text_widget/text_size.dart';
+import '../widgets/text_widget/text_widget.dart';
+import '../widgets/theme/colors.dart';
+import 'search_controller.dart';
 
 class SearchView extends ConsumerWidget with RouterObject {
   const SearchView({Key? key}) : super(key: key);

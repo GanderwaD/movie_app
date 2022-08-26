@@ -11,12 +11,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../router/router_constants.dart';
 import '../../router/router_object.dart';
-import '../../widgets/base_scaffold.dart';
-import '../../widgets/drawer.dart';
-import '../../widgets/navbar/bottom_navbar.dart';
 import '../movies/movies_view.dart';
 import '../profile/profile_view.dart';
 import '../search/search_view.dart';
+import '../widgets/base_scaffold.dart';
+import '../widgets/drawer.dart';
+import '../widgets/navbar/bottom_navbar.dart';
 import 'home_controller.dart';
 
 class HomeView extends ConsumerWidget with RouterObject {

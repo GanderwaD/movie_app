@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../router/router_helper.dart';
-import '../../widgets/paginated_list/paginated_list.dart';
+import '../widgets/paginated_list/paginated_list.dart';
 
 final allMoviesProvider = ChangeNotifierProvider((ref) {
   return AllMoviesController();

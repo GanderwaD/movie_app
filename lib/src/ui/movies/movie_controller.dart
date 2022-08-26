@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:movie_app/src/models/movie.dart';
-import 'package:movie_app/src/ui/movies/movie_service.dart';
 
-import '../../widgets/paginated_list/paginated_list.dart';
+import '../../models/movie.dart';
+import '../widgets/paginated_list/paginated_list.dart';
+import 'movie_service.dart';
+
 
 final movieControllerProvider = ChangeNotifierProvider((ref) {
   var movieService = ref.read(movieServiceProvider);
@@ -27,7 +28,6 @@ class MovieController extends ChangeNotifier {
   }
 
   Future getPopularMovies() async {
-    setLoadingPopularMovies(true);
     await Future.delayed(const Duration(seconds: 1));
     popularMovies = await _service.getPopularMovies();
     setLoadingPopularMovies(false);

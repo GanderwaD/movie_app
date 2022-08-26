@@ -9,17 +9,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_app/src/ui/landing_page/landing_item_card.dart';
-import 'package:movie_app/src/widgets/animations/slide_transform/cube_transform.dart';
-import 'package:movie_app/src/widgets/buttons/outline_button_widget.dart';
-import 'package:movie_app/src/widgets/page/page_indicator.dart';
-import 'package:movie_app/src/widgets/text_widget/text_size.dart';
-import 'package:movie_app/src/widgets/text_widget/text_widget.dart';
 
+import '../../constants/widget_key_constants.dart';
 import '../../router/router_constants.dart';
 import '../../router/router_object.dart';
-import '../../widgets/page/page_slider.dart';
-import '../../widgets/base_scaffold.dart';
-import '../../constants/widget_key_constants.dart';
+import '../widgets/animations/slide_transform/cube_transform.dart';
+import '../widgets/base_scaffold.dart';
+import '../widgets/buttons/outline_button_widget.dart';
+import '../widgets/page/page_indicator.dart';
+import '../widgets/page/page_slider.dart';
+import '../widgets/text_widget/text_size.dart';
+import '../widgets/text_widget/text_widget.dart';
 import 'landing_controller.dart';
 
 class LandingView extends ConsumerWidget with RouterObject {

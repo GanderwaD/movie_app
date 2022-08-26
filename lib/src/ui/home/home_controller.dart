@@ -6,16 +6,15 @@
  * Email : dev.ganderwa@gmail.com
  * ---------------------------
  */
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:movie_app/src/widgets/navbar/navbar_item.dart';
-import 'package:movie_app/src/widgets/paginated_list/paginated_list.dart';
-import 'package:movie_app/src/widgets/text_widget/text_size.dart';
-import 'package:movie_app/src/widgets/text_widget/text_widget.dart';
 
 import '../../models/home_slider_item.dart';
-import '../../widgets/page/page_slider_controller.dart';
+import '../widgets/navbar/navbar_item.dart';
+import '../widgets/page/page_slider_controller.dart';
+import '../widgets/paginated_list/paginated_list.dart';
+import '../widgets/text_widget/text_size.dart';
+import '../widgets/text_widget/text_widget.dart';
 
 final homeProvider = ChangeNotifierProvider((ref) {
   return HomeController();

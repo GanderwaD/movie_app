@@ -3,15 +3,21 @@ import 'dart:convert';
 class Movie {
   String title;
   String posterPath;
+  double voteAverage;
+  //int voteCount;
   Movie({
     required this.title,
     required this.posterPath,
+    required this.voteAverage,
+    //required this.voteCount,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'title': title,
       'poster_path': posterPath,
+      'vote_average': voteAverage,
+      //'vote_count': voteAverage,
     };
   }
 
@@ -21,6 +27,8 @@ class Movie {
     return Movie(
       title: map['title'] ?? '',
       posterPath: map['poster_path'] ?? '',
+      voteAverage: (map['vote_average'] ?? 0).toDouble(),
+      //voteCount: map['vote_count'] ?? 0,
     );
   }
 

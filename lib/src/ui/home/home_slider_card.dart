@@ -10,9 +10,9 @@
 import 'package:flutter/material.dart';
 
 import '../../models/home_slider_item.dart';
-import '../../widgets/card_widget.dart';
-import '../../widgets/text_widget/text_size.dart';
-import '../../widgets/text_widget/text_widget.dart';
+import '../widgets/card_widget.dart';
+import '../widgets/text_widget/text_size.dart';
+import '../widgets/text_widget/text_widget.dart';
 
 class HomeSliderItemCard extends StatelessWidget {
   const HomeSliderItemCard({
