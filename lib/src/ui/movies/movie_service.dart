@@ -20,7 +20,7 @@ class MovieService {
 
   Future<List<Movie>> getPopularMovies() async {
     final response = await _dio.get(
-      "https://api.themoviedb.org/3/movie/popular?api_key=${_environmentConfig.movieApiKey}&language=tr-TR",
+      "https://api.themoviedb.org/3/movie/popular?api_key=${_environmentConfig.movieApiKey}&language=en-Us",
     );
     final results = List<Map<String, dynamic>>.from(response.data['results']);
 
@@ -32,7 +32,7 @@ class MovieService {
 
   Future<List<Movie>> getTopMovies() async {
     final response = await _dio.get(
-      "https://api.themoviedb.org/3/movie/top_rated?api_key=${_environmentConfig.movieApiKey}&language=tr-TR&page=1",
+      "https://api.themoviedb.org/3/movie/top_rated?api_key=${_environmentConfig.movieApiKey}&language=en-US&page=1",
     );
     final results = List<Map<String, dynamic>>.from(response.data['results']);
 

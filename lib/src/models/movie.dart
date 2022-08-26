@@ -15,7 +15,7 @@ class Movie {
     };
   }
 
-  String get fullImageUrl => 'https://image.tmdb.org/t/p/w342$posterPath';
+  String get fullImageUrl => 'https://image.tmdb.org/t/p/w185$posterPath';
 
   factory Movie.fromMap(Map<String, dynamic> map) {
     return Movie(

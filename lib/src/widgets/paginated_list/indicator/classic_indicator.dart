@@ -134,15 +134,20 @@ class _ClassicHeaderState extends RefreshIndicatorState<ClassicHeader> {
                             ? widget.canTwoLevelIcon
                             : mode == RefreshStatus.refreshing
                                 ? widget.refreshingIcon ??
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 25.0,
                                       height: 25.0,
-                                      child: defaultTargetPlatform ==
-                                              TargetPlatform.iOS
-                                          ? const CupertinoActivityIndicator()
-                                          : const CircularProgressIndicator(
-                                              strokeWidth: 2.0),
+                                      child: CupertinoActivityIndicator(),
                                     )
+                                // SizedBox(
+                                //   width: 25.0,
+                                //   height: 25.0,
+                                //   child: defaultTargetPlatform ==
+                                //           TargetPlatform.iOS
+                                //       ? const CupertinoActivityIndicator()
+                                //       : const CircularProgressIndicator(
+                                //           strokeWidth: 2.0),
+                                // )
                                 : widget.twoLevelView;
     return icon ?? Container();
   }

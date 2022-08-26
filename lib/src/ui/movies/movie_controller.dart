@@ -23,18 +23,18 @@ class MovieController extends ChangeNotifier {
   List<Movie> topMovies = [];
 
   void init() async {
-    await getPopularMovies();
-    await getTopMovies();
+    await Future.wait([getPopularMovies(), getTopMovies()]);
   }
 
-  getPopularMovies() async {
+  Future getPopularMovies() async {
+    setLoadingPopularMovies(true);
     await Future.delayed(const Duration(seconds: 1));
     popularMovies = await _service.getPopularMovies();
     setLoadingPopularMovies(false);
     notifyListeners();
   }
 
-  getTopMovies() async {
+  Future getTopMovies() async {
     await Future.delayed(const Duration(seconds: 1));
     topMovies = await _service.getTopMovies();
     setLoadingTopMovies(false);

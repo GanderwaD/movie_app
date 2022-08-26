@@ -15,12 +15,10 @@ class MovieBox extends StatelessWidget {
       borderRadius: BorderRadius.circular(8.0),
       child: Stack(
         children: [
-          Container(
-            width: 200,
-            child: Image.network(
-              movie.fullImageUrl,
-              fit: BoxFit.cover,
-            ),
+          Image.network(
+            movie.fullImageUrl,
+            fit: BoxFit.fill,
+            width: double.infinity,
           ),
           Positioned(
             bottom: 0,
@@ -48,7 +46,7 @@ class _FrontBanner extends StatelessWidget {
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
         child: Container(
-          color: Colors.grey.shade200.withOpacity(0.5),
+          color: Colors.grey,
           height: 40,
           child: Center(
             child: Text(

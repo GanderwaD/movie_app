@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_app/src/ui/movies/movie_controller.dart';
+import 'package:movie_app/src/widgets/paginated_list/indicator/classic_indicator.dart';
 
 import '../../router/router_constants.dart';
 import '../../router/router_object.dart';
@@ -96,7 +97,8 @@ class MoviesView extends ConsumerWidget with RouterObject {
       child: PaginatedList(
         controller: movieController.moviePaginatedController,
         onRefresh: () => movieController.onRefresh(),
-        child: movieController.loadingTopMovies
+        header: ClassicHeader(),
+        child: movieController.loadingPopularMovies
             ? const Center(
                 child: CircularProgressIndicator(color: Colors.red),
               )
@@ -106,6 +108,7 @@ class MoviesView extends ConsumerWidget with RouterObject {
                     gridDelegate:
                         const SliverGridDelegateWithMaxCrossAxisExtent(
                             maxCrossAxisExtent: 200.0,
+                            childAspectRatio: 0.6,
                             mainAxisSpacing: 6.0,
                             crossAxisSpacing: 6.0),
                     delegate: SliverChildBuilderDelegate(
@@ -116,7 +119,7 @@ class MoviesView extends ConsumerWidget with RouterObject {
                           child: MovieBox(movie: movie),
                         );
                       },
-                      childCount: 10,
+                      childCount: 20,
                     ),
                   )
                 ],
