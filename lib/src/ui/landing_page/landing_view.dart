@@ -83,7 +83,7 @@ class LandingView extends ConsumerWidget with RouterObject {
           ),
           const Spacer(),
           Padding(
-            padding: EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10.0),
             child: SizedBox(
               width: size.width,
               child: Row(

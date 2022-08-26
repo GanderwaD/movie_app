@@ -9,7 +9,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../models/home_slider_item.dart';
 import '../widgets/navbar/navbar_item.dart';
 import '../widgets/page/page_slider_controller.dart';
 import '../widgets/paginated_list/paginated_list.dart';
@@ -24,13 +23,13 @@ class HomeController extends ChangeNotifier {
   HomeController() {
     init();
   }
-  List<HomeSliderItem> homeSliderItems = [];
   PageSliderController homeSliderController = PageSliderController();
   PaginatedController homePaginatedController = PaginatedController();
   int currentHomePageIndex = 0;
   int currentNavBarIndex = 0;
   bool isAutoPlay = true;
 
+  ///for Navbar
   List<NavbarItem> navbarItems = [
     const NavbarItem(
       title: TextWidget(
@@ -59,6 +58,7 @@ class HomeController extends ChangeNotifier {
 
   void init() {}
 
+  
   setAutoPlay(bool val) {
     isAutoPlay = val;
     notifyListeners();

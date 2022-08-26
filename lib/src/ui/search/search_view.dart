@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -76,28 +74,28 @@ class SearchView extends ConsumerWidget with RouterObject {
                   ),
                 ),
               ),
-              SliverGrid(
-                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 200.0,
-                    mainAxisSpacing: 6.0,
-                    crossAxisSpacing: 6.0),
-                delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) {
-                    return GestureDetector(
-                      onTap: () {
-                        log("$index");
-                        hideKeyboard(context);
-                      },
-                      child: Container(
-                        alignment: Alignment.center,
-                        color: modernGray,
-                        child: Text('Movie Banner $index'),
-                      ),
-                    );
-                  },
-                  childCount: 10,
-                ),
-              )
+              // SliverGrid(
+              //   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+              //       maxCrossAxisExtent: 200.0,
+              //       mainAxisSpacing: 6.0,
+              //       crossAxisSpacing: 6.0),
+              //   delegate: SliverChildBuilderDelegate(
+              //     (BuildContext context, int index) {
+              //       return GestureDetector(
+              //         onTap: () {
+              //           log("$index");
+              //           hideKeyboard(context);
+              //         },
+              //         child: Container(
+              //           alignment: Alignment.center,
+              //           color: modernGray,
+              //           child: Text('Movie Banner $index'),
+              //         ),
+              //       );
+              //     },
+              //     childCount: 10,
+              //   ),
+              // )
             ],
           ),
         ),
