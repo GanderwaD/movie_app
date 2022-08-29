@@ -1,6 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
-
 /*
  * ---------------------------
  * File : movie_genres.dart
@@ -9,6 +6,9 @@ import 'dart:convert';
  * Email : dev.ganderwa@gmail.com
  * ---------------------------
  */
+
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:convert';
 
 class Genre {
   int id;

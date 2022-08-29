@@ -1,7 +1,17 @@
+/*
+ * ---------------------------
+ * File : movies_view.dart
+ * ---------------------------
+ * Author : Eren Tatar (ganderwa)
+ * Email : dev.ganderwa@gmail.com
+ * ---------------------------
+ */
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:movie_app/src/router/router_helper.dart';
+import 'package:movie_app/src/ui/movie_detail/movie_details_view.dart';
 
 import '../../router/router_constants.dart';
 import '../../router/router_object.dart';
@@ -76,7 +86,10 @@ class MoviesView extends ConsumerWidget with RouterObject {
                   pageBuilder: (index) {
                     var movie = movieController.topMovies[index];
                     return GestureDetector(
-                      onTap: () => log("Slider $index"),
+                      onTap: () {
+                        R.instance.add(object: MovieDetailsView(movie.id));
+                        log("slider ${movie.id}");
+                      },
                       child: Padding(
                         padding: const EdgeInsets.only(right: 5.0),
                         child: MovieBox(movie: movie),
@@ -115,7 +128,10 @@ class MoviesView extends ConsumerWidget with RouterObject {
                       (BuildContext context, int index) {
                         var movie = movieController.popularMovies[index];
                         return GestureDetector(
-                          onTap: () => log("$index"),
+                          onTap: () {
+                            R.instance.add(object: MovieDetailsView(movie.id));
+                            log("box ${movie.id}");
+                          },
                           child: MovieBox(movie: movie),
                         );
                       },

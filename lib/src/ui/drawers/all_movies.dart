@@ -1,3 +1,11 @@
+/*
+ * ---------------------------
+ * File : all_movies.dart
+ * ---------------------------
+ * Author : Eren Tatar (ganderwa)
+ * Email : dev.ganderwa@gmail.com
+ * ---------------------------
+ */
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

@@ -1,42 +1,48 @@
+/*
+ * ---------------------------
+ * File : movie_details.dart
+ * ---------------------------
+ * Author : Eren Tatar (ganderwa)
+ * Email : dev.ganderwa@gmail.com
+ * ---------------------------
+ */
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 import 'movie_genres.dart';
 
-class MovieDetailsModel {
-  int budget;
-  int id;
-  int revenue;
-  int runtime;
-  int voteCount;
-  double voteAverage;
-  bool video;
-  String originalLanguage;
-  String originalTitle;
-  String overview;
-  String posterPath;
-  String releaseDate;
-  String status;
-  String tagLine;
-  String title;
-  List<Genre> genres;
-  MovieDetailsModel({
-    required this.budget,
-    required this.id,
-    required this.revenue,
-    required this.runtime,
-    required this.voteCount,
-    required this.voteAverage,
-    required this.video,
-    required this.originalLanguage,
-    required this.originalTitle,
-    required this.overview,
-    required this.posterPath,
-    required this.releaseDate,
-    required this.status,
-    required this.tagLine,
-    required this.title,
-    required this.genres,
+class MovieDetail {
+  int? budget;
+  int? id;
+  int? revenue;
+  int? runtime;
+  int? voteCount;
+  double? voteAverage;
+  String? originalLanguage;
+  String? originalTitle;
+  String? overview;
+  String? posterPath;
+  String? releaseDate;
+  String? status;
+  String? tagLine;
+  String? title;
+  List<Genre>? genres;
+  MovieDetail({
+    this.budget,
+    this.id,
+    this.revenue,
+    this.runtime,
+    this.voteCount,
+    this.voteAverage,
+    this.originalLanguage,
+    this.originalTitle,
+    this.overview,
+    this.posterPath,
+    this.releaseDate,
+    this.status,
+    this.tagLine,
+    this.title,
+    this.genres,
   });
 
   Map<String, dynamic> toMap() {
@@ -45,43 +51,47 @@ class MovieDetailsModel {
       'id': id,
       'revenue': revenue,
       'runtime': runtime,
-      'voteCount': voteCount,
-      'voteAverage': voteAverage,
-      'video': video,
-      'originalLanguage': originalLanguage,
-      'originalTitle': originalTitle,
+      'vote_count': voteCount,
+      'vote_average': voteAverage,
+      'original_language': originalLanguage,
+      'original_title': originalTitle,
       'overview': overview,
-      'posterPath': posterPath,
-      'releaseDate': releaseDate,
+      'poster_path': posterPath,
+      'release_date': releaseDate,
       'status': status,
-      'tagLine': tagLine,
+      'tagline': tagLine,
       'title': title,
-      'genres': genres.map((x) => x.toMap()).toList(),
+      'genres': genres?.map((x) => x.toMap()).toList(),
     };
   }
 
-  factory MovieDetailsModel.fromMap(Map<String, dynamic> map) {
-    return MovieDetailsModel(
-      budget: map['budget'] as int,
-      id: map['id'] as int,
-      revenue: map['revenue'] as int,
-      runtime: map['runtime'] as int,
-      voteCount: map['voteCount'] as int,
-      voteAverage: map['voteAverage'] as double,
-      video: map['video'] as bool,
-      originalLanguage: map['originalLanguage'] as String,
-      originalTitle: map['originalTitle'] as String,
-      overview: map['overview'] as String,
-      posterPath: map['posterPath'] as String,
-      releaseDate: map['releaseDate'] as String,
-      status: map['status'] as String,
-      tagLine: map['tagLine'] as String,
-      title: map['title'] as String,
-      genres: List<Genre>.from((map['genres'] as List<int>).map<Genre>((x) => Genre.fromMap(x as Map<String,dynamic>),),),
+  String get fullImageUrl => 'https://image.tmdb.org/t/p/w185$posterPath';
+
+  factory MovieDetail.fromMap(Map<String, dynamic> map) {
+    return MovieDetail(
+      budget: map['budget'],
+      id: map['id'],
+      revenue: map['revenue'],
+      runtime: map['runtime'],
+      voteCount: map['vote_count'],
+      voteAverage: map['vote_average'],
+      originalLanguage: map['original_language'],
+      originalTitle: map['original_title'],
+      overview: map['overview'],
+      posterPath: map['poster_path'],
+      releaseDate: map['release_date'],
+      status: map['status'],
+      tagLine: map['tagline'],
+      title: map['title'],
+      genres: map['genres'] != null
+          ? List<Genre>.from(
+              (map['genres']).map<Genre>((x) => Genre.fromMap(x)))
+          : null,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory MovieDetailsModel.fromJson(String source) => MovieDetailsModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory MovieDetail.fromJson(String source) =>
+      MovieDetail.fromMap(json.decode(source) as Map<String, dynamic>);
 }

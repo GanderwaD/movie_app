@@ -1,3 +1,11 @@
+/*
+ * ---------------------------
+ * File : movie_service.dart
+ * ---------------------------
+ * Author : Eren Tatar (ganderwa)
+ * Email : dev.ganderwa@gmail.com
+ * ---------------------------
+ */
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../app_config.dart';
@@ -17,7 +25,7 @@ class MovieService {
   );
   final EnvironmentConfig _environmentConfig;
   final Dio _dio;
-
+  ///Popular movie endpoint
   Future<List<Movie>> getPopularMovies() async {
     final response = await _dio.get(
       "https://api.themoviedb.org/3/movie/popular?api_key=${_environmentConfig.movieApiKey}&language=en-Us",
@@ -29,7 +37,7 @@ class MovieService {
         .toList(growable: false);
     return movies;
   }
-
+  ///Top movie endpoint
   Future<List<Movie>> getTopMovies() async {
     final response = await _dio.get(
       "https://api.themoviedb.org/3/movie/top_rated?api_key=${_environmentConfig.movieApiKey}&language=en-US&page=1",
@@ -41,4 +49,5 @@ class MovieService {
         .toList(growable: false);
     return movies;
   }
+  
 }

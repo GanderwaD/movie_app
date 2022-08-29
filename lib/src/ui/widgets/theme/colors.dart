@@ -10,3 +10,4 @@ const Color blueYonder = Color.fromARGB(255, 84, 117, 158);
 const Color liberty = Color.fromARGB(255, 88, 84, 158);
 const Color redwood = Color.fromARGB(255, 158, 88, 84);
 const Color modernGray = Color.fromARGB(255, 111, 110, 114);
+const Color beige = Color.fromARGB(255, 245, 247, 217);

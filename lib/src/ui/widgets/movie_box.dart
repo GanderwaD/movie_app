@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:movie_app/src/ui/widgets/image/cached_network_image.dart';
 
 import '../../models/movie.dart';
 import 'text_widget/text_widget.dart';
@@ -19,8 +20,8 @@ class MovieBox extends StatelessWidget {
       borderRadius: BorderRadius.circular(8.0),
       child: Stack(
         children: [
-          Image.network(
-            movie.fullImageUrl,
+          CNImage(
+            imgUrl: movie.fullImageUrl,
             fit: BoxFit.fill,
             width: double.infinity,
           ),
@@ -91,17 +92,8 @@ class _GetPopularity extends StatelessWidget {
         color: Colors.grey.shade200.withOpacity(0.3),
         child: Column(
           children: [
-            Row(
-              children: [
-                const Icon(Icons.star),
-                TextWidget("$voteAverage", color: Colors.white),
-              ],
-            ),
-            //  // TextWidget(
-            //     "$voteCount",
-            //     textSize: TextSize.xxSmall,
-            //     color: Colors.white,
-            //   )
+            const Icon(Icons.star),
+            TextWidget("$voteAverage", color: Colors.white),
           ],
         ),
       ),

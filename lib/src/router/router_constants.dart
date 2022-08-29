@@ -23,6 +23,10 @@ const String homePath = '/home';
 const String moviesKey = 'movies_key';
 const String moviesPath = '/movies';
 
+///movie details view
+const String movieDetailsKey = 'movieDetails_key';
+const String movieDetailsPath = '/movieDetails';
+
 ///search view
 const String searchKey = 'search_key';
 const String searchPath = '/search';
