@@ -31,14 +31,23 @@ class MovieDetailsController extends ChangeNotifier {
   final MovieDetailService _service;
   PaginatedController movieDetailsPaginatedController = PaginatedController();
   MovieDetail movieDetail = MovieDetail();
+  bool isLoading = false;
 
   void init() async {
+    setLoading(true);
+    await Future.delayed(const Duration(milliseconds: 500));
     movieDetail = await _service.getMovieDetail(movieId);
+    setLoading(false);
     notifyListeners();
   }
 
   goBack(context) {
     R.instance.popWidget(context);
+  }
+
+  setLoading(bool val) {
+    isLoading = val;
+    notifyListeners();
   }
 
   onRefresh() async {

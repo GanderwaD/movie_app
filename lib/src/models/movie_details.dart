@@ -22,6 +22,7 @@ class MovieDetail {
   String? originalTitle;
   String? overview;
   String? posterPath;
+  String? backdropPath;
   String? releaseDate;
   String? status;
   String? tagLine;
@@ -38,6 +39,7 @@ class MovieDetail {
     this.originalTitle,
     this.overview,
     this.posterPath,
+    this.backdropPath,
     this.releaseDate,
     this.status,
     this.tagLine,
@@ -57,6 +59,7 @@ class MovieDetail {
       'original_title': originalTitle,
       'overview': overview,
       'poster_path': posterPath,
+      'backdrop_path': backdropPath,
       'release_date': releaseDate,
       'status': status,
       'tagline': tagLine,
@@ -65,7 +68,8 @@ class MovieDetail {
     };
   }
 
-  String get fullImageUrl => 'https://image.tmdb.org/t/p/w185$posterPath';
+  String get posterImageUrl => 'https://image.tmdb.org/t/p/w185$posterPath';
+  String get backdropImageUrl => 'https://image.tmdb.org/t/p/w1280$backdropPath';
 
   factory MovieDetail.fromMap(Map<String, dynamic> map) {
     return MovieDetail(
@@ -79,6 +83,7 @@ class MovieDetail {
       originalTitle: map['original_title'],
       overview: map['overview'],
       posterPath: map['poster_path'],
+      backdropPath: map['backdrop_path'],
       releaseDate: map['release_date'],
       status: map['status'],
       tagLine: map['tagline'],

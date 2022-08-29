@@ -15,6 +15,7 @@ import 'package:movie_app/src/ui/widgets/theme/colors.dart';
 
 import '../../router/router_constants.dart';
 import '../../router/router_object.dart';
+import '../widgets/paginated_list/indicator/classic_indicator.dart';
 import '../widgets/paginated_list/paginated_list.dart';
 import '../widgets/text_widget/text_size.dart';
 import '../widgets/text_widget/text_widget.dart';
@@ -37,7 +38,41 @@ class MovieDetailsView extends ConsumerWidget with RouterObject {
   Widget build(BuildContext context, WidgetRef ref) {
     final movieDetailsController = ref.watch(movieDetailsProvider(movieId));
     return BaseScaffold(
-      body: _getBody(context, movieDetailsController),
+      body: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) => [
+          _getBackdropImage(context, movieDetailsController),
+        ],
+        body: movieDetailsController.isLoading
+            ? const Center(
+                child: CircularProgressIndicator(
+                  color: Colors.red,
+                ),
+              )
+            : _getBody(context, movieDetailsController),
+      ),
+    );
+  }
+
+  _getBackdropImage(BuildContext context, MovieDetailsController controller) {
+    return SliverAppBar(
+      centerTitle: true,
+      expandedHeight: 250,
+      pinned: true,
+      leading: IconButton(
+        onPressed: () => controller.goBack(context),
+        icon: const Icon(Icons.arrow_back, size: 30.0),
+      ),
+      backgroundColor: blueYonder,
+      title: const TextWidget('Movie Details',
+          color: Colors.blue, maxLines: 1, textSize: TextSize.uLarge),
+      flexibleSpace: FlexibleSpaceBar(
+        background: Container(
+          margin: const EdgeInsets.only(top: 70, bottom: 0),
+          child: CNImage(
+              imgUrl: controller.movieDetail.backdropImageUrl,
+              fit: BoxFit.fitWidth),
+        ),
+      ),
     );
   }
 
@@ -47,29 +82,116 @@ class MovieDetailsView extends ConsumerWidget with RouterObject {
       child: PaginatedList(
         controller: controller.movieDetailsPaginatedController,
         onRefresh: () => controller.onRefresh(),
+        header: const ClassicHeader(),
         child: CustomScrollView(
           slivers: [
-            SliverAppBar(
-              centerTitle: true,
-              pinned: true,
-              leading: IconButton(
-                onPressed: () => controller.goBack(context),
-                icon: const Icon(Icons.arrow_back, size: 30.0),
-              ),
-              backgroundColor: Colors.red,
-              title: const TextWidget(
-                'MovieDetails',
-                color: Colors.blue,
-                maxLines: 1,
-                textSize: TextSize.uLarge,
-              ),
-            ),
             SliverToBoxAdapter(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  CNImage(imgUrl: controller.movieDetail.fullImageUrl),
-                  TextWidget(controller.movieDetail.title ?? '')
+                  TextWidget(
+                    controller.movieDetail.title ?? '',
+                    textSize: TextSize.xLarge,
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Row(
+                    children: [
+                      CNImage(imgUrl: controller.movieDetail.posterImageUrl),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 10.0),
+                        //color: Colors.amber,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            TextWidget(
+                              "Status: \n${controller.movieDetail.status}",
+                              textSize: TextSize.large,
+                            ),
+                            TextWidget(
+                              "Release Date: \n${controller.movieDetail.releaseDate}",
+                              textSize: TextSize.large,
+                            ),
+                            // TextWidget(
+                            //   "Original Language: \n${controller.movieDetail.originalLanguage}",
+                            //   textSize: TextSize.large,
+                            // ),
+                            TextWidget(
+                              "Budget: \n${controller.movieDetail.budget}",
+                              textSize: TextSize.large,
+                            ),
+                            TextWidget(
+                              "Revenue: \n${controller.movieDetail.revenue}",
+                              textSize: TextSize.large,
+                            ),
+                            TextWidget(
+                              "Runtime: \n${controller.movieDetail.runtime} Minutes",
+                              textSize: TextSize.large,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    width: double.infinity,
+                    color: Colors.grey,
+                    child: Column(
+                      children: [
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const TextWidget("Original Title:"),
+                        TextWidget(
+                          controller.movieDetail.originalTitle ?? '',
+                          textSize: TextSize.large,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 5.0),
+                          child: TextWidget(
+                            controller.movieDetail.tagLine ?? '',
+                            textSize: TextSize.large,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: double.infinity,
+                    color: Colors.amber,
+                    child: Column(
+                      children: [
+                        const TextWidget(
+                          "Overview",
+                          textSize: TextSize.large,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: TextWidget(
+                            controller.movieDetail.overview ?? '',
+                            textSize: TextSize.large,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: double.infinity,
+                    color: Colors.amber,
+                    child: Column(
+                      children: [
+                        const TextWidget(
+                          "Genres",
+                          textSize: TextSize.large,
+                        ),
+                        TextWidget("${controller.movieDetail.genres}")
+                      ],
+                    ),
+                  )
                 ],
               ),
             )
