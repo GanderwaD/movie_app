@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -56,6 +56,17 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
+  fonts:
+    - family: Raleway
+      fonts:
+        - asset:  assets/fonts/raleway/Raleway-Regular.ttf
+        - asset:  assets/fonts/raleway/Raleway-Italic.ttf
+          style: italic
+    - family: SanFrancisco
+      fonts:
+        - asset:  assets/fonts/san_francisco/SFNSText-Regular.otf
+        - asset:  assets/fonts/san_francisco/SFNSText-RegularItalic.otf
+          style: italic
   assets:
     # Add assets from the images directory to the application.
     - assets/icon/

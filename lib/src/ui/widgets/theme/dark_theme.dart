@@ -5,6 +5,7 @@ import 'colors.dart';
 
 
 ThemeData darkTheme = ThemeData(
+  fontFamily: 'SanFrancisco',
   brightness: Brightness.dark,
  colorScheme:const ColorScheme.dark(
     primary: glaucous,

@@ -8,6 +8,7 @@
  */
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:movie_app/src/models/backdrop_image.dart';
 import 'package:movie_app/src/models/movie_details.dart';
 import 'package:movie_app/src/ui/movie_detail/movie_detail_service.dart';
 import 'package:movie_app/src/ui/widgets/paginated_list/paginated_list.dart';
@@ -30,14 +31,29 @@ class MovieDetailsController extends ChangeNotifier {
   final int movieId;
   final MovieDetailService _service;
   PaginatedController movieDetailsPaginatedController = PaginatedController();
+  ScrollController movieDetailsScrollController = ScrollController();
   MovieDetail movieDetail = MovieDetail();
-  bool isLoading = false;
+  List<BackdropImage> backdropImages = [];
+  bool isDetailsLoading = false;
+  bool isImagesLoading = false;
 
   void init() async {
-    setLoading(true);
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future.wait([getMovieDetails(), getMovieImages()]);
+  }
+
+  Future getMovieDetails() async {
+    setDetailsLoading(true);
+    await Future.delayed(const Duration(seconds: 1));
     movieDetail = await _service.getMovieDetail(movieId);
-    setLoading(false);
+    setDetailsLoading(false);
+    notifyListeners();
+  }
+
+  Future getMovieImages() async {
+    setImagesLoading(true);
+    await Future.delayed(const Duration(seconds: 1));
+    backdropImages = await _service.getMovieImages(movieId);
+    setImagesLoading(false);
     notifyListeners();
   }
 
@@ -45,13 +61,19 @@ class MovieDetailsController extends ChangeNotifier {
     R.instance.popWidget(context);
   }
 
-  setLoading(bool val) {
-    isLoading = val;
+  setDetailsLoading(bool val) {
+    isDetailsLoading = val;
+    notifyListeners();
+  }
+
+  setImagesLoading(bool val) {
+    isImagesLoading = val;
     notifyListeners();
   }
 
   onRefresh() async {
     await Future.delayed(const Duration(seconds: 1));
+    init();
     movieDetailsPaginatedController.refreshCompleted();
     notifyListeners();
   }

@@ -10,6 +10,7 @@
 import 'dart:convert';
 
 import 'movie_genres.dart';
+import 'backdrop_image.dart';
 
 class MovieDetail {
   int? budget;
@@ -69,7 +70,8 @@ class MovieDetail {
   }
 
   String get posterImageUrl => 'https://image.tmdb.org/t/p/w185$posterPath';
-  String get backdropImageUrl => 'https://image.tmdb.org/t/p/w1280$backdropPath';
+  String get backdropImageUrl =>
+      'https://image.tmdb.org/t/p/w1280$backdropPath';
 
   factory MovieDetail.fromMap(Map<String, dynamic> map) {
     return MovieDetail(
@@ -90,7 +92,10 @@ class MovieDetail {
       title: map['title'],
       genres: map['genres'] != null
           ? List<Genre>.from(
-              (map['genres']).map<Genre>((x) => Genre.fromMap(x)))
+              (map['genres']).map<Genre>(
+                (x) => Genre.fromMap(x),
+              ),
+            )
           : null,
     );
   }

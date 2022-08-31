@@ -63,7 +63,7 @@ class MovieController extends ChangeNotifier {
 
   onRefresh() async {
     await Future.delayed(const Duration(seconds: 1));
-    await getPopularMovies();
+    init();
     moviePaginatedController.refreshCompleted();
     notifyListeners();
   }

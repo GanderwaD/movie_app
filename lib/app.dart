@@ -13,9 +13,9 @@ class App extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(routerProvider(ref));
     return MaterialApp.router(
+      title: 'MovieApp',
       theme: lightTheme,
       darkTheme: darkTheme,
-      themeMode: ThemeMode.system,
       backButtonDispatcher: router.backButtonDispatcher,
       routerDelegate: router.delegate,
       routeInformationParser: router.parser,

@@ -37,7 +37,7 @@ class MovieBox extends StatelessWidget {
             bottom: 0,
             left: 0,
             right: 0,
-            child: _FrontBanner(text: movie.title),
+            child: FrontBanner(text: movie.title),
           ),
         ],
       ),
@@ -45,8 +45,8 @@ class MovieBox extends StatelessWidget {
   }
 }
 
-class _FrontBanner extends StatelessWidget {
-  const _FrontBanner({
+class FrontBanner extends StatelessWidget {
+  const FrontBanner({
     Key? key,
     required this.text,
   }) : super(key: key);
@@ -56,17 +56,14 @@ class _FrontBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-        child: Container(
-          color: Colors.grey,
-          height: 40,
-          child: Center(
-            child: Text(
-              text,
-              style: Theme.of(context).textTheme.bodyText2,
-              textAlign: TextAlign.center,
-            ),
+      child: Container(
+        color: Colors.grey.withOpacity(0.8),
+        height: 40,
+        child: Center(
+          child: Text(
+            text,
+            style: Theme.of(context).textTheme.bodyText2,
+            textAlign: TextAlign.center,
           ),
         ),
       ),
