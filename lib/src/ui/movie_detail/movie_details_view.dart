@@ -128,9 +128,12 @@ class MovieDetailsView extends ConsumerWidget with RouterObject {
                           children: [
                             ClipRRect(
                               borderRadius: BorderRadius.circular(10),
-                              child: CNImage(
-                                  imgUrl:
-                                      controller.movieDetail.posterImageUrl),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: CNImage(
+                                    imgUrl:
+                                        controller.movieDetail.posterImageUrl),
+                              ),
                             ),
                             const SizedBox(
                               height: 10,

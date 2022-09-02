@@ -39,7 +39,7 @@ class MovieController extends ChangeNotifier {
 
   Future getPopularMovies() async {
     await Future.delayed(const Duration(seconds: 1));
-    popularMovies = await _service.getPopularMovies();
+    popularMovies = await _service.getPopularMovies(1);
     setLoadingPopularMovies(false);
     notifyListeners();
   }

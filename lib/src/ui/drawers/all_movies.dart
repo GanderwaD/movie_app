@@ -83,7 +83,7 @@ class AllMovies extends ConsumerWidget with RouterObject {
                         child: MovieBox(movie: movie),
                       );
                     },
-                    childCount: controller.itemCount,
+                    childCount: controller.popularMovies.length,
                   ),
                 )
               ],

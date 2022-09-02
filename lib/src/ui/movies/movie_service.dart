@@ -25,22 +25,24 @@ class MovieService {
   );
   final EnvironmentConfig _environmentConfig;
   final Dio _dio;
+
   ///Popular movie endpoint
-  Future<List<Movie>> getPopularMovies() async {
+  Future<List<Movie>> getPopularMovies(int page) async {
     final response = await _dio.get(
-      "https://api.themoviedb.org/3/movie/popular?api_key=${_environmentConfig.movieApiKey}&language=en-Us",
+      "https://api.themoviedb.org/3/movie/popular?api_key=${_environmentConfig.movieApiKey}&language=en-Us&$page",
     );
     final results = List<Map<String, dynamic>>.from(response.data['results']);
 
     List<Movie> movies = results
         .map((movieData) => Movie.fromMap(movieData))
-        .toList(growable: false);
+        .toList(growable: true);
     return movies;
   }
+
   ///Top movie endpoint
   Future<List<Movie>> getTopMovies() async {
     final response = await _dio.get(
-      "https://api.themoviedb.org/3/movie/top_rated?api_key=${_environmentConfig.movieApiKey}&language=en-US&page=1",
+      "https://api.themoviedb.org/3/movie/top_rated?api_key=${_environmentConfig.movieApiKey}&language=en-US",
     );
     final results = List<Map<String, dynamic>>.from(response.data['results']);
 
@@ -49,5 +51,4 @@ class MovieService {
         .toList(growable: false);
     return movies;
   }
-  
 }
