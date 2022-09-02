@@ -10,6 +10,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_app/src/models/backdrop_image.dart';
 import 'package:movie_app/src/models/movie_details.dart';
+import 'package:movie_app/src/models/movie_genres.dart';
 import 'package:movie_app/src/ui/movie_detail/movie_detail_service.dart';
 import 'package:movie_app/src/ui/widgets/paginated_list/paginated_list.dart';
 
@@ -56,6 +57,7 @@ class MovieDetailsController extends ChangeNotifier {
     setImagesLoading(false);
     notifyListeners();
   }
+
 
   goBack(context) {
     R.instance.popWidget(context);

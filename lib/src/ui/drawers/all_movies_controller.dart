@@ -28,7 +28,6 @@ class AllMoviesController extends ChangeNotifier {
   PaginatedController allMoviesPaginatedController = PaginatedController();
   bool loadingPopularMovies = false;
   List<Movie> popularMovies = [];
-  List<Movie> morePopularMovies = [];
   int page = 1;
 
   void init() async {
@@ -43,19 +42,15 @@ class AllMoviesController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future fetchMorePopularMovies() async {
-    await Future.delayed(const Duration(seconds: 1));
+  setLoadMore() async {
     page++;
-    morePopularMovies = await _service.getPopularMovies(page);
-    notifyListeners();
-  }
-
-  setLoadMore() {
-    fetchMorePopularMovies();
-    popularMovies.addAll(morePopularMovies);
+    popularMovies.addAll(await _service.getPopularMovies(page));
+    await Future.delayed(const Duration(seconds: 1));
     allMoviesPaginatedController.loadComplete();
     notifyListeners();
   }
+
+  
 
   setLoadingPopularMovies(bool val) {
     loadingPopularMovies = val;

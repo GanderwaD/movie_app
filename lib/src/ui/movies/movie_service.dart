@@ -29,7 +29,7 @@ class MovieService {
   ///Popular movie endpoint
   Future<List<Movie>> getPopularMovies(int page) async {
     final response = await _dio.get(
-      "https://api.themoviedb.org/3/movie/popular?api_key=${_environmentConfig.movieApiKey}&language=en-Us&$page",
+      "https://api.themoviedb.org/3/movie/popular?api_key=${_environmentConfig.movieApiKey}&language=en-Us&page=$page",
     );
     final results = List<Map<String, dynamic>>.from(response.data['results']);
 

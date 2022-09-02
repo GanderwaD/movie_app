@@ -278,12 +278,10 @@ class _ClassicFooterState extends LoadIndicatorState<ClassicFooter> {
   Widget _buildIcon(LoadStatus? mode) {
     Widget? icon = mode == LoadStatus.loading
         ? widget.loadingIcon ??
-            SizedBox(
+           const SizedBox(
               width: 25.0,
               height: 25.0,
-              child: defaultTargetPlatform == TargetPlatform.iOS
-                  ? const CupertinoActivityIndicator()
-                  : const CircularProgressIndicator(strokeWidth: 2.0),
+              child:  const CupertinoActivityIndicator(),
             )
         : mode == LoadStatus.noMore
             ? widget.noMoreIcon

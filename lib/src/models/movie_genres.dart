@@ -25,6 +25,7 @@ class Genre {
       'name': name,
     };
   }
+  
 
   factory Genre.fromMap(Map<String, dynamic> map) {
     return Genre(

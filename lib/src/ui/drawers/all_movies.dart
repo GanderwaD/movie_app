@@ -46,6 +46,7 @@ class AllMovies extends ConsumerWidget with RouterObject {
       onRefresh: () => controller.onRefresh(),
       enablePullUp: true,
       onLoading: () => controller.setLoadMore(),
+      footer: const ClassicFooter(),
       header: const ClassicHeader(),
       child: controller.loadingPopularMovies
           ? const Center(
