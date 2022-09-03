@@ -36,7 +36,21 @@ class AllMovies extends ConsumerWidget with RouterObject {
   Widget build(BuildContext context, WidgetRef ref) {
     final allMoviesController = ref.watch(allMoviesProvider);
     return BaseScaffold(
+      appBar: _getAppbar(context, allMoviesController),
       body: _getBody(context, allMoviesController),
+    );
+  }
+
+  _getAppbar(BuildContext context, AllMoviesController controller) {
+    return AppBar(
+      centerTitle: true,
+      leading: IconButton(
+        onPressed: () => controller.goBack(context),
+        icon: const Icon(Icons.arrow_back, size: 30.0),
+      ),
+      backgroundColor: Colors.red,
+      title: const TextWidget('All Movies',
+          color: Colors.blue, maxLines: 1, textSize: TextSize.uLarge),
     );
   }
 
@@ -54,19 +68,6 @@ class AllMovies extends ConsumerWidget with RouterObject {
             )
           : CustomScrollView(
               slivers: [
-                SliverAppBar(
-                  centerTitle: true,
-                  pinned: true,
-                  leading: IconButton(
-                    onPressed: () => controller.goBack(context),
-                    icon: const Icon(Icons.arrow_back, size: 30.0),
-                  ),
-                  backgroundColor: Colors.red,
-                  title: const TextWidget('All Movies',
-                      color: Colors.blue,
-                      maxLines: 1,
-                      textSize: TextSize.uLarge),
-                ),
                 SliverGrid(
                   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                       maxCrossAxisExtent: 200.0,

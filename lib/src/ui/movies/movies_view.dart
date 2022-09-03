@@ -58,7 +58,7 @@ class MoviesView extends ConsumerWidget with RouterObject {
       MovieController movieController) {
     return SliverAppBar(
       centerTitle: true,
-      expandedHeight: 250,
+      expandedHeight: 255,
       pinned: true,
       leading: IconButton(
         onPressed: () => Scaffold.of(context).openDrawer(),
@@ -69,7 +69,7 @@ class MoviesView extends ConsumerWidget with RouterObject {
           color: Colors.blue, maxLines: 1, textSize: TextSize.uLarge),
       flexibleSpace: FlexibleSpaceBar(
         background: Container(
-          margin: const EdgeInsets.only(top: 70, bottom: 10),
+          margin: const EdgeInsets.only(top: 75, bottom: 10),
           child: movieController.loadingTopMovies
               ? const Center(
                   child: CircularProgressIndicator(color: Colors.red),
