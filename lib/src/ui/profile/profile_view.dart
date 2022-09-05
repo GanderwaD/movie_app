@@ -36,7 +36,7 @@ class ProfileView extends ConsumerWidget with RouterObject {
   }
 
   _getBody(context) {
-    return CustomScrollView(
+    return  CustomScrollView(
       slivers: [
         SliverAppBar(
           centerTitle: true,

@@ -8,23 +8,23 @@
  */
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:movie_app/src/router/router_helper.dart';
 import 'package:movie_app/src/ui/home/home_controller.dart';
 import 'package:movie_app/src/ui/movie_detail/movie_details_controller.dart';
-import 'package:movie_app/src/ui/movie_detail/movie_image_view.dart';
 import 'package:movie_app/src/ui/widgets/base_scaffold.dart';
 import 'package:movie_app/src/ui/widgets/image/cached_network_image.dart';
-import 'package:movie_app/src/ui/widgets/page/page_slider.dart';
 import 'package:movie_app/src/ui/widgets/theme/colors.dart';
 
 import '../../router/router_constants.dart';
+import '../../router/router_helper.dart';
 import '../../router/router_object.dart';
 import '../widgets/animations/slide_transform/default_transform.dart';
 import '../widgets/movie_box.dart';
+import '../widgets/page/page_slider.dart';
 import '../widgets/paginated_list/indicator/classic_indicator.dart';
 import '../widgets/paginated_list/paginated_list.dart';
 import '../widgets/text_widget/text_size.dart';
 import '../widgets/text_widget/text_widget.dart';
+import 'movie_image_view.dart';
 
 class MovieDetailsView extends ConsumerWidget with RouterObject {
   const MovieDetailsView(
@@ -57,7 +57,7 @@ class MovieDetailsView extends ConsumerWidget with RouterObject {
   _getBackdropImage(BuildContext context, MovieDetailsController controller) {
     return SliverAppBar(
       centerTitle: true,
-      expandedHeight: 250,
+      expandedHeight: 255,
       pinned: true,
       leading: IconButton(
         onPressed: () => controller.goBack(context),
@@ -75,26 +75,35 @@ class MovieDetailsView extends ConsumerWidget with RouterObject {
                 color: Colors.red,
               ),
             )
-          : FlexibleSpaceBar(
-              background: Container(
-                margin: const EdgeInsets.only(top: 70, bottom: 0),
-                child: Stack(
-                  children: [
-                    Positioned(
-                      left: 0,
-                      right: 0,
-                      child: CNImage(
-                          imgUrl: controller.movieDetail.backdropImageUrl,
-                          fit: BoxFit.fitWidth),
-                    ),
-                    Positioned(
-                      left: 0,
-                      right: 0,
-                      bottom: 0,
-                      child:
-                          FrontBanner(text: controller.movieDetail.title ?? ''),
-                    ),
-                  ],
+          : Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  colors: [royalOrange, americanBlue],
+                ),
+              ),
+              child: FlexibleSpaceBar(
+                background: Container(
+                  margin: const EdgeInsets.only(top: 75, bottom: 0),
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        left: 0,
+                        right: 0,
+                        child: CNImage(
+                            imgUrl: controller.movieDetail.backdropImageUrl,
+                            fit: BoxFit.fitWidth),
+                      ),
+                      Positioned(
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        child: FrontBanner(
+                            text: controller.movieDetail.title ?? ''),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -104,7 +113,13 @@ class MovieDetailsView extends ConsumerWidget with RouterObject {
   _getBody(BuildContext context, MovieDetailsController controller,
       HomeController homeViewController) {
     return Container(
-      color: beige,
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topRight,
+          end: Alignment.bottomLeft,
+          colors: [royalOrange, americanBlue],
+        ),
+      ),
       child: PaginatedList(
         controller: controller.movieDetailsPaginatedController,
         onRefresh: () => controller.onRefresh(),
@@ -138,43 +153,41 @@ class MovieDetailsView extends ConsumerWidget with RouterObject {
                             const SizedBox(
                               height: 10,
                             ),
-                            Container(
-                              margin: EdgeInsets.only(left: 10.0),
-                              //color: Colors.amber,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  TextWidget(
-                                    "Status: \n${controller.movieDetail.status}",
-                                    textSize: TextSize.large,
-                                  ),
-                                  TextWidget(
-                                    "Release Date: \n${controller.movieDetail.releaseDate}",
-                                    textSize: TextSize.large,
-                                  ),
-                                  // TextWidget(
-                                  //   "Original Language: \n${controller.movieDetail.originalLanguage}",
-                                  //   textSize: TextSize.large,
-                                  // ),
-                                  TextWidget(
-                                    "Budget: \n${controller.movieDetail.budget}",
-                                    textSize: TextSize.large,
-                                  ),
-                                  TextWidget(
-                                    "Revenue: \n${controller.movieDetail.revenue}",
-                                    textSize: TextSize.large,
-                                  ),
-                                  TextWidget(
-                                    "Runtime: \n${controller.movieDetail.runtime} Minutes",
-                                    textSize: TextSize.large,
-                                  ),
-                                ],
-                              ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                TextWidget(
+                                  "Status: \n${controller.movieDetail.status}",
+                                  textSize: TextSize.large,
+                                ),
+                                TextWidget(
+                                  "Release Date: \n${controller.movieDetail.releaseDate}",
+                                  textSize: TextSize.large,
+                                ),
+                                // TextWidget(
+                                //   "Original Language: \n${controller.movieDetail.originalLanguage}",
+                                //   textSize: TextSize.large,
+                                // ),
+                                TextWidget(
+                                  "Budget: \n${controller.movieDetail.budget}",
+                                  textSize: TextSize.large,
+                                ),
+                                TextWidget(
+                                  "Revenue: \n${controller.movieDetail.revenue}",
+                                  textSize: TextSize.large,
+                                ),
+                                TextWidget(
+                                  "Runtime: \n${controller.movieDetail.runtime} Minutes",
+                                  textSize: TextSize.large,
+                                ),
+                              ],
                             ),
                           ],
                         ),
                         Column(
                           children: [
+                            const TextWidget(
+                                "-----------------------------------------------"),
                             const SizedBox(
                               height: 10,
                             ),
@@ -190,67 +203,75 @@ class MovieDetailsView extends ConsumerWidget with RouterObject {
                                 textSize: TextSize.large,
                               ),
                             ),
+                            const TextWidget(
+                                "-----------------------------------------------"),
                           ],
                         ),
-                        Container(
-                          width: double.infinity,
-                          color: Colors.amber,
-                          child: Column(
-                            children: [
-                              const TextWidget(
-                                "Overview",
+                        Column(
+                          children: [
+                            const TextWidget(
+                              "Overview",
+                              textSize: TextSize.large,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: TextWidget(
+                                controller.movieDetail.overview ?? '',
                                 textSize: TextSize.large,
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: TextWidget(
-                                  controller.movieDetail.overview ?? '',
-                                  textSize: TextSize.large,
-                                ),
-                              )
-                            ],
-                          ),
+                            ),
+                            const TextWidget(
+                                "-----------------------------------------------"),
+                          ],
                         ),
-                        Container(
-                          width: double.infinity,
-                          color: Colors.amber,
-                          child: Column(
-                            children: [
-                              const TextWidget(
-                                "Genres",
-                                textSize: TextSize.large,
-                              ),
-                              TextWidget("${controller.movieDetail.genres}"),
-                              PageSlider(
-                                controller:
-                                    homeViewController.homeSliderController,
-                                onPageChanged: (index) =>
-                                    homeViewController.updatePageIndex(index),
-                                slideTransform: const DefaultTransform(),
-                                pageBuilder: (index) {
-                                  return GestureDetector(
-                                    onTap: () => R.instance.add(
-                                        object: MovieImageView(controller
-                                            .backdropImages[index]
-                                            .backdropsImageUrl)),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(12.0),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(12),
-                                        child: CNImage(
-                                          imgUrl: controller
-                                              .backdropImages[index]
-                                              .backdropsImageUrl,
-                                          fit: BoxFit.fill,
-                                        ),
+                        Column(
+                          children: [
+                            const TextWidget(
+                              "Genres",
+                              textSize: TextSize.large,
+                            ),
+                            TextWidget("${controller.movieDetail.genres}"),
+                            const TextWidget(
+                                "-----------------------------------------------"),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: const [
+                                Icon(Icons.arrow_back),
+                                Icon(Icons.arrow_forward)
+                              ],
+                            ),
+                            PageSlider(
+                              controller:
+                                  homeViewController.homeSliderController,
+                              onPageChanged: (index) =>
+                                  homeViewController.updatePageIndex(index),
+                              slideTransform: const DefaultTransform(),
+                              pageBuilder: (index) {
+                                return GestureDetector(
+                                  onTap: () => R.instance.add(
+                                      object: MovieImageView(controller
+                                          .backdropImages[index]
+                                          .backdropsImageUrl)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(12.0),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(12),
+                                      child: CNImage(
+                                        imgUrl: controller.backdropImages[index]
+                                            .backdropsImageUrl,
+                                        fit: BoxFit.fill,
                                       ),
                                     ),
-                                  );
-                                },
-                                itemCount: controller.backdropImages.length,
-                              ),
-                            ],
-                          ),
+                                  ),
+                                );
+                              },
+                              itemCount: controller.backdropImages.length,
+                            ),
+                          ],
                         )
                       ],
                     ),

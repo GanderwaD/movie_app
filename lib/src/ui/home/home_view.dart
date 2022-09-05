@@ -11,8 +11,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../router/router_constants.dart';
 import '../../router/router_object.dart';
+import '../drawers/all_movies.dart';
 import '../movies/movies_view.dart';
-import '../profile/profile_view.dart';
 import '../search/search_view.dart';
 import '../widgets/base_scaffold.dart';
 import '../widgets/drawer.dart';
@@ -31,13 +31,12 @@ class HomeView extends ConsumerWidget with RouterObject {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final homeViewController = ref.watch(homeProvider);
-    final size = MediaQuery.of(context).size;
     return BaseScaffold(
       body: homeViewController.currentNavBarIndex == 0
           ? const MoviesView()
           : homeViewController.currentNavBarIndex == 1
-              ? const SearchView()
-              : const ProfileView(),
+              ? const AllMovies()
+              : const SearchView(),
       drawer: const Drawer(
         child: GetDrawer(),
       ),

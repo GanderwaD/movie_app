@@ -40,25 +40,24 @@ class HomeController extends ChangeNotifier {
     ),
     const NavbarItem(
       title: TextWidget(
+        "Browse",
+        textSize: TextSize.medium,
+        color: Colors.blue,
+      ),
+      icon: Icon(Icons.browse_gallery_outlined),
+    ),
+    const NavbarItem(
+      title: TextWidget(
         "Search",
         textSize: TextSize.medium,
         color: Colors.blue,
       ),
       icon: Icon(Icons.search_outlined),
     ),
-    const NavbarItem(
-      title: TextWidget(
-        "Account",
-        textSize: TextSize.medium,
-        color: Colors.blue,
-      ),
-      icon: Icon(Icons.account_box),
-    ),
   ];
 
   void init() {}
 
-  
   setAutoPlay(bool val) {
     isAutoPlay = val;
     notifyListeners();

@@ -67,37 +67,46 @@ class MoviesView extends ConsumerWidget with RouterObject {
       backgroundColor: blueYonder,
       title: const TextWidget('Movie',
           color: Colors.blue, maxLines: 1, textSize: TextSize.uLarge),
-      flexibleSpace: FlexibleSpaceBar(
-        background: Container(
-          margin: const EdgeInsets.only(top: 75, bottom: 10),
-          child: movieController.loadingTopMovies
-              ? const Center(
-                  child: CircularProgressIndicator(color: Colors.red),
-                )
-              : PageSlider(
-                  viewportFraction: 0.4,
-                  controller: homeViewController.homeSliderController,
-                  infiniteScroll: true,
-                  onPageChanged: (index) =>
-                      homeViewController.updatePageIndex(index),
-                  //enableAutoSlider: homeViewController.isAutoPlay,
-                  enableAutoSlider: true,
-                  slideTransform: const DefaultTransform(),
-                  pageBuilder: (index) {
-                    var movie = movieController.topMovies[index];
-                    return GestureDetector(
-                      onTap: () {
-                        R.instance.add(object: MovieDetailsView(movie.id));
-                        log("slider ${movie.id}");
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 5.0),
-                        child: MovieBox(movie: movie),
-                      ),
-                    );
-                  },
-                  itemCount: 5,
-                ),
+      flexibleSpace: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.centerRight,
+            end: Alignment.centerLeft,
+            colors: [gunMetal, deepSpaceSparkle],
+          ),
+        ),
+        child: FlexibleSpaceBar(
+          background: Container(
+            margin: const EdgeInsets.only(top: 80, bottom: 10),
+            child: movieController.loadingTopMovies
+                ? const Center(
+                    child: CircularProgressIndicator(color: Colors.red),
+                  )
+                : PageSlider(
+                    viewportFraction: 0.4,
+                    controller: homeViewController.homeSliderController,
+                    infiniteScroll: true,
+                    onPageChanged: (index) =>
+                        homeViewController.updatePageIndex(index),
+                    //enableAutoSlider: homeViewController.isAutoPlay,
+                    enableAutoSlider: true,
+                    slideTransform: const DefaultTransform(),
+                    pageBuilder: (index) {
+                      var movie = movieController.topMovies[index];
+                      return GestureDetector(
+                        onTap: () {
+                          R.instance.add(object: MovieDetailsView(movie.id));
+                          log("slider ${movie.id}");
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 5.0),
+                          child: MovieBox(movie: movie),
+                        ),
+                      );
+                    },
+                    itemCount: 5,
+                  ),
+          ),
         ),
       ),
     );
@@ -106,7 +115,13 @@ class MoviesView extends ConsumerWidget with RouterObject {
   _getBody(BuildContext context, HomeController homeViewController,
       MovieController movieController) {
     return Container(
-      color: blueYonder,
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topRight,
+          end: Alignment.bottomLeft,
+          colors: [gunMetal, deepSpaceSparkle],
+        ),
+      ),
       child: PaginatedList(
         controller: movieController.moviePaginatedController,
         onRefresh: () => movieController.onRefresh(),
@@ -135,6 +150,7 @@ class MoviesView extends ConsumerWidget with RouterObject {
                           child: MovieBox(movie: movie),
                         );
                       },
+                      //number of items in movie_view page
                       childCount: 20,
                     ),
                   )

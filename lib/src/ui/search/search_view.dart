@@ -33,14 +33,14 @@ class SearchView extends ConsumerWidget with RouterObject {
   Widget build(BuildContext context, WidgetRef ref) {
     final searchController = ref.watch(searchProvider);
     return BaseScaffold(
-      body: _getBody(context,searchController),
-      drawer: const Drawer(
-        child: GetDrawer(),
-      ),
+      body: _getBody(context, searchController),
+      // drawer: const Drawer(
+      //   child: GetDrawer(),
+      // ),
     );
   }
 
-  _getBody(BuildContext context,SearchController searchController) {
+  _getBody(BuildContext context, SearchController searchController) {
     return Container(
       color: redwood,
       child: GestureDetector(

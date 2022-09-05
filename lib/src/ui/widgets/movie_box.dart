@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:movie_app/src/ui/widgets/image/cached_network_image.dart';
+import 'package:movie_app/src/ui/widgets/theme/colors.dart';
 
 import '../../models/movie.dart';
 import 'text_widget/text_widget.dart';
@@ -57,7 +58,7 @@ class FrontBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       child: Container(
-        color: Colors.grey.withOpacity(0.8),
+        color: Colors.grey,
         height: 40,
         child: Center(
           child: Text(
@@ -89,7 +90,10 @@ class _GetPopularity extends StatelessWidget {
         color: Colors.grey.shade200.withOpacity(0.3),
         child: Column(
           children: [
-            const Icon(Icons.star),
+            const Icon(
+              Icons.star,
+              color: goldGlaze,
+            ),
             TextWidget("$voteAverage", color: Colors.white),
           ],
         ),
