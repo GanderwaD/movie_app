@@ -43,7 +43,7 @@ class MovieDetailsController extends ChangeNotifier {
 
   Future getMovieDetails() async {
     setDetailsLoading(true);
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(milliseconds: 500));
     movieDetail = await _service.getMovieDetail(movieId);
     setDetailsLoading(false);
     notifyListeners();
@@ -51,7 +51,7 @@ class MovieDetailsController extends ChangeNotifier {
 
   Future getMovieImages() async {
     setImagesLoading(true);
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(milliseconds: 500));
     backdropImages = await _service.getMovieImages(movieId);
     setImagesLoading(false);
     notifyListeners();
@@ -73,7 +73,7 @@ class MovieDetailsController extends ChangeNotifier {
   }
 
   onRefresh() async {
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(milliseconds: 500));
     init();
     movieDetailsPaginatedController.refreshCompleted();
     notifyListeners();

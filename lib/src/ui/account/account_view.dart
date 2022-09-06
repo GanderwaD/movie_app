@@ -7,6 +7,7 @@ import 'package:movie_app/src/utils/bubble_indicator_painter.dart';
 
 import '../../router/router_constants.dart';
 import '../../router/router_object.dart';
+import '../widgets/text_widget/text_size.dart';
 import '../widgets/text_widget/text_widget.dart';
 import '../widgets/theme/colors.dart';
 import 'login/sign_in.dart';
@@ -34,19 +35,19 @@ class AccountView extends ConsumerWidget with RouterObject {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                  colors: <Color>[loginGradientStart, loginGradientEnd],
-                  begin: FractionalOffset(0.0, 0.0),
-                  end: FractionalOffset(1.0, 1.0),
-                  stops: <double>[0.0, 1.0],
-                  tileMode: TileMode.clamp),
+              gradient: deepMetalGradient,
             ),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
                 const Padding(
                   padding: EdgeInsets.only(top: 75.0),
-                  child: TextWidget("MovieApp"),
+                  child: TextWidget(
+                    "MovieApp",
+                    color: brushedSilver,
+                    fontFamily: 'FoxCavalier',
+                    textSize: TextSize.xxlLarge,
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 20.0),
@@ -59,20 +60,6 @@ class AccountView extends ConsumerWidget with RouterObject {
                     physics: const ClampingScrollPhysics(),
                     onPageChanged: (int i) =>
                         controller.onPageChanged(i, context),
-                    //   (int i) {
-                    //   FocusScope.of(context).requestFocus(FocusNode());
-                    //   if (i == 0) {
-                    //     setState(() {
-                    //       right = Colors.white;
-                    //       left = Colors.black;
-                    //     });
-                    //   } else if (i == 1) {
-                    //     setState(() {
-                    //       right = Colors.black;
-                    //       left = Colors.white;
-                    //     });
-                    //   }
-                    // },
                     children: <Widget>[
                       ConstrainedBox(
                         constraints: const BoxConstraints.expand(),
@@ -114,11 +101,11 @@ class AccountView extends ConsumerWidget with RouterObject {
                 ),
                 onPressed: () => controller.onSignInButtonPress(),
                 child: Text(
-                  'SignIn',
+                  'LogIn',
                   style: TextStyle(
                       color: controller.left,
                       fontSize: 16.0,
-                      fontFamily: 'WorkSansSemiBold'),
+                      fontFamily: 'SanFrancisco'),
                 ),
               ),
             ),
@@ -134,7 +121,7 @@ class AccountView extends ConsumerWidget with RouterObject {
                   style: TextStyle(
                       color: controller.right,
                       fontSize: 16.0,
-                      fontFamily: 'WorkSansSemiBold'),
+                      fontFamily: 'SanFrancisco'),
                 ),
               ),
             ),

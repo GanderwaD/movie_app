@@ -38,14 +38,14 @@ class MovieController extends ChangeNotifier {
   }
 
   Future getPopularMovies() async {
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(milliseconds: 500));
     popularMovies = await _service.getPopularMovies(1);
     setLoadingPopularMovies(false);
     notifyListeners();
   }
 
   Future getTopMovies() async {
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(milliseconds: 500));
     topMovies = await _service.getTopMovies();
     setLoadingTopMovies(false);
     notifyListeners();
@@ -62,7 +62,7 @@ class MovieController extends ChangeNotifier {
   }
 
   onRefresh() async {
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(milliseconds: 500));
     init();
     moviePaginatedController.refreshCompleted();
     notifyListeners();

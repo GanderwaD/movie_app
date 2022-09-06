@@ -3,6 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../router/router_helper.dart';
 import '../../widgets/snackbar.dart';
+import '../../widgets/text_widget/text_size.dart';
+import '../../widgets/text_widget/text_widget.dart';
 import '../../widgets/theme/colors.dart';
 
 class SignUp extends StatefulWidget {
@@ -208,39 +210,32 @@ class _SignUpState extends State<SignUp> {
               Container(
                 margin: const EdgeInsets.only(top: 340.0),
                 decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                  boxShadow: <BoxShadow>[
-                    BoxShadow(
-                      color: loginGradientStart,
-                      offset: Offset(1.0, 6.0),
-                      blurRadius: 20.0,
-                    ),
-                    BoxShadow(
-                      color: loginGradientEnd,
-                      offset: Offset(1.0, 6.0),
-                      blurRadius: 20.0,
-                    ),
-                  ],
-                  gradient: LinearGradient(
-                      colors: <Color>[loginGradientEnd, loginGradientStart],
-                      begin: FractionalOffset(0.2, 0.2),
-                      end: FractionalOffset(1.0, 1.0),
-                      stops: <double>[0.0, 1.0],
-                      tileMode: TileMode.clamp),
-                ),
+                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                    boxShadow: <BoxShadow>[
+                      BoxShadow(
+                        color: deepSpaceSparkle,
+                        offset: Offset(1.0, 6.0),
+                        blurRadius: 20.0,
+                      ),
+                      BoxShadow(
+                        color: gunMetal,
+                        offset: Offset(1.0, 6.0),
+                        blurRadius: 20.0,
+                      ),
+                    ],
+                    gradient: deepMetalGradient),
                 child: MaterialButton(
                   highlightColor: Colors.transparent,
-                  splashColor: loginGradientEnd,
+                  splashColor: americanBlue,
                   //shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5.0))),
                   child: const Padding(
                     padding:
                         EdgeInsets.symmetric(vertical: 10.0, horizontal: 42.0),
-                    child: Text(
-                      'SIGN UP',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 25.0,
-                          fontFamily: 'WorkSansBold'),
+                    child: TextWidget(
+                      'SignUp',
+                      color: brushedSilver,
+                      fontFamily: 'FoxCavalier',
+                      textSize: TextSize.xxlLarge,
                     ),
                   ),
                   onPressed: () => _toggleSignUpButton(),
@@ -251,36 +246,31 @@ class _SignUpState extends State<SignUp> {
           Container(
             margin: const EdgeInsets.only(top: 20.0),
             decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(5.0)),
-              boxShadow: <BoxShadow>[
-                BoxShadow(
-                  color: loginGradientStart,
-                  offset: Offset(1.0, 6.0),
-                  blurRadius: 20.0,
-                ),
-                BoxShadow(
-                  color: loginGradientEnd,
-                  offset: Offset(1.0, 6.0),
-                  blurRadius: 20.0,
-                ),
-              ],
-              gradient: LinearGradient(
-                  colors: <Color>[loginGradientEnd, loginGradientStart],
-                  begin: FractionalOffset(0.2, 0.2),
-                  end: FractionalOffset(1.0, 1.0),
-                  stops: <double>[0.0, 1.0],
-                  tileMode: TileMode.clamp),
-            ),
+                borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                boxShadow: <BoxShadow>[
+                  BoxShadow(
+                    color: deepSpaceSparkle,
+                    offset: Offset(1.0, 6.0),
+                    blurRadius: 20.0,
+                  ),
+                  BoxShadow(
+                    color: gunMetal,
+                    offset: Offset(1.0, 6.0),
+                    blurRadius: 20.0,
+                  ),
+                ],
+                gradient: deepMetalGradient),
             child: MaterialButton(
               highlightColor: Colors.transparent,
-              splashColor: loginGradientEnd,
+              splashColor: americanBlue,
               child: const Padding(
-                  padding:
-                      EdgeInsets.symmetric(vertical: 10.0, horizontal: 42.0),
-                  child: Icon(
-                    Icons.arrow_back,
-                    color: white,
-                  )),
+                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 42.0),
+                child: Icon(
+                  Icons.arrow_back,
+                  color: brushedSilver,
+                  size: 30,
+                ),
+              ),
               onPressed: () => R.instance.popWidget(context),
             ),
           ),

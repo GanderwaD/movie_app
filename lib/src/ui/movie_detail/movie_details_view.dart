@@ -61,31 +61,31 @@ class MovieDetailsView extends ConsumerWidget with RouterObject {
       pinned: true,
       leading: IconButton(
         onPressed: () => controller.goBack(context),
-        icon: const Icon(Icons.arrow_back, size: 30.0),
+        icon: const Icon(
+          Icons.arrow_back,
+          size: 30.0,
+          color: brushedSilver,
+        ),
       ),
-      backgroundColor: blueYonder,
-      title: const TextWidget('Movie Details',
-          fontFamily: 'SanFrancisco',
-          color: Colors.blue,
+      title: const TextWidget('Details',
+          color: brushedSilver,
           maxLines: 1,
-          textSize: TextSize.uLarge),
+          fontFamily: 'FoxCavalier',
+          textSize: TextSize.xxlLarge),
       flexibleSpace: controller.isDetailsLoading
-          ? const Center(
-              child: CircularProgressIndicator(
-                color: Colors.red,
+          ? Container(
+              decoration: const BoxDecoration(gradient: royalAmericanGradient),
+              child: const Center(
+                child: CircularProgressIndicator(
+                  color: Colors.red,
+                ),
               ),
             )
           : Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topRight,
-                  end: Alignment.bottomLeft,
-                  colors: [royalOrange, americanBlue],
-                ),
-              ),
+              decoration: const BoxDecoration(gradient: royalAmericanGradient),
               child: FlexibleSpaceBar(
                 background: Container(
-                  margin: const EdgeInsets.only(top: 75, bottom: 0),
+                  margin: const EdgeInsets.only(top: 80, bottom: 0),
                   child: Stack(
                     children: [
                       Positioned(
@@ -113,9 +113,7 @@ class MovieDetailsView extends ConsumerWidget with RouterObject {
   _getBody(BuildContext context, MovieDetailsController controller,
       HomeController homeViewController) {
     return Container(
-      decoration: const BoxDecoration(
-        gradient: primaryGradient
-      ),
+      decoration: const BoxDecoration(gradient: royalAmericanGradient),
       child: PaginatedList(
         controller: controller.movieDetailsPaginatedController,
         onRefresh: () => controller.onRefresh(),
@@ -153,28 +151,33 @@ class MovieDetailsView extends ConsumerWidget with RouterObject {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 TextWidget(
-                                  "Status: \n${controller.movieDetail.status}",
+                                  "Status: \n${controller.movieDetail.status} \n------------------",
                                   textSize: TextSize.large,
+                                  fontFamily: 'SanFrancisco',
                                 ),
                                 TextWidget(
-                                  "Release Date: \n${controller.movieDetail.releaseDate}",
+                                  "Release Date: \n${controller.movieDetail.releaseDate} \n------------------",
                                   textSize: TextSize.large,
+                                  fontFamily: 'SanFrancisco',
                                 ),
                                 // TextWidget(
                                 //   "Original Language: \n${controller.movieDetail.originalLanguage}",
                                 //   textSize: TextSize.large,
                                 // ),
                                 TextWidget(
-                                  "Budget: \n${controller.movieDetail.budget}",
+                                  "Budget: \n${controller.movieDetail.budget} \n------------------",
                                   textSize: TextSize.large,
+                                  fontFamily: 'SanFrancisco',
                                 ),
                                 TextWidget(
-                                  "Revenue: \n${controller.movieDetail.revenue}",
+                                  "Revenue: \n${controller.movieDetail.revenue} \n------------------",
                                   textSize: TextSize.large,
+                                  fontFamily: 'SanFrancisco',
                                 ),
                                 TextWidget(
                                   "Runtime: \n${controller.movieDetail.runtime} Minutes",
                                   textSize: TextSize.large,
+                                  fontFamily: 'SanFrancisco',
                                 ),
                               ],
                             ),
@@ -187,16 +190,21 @@ class MovieDetailsView extends ConsumerWidget with RouterObject {
                             const SizedBox(
                               height: 10,
                             ),
-                            const TextWidget("Original Title:"),
+                            const TextWidget(
+                              "Original Title:",
+                              fontFamily: 'SanFrancisco',
+                            ),
                             TextWidget(
                               controller.movieDetail.originalTitle ?? '',
                               textSize: TextSize.large,
+                              fontFamily: 'SanFrancisco',
                             ),
                             Padding(
                               padding: const EdgeInsets.only(bottom: 5.0),
                               child: TextWidget(
                                 controller.movieDetail.tagLine ?? '',
                                 textSize: TextSize.large,
+                                fontFamily: 'SanFrancisco',
                               ),
                             ),
                             const TextWidget(
@@ -208,12 +216,14 @@ class MovieDetailsView extends ConsumerWidget with RouterObject {
                             const TextWidget(
                               "Overview",
                               textSize: TextSize.large,
+                              fontFamily: 'SanFrancisco',
                             ),
                             Padding(
                               padding: const EdgeInsets.all(5.0),
                               child: TextWidget(
                                 controller.movieDetail.overview ?? '',
                                 textSize: TextSize.large,
+                                fontFamily: 'SanFrancisco',
                               ),
                             ),
                             const TextWidget(
@@ -225,6 +235,7 @@ class MovieDetailsView extends ConsumerWidget with RouterObject {
                             const TextWidget(
                               "Genres",
                               textSize: TextSize.large,
+                              fontFamily: 'SanFrancisco',
                             ),
                             TextWidget("${controller.movieDetail.genres}"),
                             const TextWidget(

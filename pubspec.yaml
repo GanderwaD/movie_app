@@ -58,6 +58,10 @@ flutter:
   uses-material-design: true
 
   fonts:
+    - family: FoxCavalier
+      fonts:
+        - asset:  assets/fonts/fox_cavalier/Fox-Cavalier.ttf
+
     - family: Raleway
       fonts:
         - asset:  assets/fonts/raleway/Raleway-Regular.ttf

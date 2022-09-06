@@ -54,27 +54,25 @@ class AllMovies extends ConsumerWidget with RouterObject {
       pinned: true,
       leading: IconButton(
         onPressed: () => R.instance.add(object: AccountView()),
-        icon: const Icon(Icons.account_circle_outlined, size: 30.0),
+        icon: const Icon(Icons.account_circle_outlined,
+            color: brushedSilver, size: 30.0),
       ),
-      title: const TextWidget('Browse',
-          color: Colors.blue, maxLines: 1, textSize: TextSize.uLarge),
+      title: const TextWidget(
+        'Browse',
+        color: brushedSilver,
+        maxLines: 1,
+        fontFamily: 'FoxCavalier',
+        textSize: TextSize.xxlLarge,
+      ),
       flexibleSpace: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [royalOrange, americanBlue],
-          ),
-        ),
+        decoration: const BoxDecoration(gradient: deepMetalAppBarGradient),
       ),
     );
   }
 
   _getBody(BuildContext context, AllMoviesController controller) {
     return Container(
-      decoration: const BoxDecoration(
-        gradient: primaryGradient
-      ),
+      decoration: const BoxDecoration(gradient: deepMetalAppBarGradient),
       child: PaginatedList(
         controller: controller.allMoviesPaginatedController,
         onRefresh: () => controller.onRefresh(),

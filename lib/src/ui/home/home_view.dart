@@ -8,6 +8,7 @@
  */
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:movie_app/src/ui/widgets/theme/colors.dart';
 
 import '../../router/router_constants.dart';
 import '../../router/router_object.dart';
@@ -41,7 +42,7 @@ class HomeView extends ConsumerWidget with RouterObject {
         child: GetDrawer(),
       ),
       navbar: BottomNavbar(
-        backgroundColor: Colors.black,
+        backgroundColor: gunMetal,
         items: homeViewController.navbarItems,
         selectedIndex: homeViewController.currentNavBarIndex,
         onItemSelected: (index) => homeViewController.navbarSelected(index),

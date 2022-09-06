@@ -18,18 +18,52 @@ const Color americanBlue = Color.fromARGB(255, 59, 67, 113);
 const Color royalOrange = Color.fromARGB(255, 243, 144, 79);
 const Color gunMetal = Color.fromARGB(255, 22, 34, 42);
 const Color deepSpaceSparkle = Color.fromARGB(255, 58, 96, 115);
-const Color loginGradientStart = Color(0xFFfbab66);
-const Color loginGradientEnd = Color(0xFFf7418c);
+const Color rajah = Color.fromARGB(255, 251, 171, 102);
+const Color frenchFuchsia = Color.fromARGB(255, 247, 65, 140);
+const Color cetaceanBlue = Color.fromARGB(255, 0, 0, 70);
+const Color chargedBlue = Color.fromARGB(255, 28, 181, 224);
 
-const LinearGradient secondaryGradient = LinearGradient(
-  colors: [loginGradientStart, loginGradientEnd],
-  stops: <double>[0.0, 1.0],
-  begin: Alignment.topCenter,
-  end: Alignment.bottomCenter,
-);
-
-const LinearGradient primaryGradient = LinearGradient(
+const LinearGradient deepMetalGradient = LinearGradient(
   begin: Alignment.topRight,
   end: Alignment.bottomLeft,
-  colors: [gunMetal, deepSpaceSparkle],
+  colors: [
+    deepSpaceSparkle,
+    gunMetal,
+  ],
+);
+
+const LinearGradient deepMetalAppBarGradient = LinearGradient(
+  begin: Alignment.topLeft,
+  end: Alignment.bottomRight,
+  colors: [
+    deepSpaceSparkle,
+    gunMetal,
+  ],
+);
+
+const LinearGradient pinkishGradient = LinearGradient(
+  begin: Alignment.topCenter,
+  end: Alignment.bottomCenter,
+  colors: [
+    rajah,
+    frenchFuchsia,
+  ],
+);
+
+const LinearGradient royalAmericanGradient = LinearGradient(
+  begin: Alignment.topRight,
+  end: Alignment.bottomLeft,
+  colors: [
+    royalOrange,
+    americanBlue,
+  ],
+);
+
+const LinearGradient blueGradient = LinearGradient(
+  begin: Alignment.topRight,
+  end: Alignment.bottomLeft,
+  colors: [
+    chargedBlue,
+    cetaceanBlue,
+  ],
 );

@@ -43,7 +43,16 @@ class SearchView extends ConsumerWidget with RouterObject {
 
   _getBody(BuildContext context, SearchController searchController) {
     return Container(
-      decoration: const BoxDecoration(gradient: primaryGradient),
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            deepSpaceSparkle,
+            gunMetal,
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+      ),
       child: GestureDetector(
         onTap: () => hideKeyboard(context),
         child: PaginatedList(
@@ -56,11 +65,21 @@ class SearchView extends ConsumerWidget with RouterObject {
                 pinned: true,
                 leading: IconButton(
                   onPressed: () => R.instance.add(object: AccountView()),
-                  icon: const Icon(Icons.account_circle_outlined, size: 30.0),
+                  icon: const Icon(Icons.account_circle_outlined,
+                      color: brushedSilver, size: 30.0),
                 ),
-                backgroundColor: redwood,
-                title: const TextWidget('Search',
-                    color: Colors.blue, maxLines: 1, textSize: TextSize.uLarge),
+                flexibleSpace: Container(
+                  decoration: const BoxDecoration(
+                    gradient: deepMetalAppBarGradient,
+                  ),
+                ),
+                title: const TextWidget(
+                  'Search',
+                  color: brushedSilver,
+                  maxLines: 1,
+                  fontFamily: 'FoxCavalier',
+                  textSize: TextSize.xxlLarge,
+                ),
               ),
               SliverToBoxAdapter(
                 child: Padding(
