@@ -18,3 +18,12 @@ const Color americanBlue = Color.fromARGB(255, 59, 67, 113);
 const Color royalOrange = Color.fromARGB(255, 243, 144, 79);
 const Color gunMetal = Color.fromARGB(255, 22, 34, 42);
 const Color deepSpaceSparkle = Color.fromARGB(255, 58, 96, 115);
+const Color loginGradientStart = Color(0xFFfbab66);
+const Color loginGradientEnd = Color(0xFFf7418c);
+
+const LinearGradient primaryGradient = LinearGradient(
+  colors: <Color>[loginGradientStart, loginGradientEnd],
+  stops: <double>[0.0, 1.0],
+  begin: Alignment.topCenter,
+  end: Alignment.bottomCenter,
+);

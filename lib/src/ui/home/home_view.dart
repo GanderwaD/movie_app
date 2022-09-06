@@ -11,7 +11,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../router/router_constants.dart';
 import '../../router/router_object.dart';
-import '../drawers/all_movies.dart';
+import '../discover_movies/discover_movies.dart';
 import '../movies/movies_view.dart';
 import '../search/search_view.dart';
 import '../widgets/base_scaffold.dart';

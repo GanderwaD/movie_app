@@ -39,6 +39,10 @@ const String searchPath = '/search';
 const String profileKey = 'profile_key';
 const String profilePath = '/profile';
 
+///profile view
+const String loginKey = 'login_key';
+const String loginPath = '/login';
+
 ///all movies
 const String allMovieKey = 'all_movies_key';
 const String allMoviePath = '/allMovie';

@@ -22,7 +22,7 @@ import '../widgets/paginated_list/paginated_list.dart';
 import '../widgets/text_widget/text_size.dart';
 import '../widgets/text_widget/text_widget.dart';
 import '../widgets/theme/colors.dart';
-import 'all_movies_controller.dart';
+import 'discover_movies_controller.dart';
 
 class AllMovies extends ConsumerWidget with RouterObject {
   const AllMovies({Key? key}) : super(key: key);

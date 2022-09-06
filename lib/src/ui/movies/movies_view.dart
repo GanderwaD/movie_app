@@ -62,7 +62,7 @@ class MoviesView extends ConsumerWidget with RouterObject {
       pinned: true,
       leading: IconButton(
         onPressed: () => Scaffold.of(context).openDrawer(),
-        icon: const Icon(Icons.menu, size: 30.0),
+        icon: const Icon(Icons.account_circle_outlined, size: 30.0),
       ),
       backgroundColor: blueYonder,
       title: const TextWidget('Movie',
@@ -143,12 +143,14 @@ class MoviesView extends ConsumerWidget with RouterObject {
                       (BuildContext context, int index) {
                         var movie = movieController.popularMovies[index];
                         return GestureDetector(
-                          onTap: () {
-                            R.instance.add(object: MovieDetailsView(movie.id));
-                            log("box ${movie.id}");
-                          },
-                          child: MovieBox(movie: movie),
-                        );
+                            onTap: () {
+                              R.instance
+                                  .add(object: MovieDetailsView(movie.id));
+                              log("box ${movie.id}");
+                            },
+                            child: TextWidget("")
+                            //MovieBox(movie: movie),
+                            );
                       },
                       //number of items in movie_view page
                       childCount: 20,
