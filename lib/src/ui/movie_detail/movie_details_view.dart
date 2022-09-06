@@ -114,11 +114,7 @@ class MovieDetailsView extends ConsumerWidget with RouterObject {
       HomeController homeViewController) {
     return Container(
       decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topRight,
-          end: Alignment.bottomLeft,
-          colors: [royalOrange, americanBlue],
-        ),
+        gradient: primaryGradient
       ),
       child: PaginatedList(
         controller: controller.movieDetailsPaginatedController,

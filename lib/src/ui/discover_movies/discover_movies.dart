@@ -10,6 +10,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:movie_app/src/ui/account/account_view.dart';
 
 import '../../router/router_constants.dart';
 import '../../router/router_helper.dart';
@@ -52,8 +53,8 @@ class AllMovies extends ConsumerWidget with RouterObject {
       expandedHeight: 0,
       pinned: true,
       leading: IconButton(
-        onPressed: () => Scaffold.of(context).openDrawer(),
-        icon: const Icon(Icons.menu, size: 30.0),
+        onPressed: () => R.instance.add(object: AccountView()),
+        icon: const Icon(Icons.account_circle_outlined, size: 30.0),
       ),
       title: const TextWidget('Browse',
           color: Colors.blue, maxLines: 1, textSize: TextSize.uLarge),
@@ -72,11 +73,7 @@ class AllMovies extends ConsumerWidget with RouterObject {
   _getBody(BuildContext context, AllMoviesController controller) {
     return Container(
       decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topRight,
-          end: Alignment.bottomLeft,
-          colors: [royalOrange, americanBlue],
-        ),
+        gradient: primaryGradient
       ),
       child: PaginatedList(
         controller: controller.allMoviesPaginatedController,

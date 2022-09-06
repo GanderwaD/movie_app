@@ -11,6 +11,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_app/src/router/router_helper.dart';
+import 'package:movie_app/src/ui/account/account_view.dart';
 import 'package:movie_app/src/ui/movie_detail/movie_details_view.dart';
 
 import '../../router/router_constants.dart';
@@ -61,7 +62,7 @@ class MoviesView extends ConsumerWidget with RouterObject {
       expandedHeight: 255,
       pinned: true,
       leading: IconButton(
-        onPressed: () => Scaffold.of(context).openDrawer(),
+        onPressed: () => R.instance.add(object: AccountView()),
         icon: const Icon(Icons.account_circle_outlined, size: 30.0),
       ),
       backgroundColor: blueYonder,
@@ -116,11 +117,7 @@ class MoviesView extends ConsumerWidget with RouterObject {
       MovieController movieController) {
     return Container(
       decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topRight,
-          end: Alignment.bottomLeft,
-          colors: [gunMetal, deepSpaceSparkle],
-        ),
+        gradient: primaryGradient
       ),
       child: PaginatedList(
         controller: movieController.moviePaginatedController,
@@ -143,14 +140,12 @@ class MoviesView extends ConsumerWidget with RouterObject {
                       (BuildContext context, int index) {
                         var movie = movieController.popularMovies[index];
                         return GestureDetector(
-                            onTap: () {
-                              R.instance
-                                  .add(object: MovieDetailsView(movie.id));
-                              log("box ${movie.id}");
-                            },
-                            child: TextWidget("")
-                            //MovieBox(movie: movie),
-                            );
+                          onTap: () {
+                            R.instance.add(object: MovieDetailsView(movie.id));
+                            log("box ${movie.id}");
+                          },
+                          child: MovieBox(movie: movie),
+                        );
                       },
                       //number of items in movie_view page
                       childCount: 20,

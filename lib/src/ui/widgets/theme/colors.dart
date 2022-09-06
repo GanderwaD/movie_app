@@ -21,9 +21,15 @@ const Color deepSpaceSparkle = Color.fromARGB(255, 58, 96, 115);
 const Color loginGradientStart = Color(0xFFfbab66);
 const Color loginGradientEnd = Color(0xFFf7418c);
 
-const LinearGradient primaryGradient = LinearGradient(
-  colors: <Color>[loginGradientStart, loginGradientEnd],
+const LinearGradient secondaryGradient = LinearGradient(
+  colors: [loginGradientStart, loginGradientEnd],
   stops: <double>[0.0, 1.0],
   begin: Alignment.topCenter,
   end: Alignment.bottomCenter,
+);
+
+const LinearGradient primaryGradient = LinearGradient(
+  begin: Alignment.topRight,
+  end: Alignment.bottomLeft,
+  colors: [gunMetal, deepSpaceSparkle],
 );

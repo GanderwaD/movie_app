@@ -8,12 +8,13 @@
  */
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:movie_app/src/router/router_helper.dart';
+import 'package:movie_app/src/ui/account/account_view.dart';
 
 import '../../router/router_constants.dart';
 import '../../router/router_object.dart';
 import '../../utils/keyboard_utils.dart';
 import '../widgets/base_scaffold.dart';
-import '../widgets/drawer.dart';
 import '../widgets/paginated_list/paginated_list.dart';
 import '../widgets/text_widget/text_size.dart';
 import '../widgets/text_widget/text_widget.dart';
@@ -42,7 +43,7 @@ class SearchView extends ConsumerWidget with RouterObject {
 
   _getBody(BuildContext context, SearchController searchController) {
     return Container(
-      color: redwood,
+      decoration: const BoxDecoration(gradient: primaryGradient),
       child: GestureDetector(
         onTap: () => hideKeyboard(context),
         child: PaginatedList(
@@ -54,8 +55,8 @@ class SearchView extends ConsumerWidget with RouterObject {
                 centerTitle: true,
                 pinned: true,
                 leading: IconButton(
-                  onPressed: () => Scaffold.of(context).openDrawer(),
-                  icon: const Icon(Icons.menu, size: 30.0),
+                  onPressed: () => R.instance.add(object: AccountView()),
+                  icon: const Icon(Icons.account_circle_outlined, size: 30.0),
                 ),
                 backgroundColor: redwood,
                 title: const TextWidget('Search',
