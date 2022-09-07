@@ -6,6 +6,7 @@
  * Email : dev.ganderwa@gmail.com
  * ---------------------------
  */
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -27,28 +28,28 @@ class ProfileView extends ConsumerWidget with RouterObject {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final user = FirebaseAuth.instance.currentUser;
     return BaseScaffold(
-      body: _getBody(context),
-      drawer: const Drawer(
-        child: GetDrawer(),
-      ),
+      body: _getBody(context,user),
     );
   }
 
-  _getBody(context) {
-    return  CustomScrollView(
+  _getBody(context, User? user) {
+    return CustomScrollView(
       slivers: [
-        SliverAppBar(
+        const SliverAppBar(
           centerTitle: true,
           pinned: true,
-          leading: IconButton(
-            onPressed: () => Scaffold.of(context).openDrawer(),
-            icon: const Icon(Icons.menu, size: 30.0),
-          ),
           backgroundColor: Colors.red,
-          title: const TextWidget('Profile',
+          title: TextWidget('Profile',
               color: Colors.blue, maxLines: 1, textSize: TextSize.uLarge),
-        )
+        ),
+        SliverToBoxAdapter(
+          child: TextWidget("logged in as \n${user?.email}"),
+        ),
+        SliverToBoxAdapter(
+          child: OutlinedButton(onPressed: () => FirebaseAuth.instance.signOut(), child: const TextWidget("logout<3"))
+        ),
       ],
     );
   }

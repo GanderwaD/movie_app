@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:movie_app/src/router/router_helper.dart';
@@ -115,7 +116,7 @@ class _SignInState extends State<SignIn> {
                             ),
                           ),
                           onSubmitted: (_) {
-                            _toggleSignInButton();
+                            signIn();
                           },
                           textInputAction: TextInputAction.go,
                         ),
@@ -310,5 +311,12 @@ class _SignInState extends State<SignIn> {
     setState(() {
       _obscureTextPassword = !_obscureTextPassword;
     });
+  }
+
+  Future signIn() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: loginEmailController.text.trim(),
+      password: loginPasswordController.text.trim(),
+    );
   }
 }

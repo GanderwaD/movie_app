@@ -55,6 +55,7 @@ class MovieController extends ChangeNotifier {
     loadingTopMovies = val;
     notifyListeners();
   }
+  
 
   setLoadingPopularMovies(bool val) {
     loadingPopularMovies = val;

@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_app/src/ui/account/account_view_controller.dart';
 import 'package:movie_app/src/ui/account/register/sign_up.dart';
+import 'package:movie_app/src/ui/movies/movies_view.dart';
 import 'package:movie_app/src/ui/widgets/base_scaffold.dart';
 import 'package:movie_app/src/utils/bubble_indicator_painter.dart';
 
@@ -63,7 +65,15 @@ class AccountView extends ConsumerWidget with RouterObject {
                     children: <Widget>[
                       ConstrainedBox(
                         constraints: const BoxConstraints.expand(),
-                        child: const SignIn(),
+                        child: StreamBuilder<User?>(
+                            stream: FirebaseAuth.instance.authStateChanges(),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                return const MoviesView();
+                              } else {
+                                return const SignIn();
+                              }
+                            }),
                       ),
                       ConstrainedBox(
                         constraints: const BoxConstraints.expand(),

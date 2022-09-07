@@ -8,10 +8,12 @@
  */
 import 'dart:developer';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_app/src/router/router_helper.dart';
 import 'package:movie_app/src/ui/account/account_view.dart';
+import 'package:movie_app/src/ui/account/profile_view.dart';
 import 'package:movie_app/src/ui/movie_detail/movie_details_view.dart';
 
 import '../../router/router_constants.dart';
@@ -42,12 +44,13 @@ class MoviesView extends ConsumerWidget with RouterObject {
   Widget build(BuildContext context, WidgetRef ref) {
     final homeViewController = ref.watch(homeProvider);
     final movieController = ref.watch(movieControllerProvider);
+    final user = FirebaseAuth.instance.currentUser;
     return BaseScaffold(
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
-          _getMovieSlider(context, homeViewController, movieController),
+          _getMovieSlider(context, homeViewController, movieController, user),
         ],
-        body: _getBody(context, homeViewController, movieController),
+        body: _getBody(context, homeViewController, movieController, user),
       ),
       drawer: const Drawer(
         child: GetDrawer(),
@@ -56,13 +59,19 @@ class MoviesView extends ConsumerWidget with RouterObject {
   }
 
   _getMovieSlider(BuildContext context, HomeController homeViewController,
-      MovieController movieController) {
+      MovieController movieController, User? user) {
     return SliverAppBar(
       centerTitle: true,
       expandedHeight: 255,
       pinned: true,
       leading: IconButton(
-        onPressed: () => R.instance.add(object: AccountView()),
+        onPressed: () {
+          if (user?.email != null) {
+            R.instance.add(object: ProfileView());
+          } else {
+            R.instance.add(object: AccountView());
+          }
+        },
         icon: const Icon(Icons.account_circle_outlined,
             size: 30.0, color: brushedSilver),
       ),
@@ -116,7 +125,7 @@ class MoviesView extends ConsumerWidget with RouterObject {
   }
 
   _getBody(BuildContext context, HomeController homeViewController,
-      MovieController movieController) {
+      MovieController movieController, User? user) {
     return Container(
       decoration: const BoxDecoration(gradient: deepMetalGradient),
       child: PaginatedList(
@@ -150,6 +159,9 @@ class MoviesView extends ConsumerWidget with RouterObject {
                       //number of items in movie_view page
                       childCount: 20,
                     ),
+                  ),
+                  SliverToBoxAdapter(
+                    child: TextWidget("signed in as \n${user?.email}"),
                   )
                 ],
               ),
