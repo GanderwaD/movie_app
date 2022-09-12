@@ -33,6 +33,7 @@ dependencies:
   styled_text: ^5.1.0
   font_awesome_flutter: ^10.1.0
   cupertino_icons: ^1.0.2
+  firebase_core: ^1.22.0
   flutter_svg: ^1.1.4
   cached_network_image: ^3.2.1
   backdrop: ^0.8.0
