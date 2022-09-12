@@ -13,13 +13,13 @@ import 'package:movie_app/src/ui/landing_page/landing_item_card.dart';
 import '../../constants/widget_key_constants.dart';
 import '../../router/router_constants.dart';
 import '../../router/router_object.dart';
-import '../widgets/animations/slide_transform/cube_transform.dart';
-import '../widgets/base_scaffold.dart';
-import '../widgets/buttons/outline_button_widget.dart';
-import '../widgets/page/page_indicator.dart';
-import '../widgets/page/page_slider.dart';
-import '../widgets/text_widget/text_size.dart';
-import '../widgets/text_widget/text_widget.dart';
+import '../shared/widgets/animations/slide_transform/cube_transform.dart';
+import '../shared/widgets/bases/base_scaffold.dart';
+import '../shared/widgets/buttons/outline_button_widget.dart';
+import '../shared/widgets/page/page_indicator.dart';
+import '../shared/widgets/page/page_slider.dart';
+import '../shared/widgets/text_widget/text_size.dart';
+import '../shared/widgets/text_widget/text_widget.dart';
 import 'landing_controller.dart';
 
 class LandingView extends ConsumerWidget with RouterObject {

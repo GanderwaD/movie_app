@@ -1,37 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:movie_app/src/router/router_helper.dart';
-import 'package:movie_app/src/ui/widgets/text_widget/text_widget.dart';
 
-import '../../widgets/snackbar.dart';
-import '../../widgets/text_widget/text_size.dart';
-import '../../widgets/theme/colors.dart';
+import '../../../router/router_helper.dart';
+import '../../shared/widgets/snackbar.dart';
+import '../../shared/widgets/text_widget/text_size.dart';
+import '../../shared/widgets/text_widget/text_widget.dart';
+import '../../shared/widgets/theme/colors.dart';
+import 'login_controller.dart';
 
-class SignIn extends StatefulWidget {
+class SignIn extends ConsumerWidget {
   const SignIn({Key? key}) : super(key: key);
 
   @override
-  _SignInState createState() => _SignInState();
-}
-
-class _SignInState extends State<SignIn> {
-  TextEditingController loginEmailController = TextEditingController();
-  TextEditingController loginPasswordController = TextEditingController();
-
-  final FocusNode focusNodeEmail = FocusNode();
-  final FocusNode focusNodePassword = FocusNode();
-
-  bool _obscureTextPassword = true;
-
-  @override
-  void dispose() {
-    focusNodeEmail.dispose();
-    focusNodePassword.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final controller = ref.watch(loginControllerProvider);
     return Container(
       padding: const EdgeInsets.only(top: 23.0),
       child: Column(
@@ -45,7 +28,7 @@ class _SignInState extends State<SignIn> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.0),
                 ),
-                child: Container(
+                child: SizedBox(
                   width: 300.0,
                   height: 190.0,
                   child: Column(
@@ -54,8 +37,8 @@ class _SignInState extends State<SignIn> {
                         padding: const EdgeInsets.only(
                             top: 20.0, bottom: 20.0, left: 25.0, right: 25.0),
                         child: TextField(
-                          focusNode: focusNodeEmail,
-                          controller: loginEmailController,
+                          focusNode: controller.focusNodeEmail,
+                          controller: controller.loginEmailController,
                           keyboardType: TextInputType.emailAddress,
                           style: const TextStyle(
                               fontFamily: 'WorkSansSemiBold',
@@ -73,7 +56,7 @@ class _SignInState extends State<SignIn> {
                                 fontFamily: 'WorkSansSemiBold', fontSize: 17.0),
                           ),
                           onSubmitted: (_) {
-                            focusNodePassword.requestFocus();
+                            controller.focusNodePassword.requestFocus();
                           },
                         ),
                       ),
@@ -86,9 +69,9 @@ class _SignInState extends State<SignIn> {
                         padding: const EdgeInsets.only(
                             top: 20.0, bottom: 20.0, left: 25.0, right: 25.0),
                         child: TextField(
-                          focusNode: focusNodePassword,
-                          controller: loginPasswordController,
-                          obscureText: _obscureTextPassword,
+                          focusNode: controller.focusNodePassword,
+                          controller: controller.loginPasswordController,
+                          obscureText: controller.obscureTextPassword,
                           style: const TextStyle(
                               fontFamily: 'WorkSansSemiBold',
                               fontSize: 16.0,
@@ -104,9 +87,9 @@ class _SignInState extends State<SignIn> {
                             hintStyle: const TextStyle(
                                 fontFamily: 'WorkSansSemiBold', fontSize: 17.0),
                             suffixIcon: GestureDetector(
-                              onTap: _toggleLogin,
+                              onTap: controller.toggleLogin,
                               child: Icon(
-                                _obscureTextPassword
+                                controller.obscureTextPassword
                                     ? FontAwesomeIcons.eye
                                     : FontAwesomeIcons.eyeSlash,
                                 size: 15.0,
@@ -115,7 +98,7 @@ class _SignInState extends State<SignIn> {
                             ),
                           ),
                           onSubmitted: (_) {
-                            _toggleSignInButton();
+                            ref.read(loginControllerProvider).toggleSignInButton();
                           },
                           textInputAction: TextInputAction.go,
                         ),
@@ -156,8 +139,7 @@ class _SignInState extends State<SignIn> {
                           textSize: TextSize.xxlLarge,
                         ),
                       ),
-                      onPressed: () => CustomSnackBar(
-                          context, const Text('Login button pressed')),
+                      onPressed: () => controller.toggleSignInButton(),
                     ),
                   ),
                 ],
@@ -300,15 +282,5 @@ class _SignInState extends State<SignIn> {
         ],
       ),
     );
-  }
-
-  void _toggleSignInButton() {
-    CustomSnackBar(context, const Text('Login button pressed'));
-  }
-
-  void _toggleLogin() {
-    setState(() {
-      _obscureTextPassword = !_obscureTextPassword;
-    });
   }
 }

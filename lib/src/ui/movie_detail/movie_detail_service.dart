@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:movie_app/src/models/backdrop_image.dart';
-import 'package:movie_app/src/models/movie_details.dart';
 
 import '../../../app_config.dart';
+import '../../models/backdrop_image.dart';
+import '../../models/movie_details.dart';
 
 final movieDetailServiceProvider = Provider<MovieDetailService>((ref) {
   final config = ref.watch(environmentConfigProvider);

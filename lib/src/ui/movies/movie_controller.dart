@@ -8,12 +8,9 @@
  */
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:movie_app/src/models/movie_details.dart';
-import 'package:movie_app/src/router/router_helper.dart';
-import 'package:movie_app/src/ui/movie_detail/movie_details_view.dart';
 
 import '../../models/movie.dart';
-import '../widgets/paginated_list/paginated_list.dart';
+import '../shared/widgets/paginated_list/paginated_list.dart';
 import 'movie_service.dart';
 
 final movieControllerProvider = ChangeNotifierProvider((ref) {

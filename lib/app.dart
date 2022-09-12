@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'src/router/router.dart';
-import 'src/ui/widgets/theme/dark_theme.dart';
-import 'src/ui/widgets/theme/light_theme.dart';
+import 'src/ui/shared/widgets/theme/dark_theme.dart';
+import 'src/ui/shared/widgets/theme/light_theme.dart';
 
 class App extends ConsumerWidget {
   const App({Key? key}) : super(key: key);

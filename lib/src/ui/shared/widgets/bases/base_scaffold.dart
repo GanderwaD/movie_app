@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/keyboard_utils.dart';
-import 'navbar/bottom_navbar.dart';
-import 'text_widget/text_widget.dart';
+import '../../../../utils/keyboard_utils.dart';
+import '../navbar/bottom_navbar.dart';
+import '../text_widget/text_widget.dart';
 
 class BaseScaffold extends StatelessWidget {
   const BaseScaffold({

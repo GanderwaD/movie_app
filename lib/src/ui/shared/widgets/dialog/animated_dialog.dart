@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../router/router_delegate.dart';
+import '../../../../router/router_delegate.dart';
 import '../animations/rotate_animation.dart';
 import '../animations/scale_animation.dart';
 import '../animations/slide_animation.dart';

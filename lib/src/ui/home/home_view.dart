@@ -8,16 +8,15 @@
  */
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:movie_app/src/ui/widgets/theme/colors.dart';
+import 'package:movie_app/src/ui/shared/widgets/theme/colors.dart';
 
 import '../../router/router_constants.dart';
 import '../../router/router_object.dart';
 import '../discover_movies/discover_movies.dart';
 import '../movies/movies_view.dart';
 import '../search/search_view.dart';
-import '../widgets/base_scaffold.dart';
-import '../widgets/drawer.dart';
-import '../widgets/navbar/bottom_navbar.dart';
+import '../shared/widgets/bases/base_scaffold.dart';
+import '../shared/widgets/navbar/bottom_navbar.dart';
 import 'home_controller.dart';
 
 class HomeView extends ConsumerWidget with RouterObject {
@@ -38,9 +37,6 @@ class HomeView extends ConsumerWidget with RouterObject {
           : homeViewController.currentNavBarIndex == 1
               ? const AllMovies()
               : const SearchView(),
-      drawer: const Drawer(
-        child: GetDrawer(),
-      ),
       navbar: BottomNavbar(
         backgroundColor: gunMetal,
         items: homeViewController.navbarItems,

@@ -1,25 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:movie_app/src/ui/account/account_view_controller.dart';
-import 'package:movie_app/src/ui/account/register/sign_up.dart';
-import 'package:movie_app/src/ui/widgets/base_scaffold.dart';
-import 'package:movie_app/src/utils/bubble_indicator_painter.dart';
 
-import '../../router/router_constants.dart';
-import '../../router/router_object.dart';
-import '../widgets/text_widget/text_size.dart';
-import '../widgets/text_widget/text_widget.dart';
-import '../widgets/theme/colors.dart';
+import '../../utils/bubble_indicator_painter.dart';
+import '../shared/widgets/bases/base_scaffold.dart';
+import '../shared/widgets/text_widget/text_size.dart';
+import '../shared/widgets/text_widget/text_widget.dart';
+import '../shared/widgets/theme/colors.dart';
+import 'account_view_controller.dart';
 import 'login/sign_in.dart';
+import 'register/sign_up.dart';
 
-class AccountView extends ConsumerWidget with RouterObject {
-  AccountView({Key? key}) : super(key: key);
-
-  @override
-  String get routeKey => accountKey;
-
-  @override
-  String get routePath => accountPath;
+class AccountView extends ConsumerWidget {
+  const AccountView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

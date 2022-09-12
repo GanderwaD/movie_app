@@ -6,17 +6,17 @@
  * Email : dev.ganderwa@gmail.com
  * ---------------------------
  */
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../router/router_helper.dart';
+import '../shared/widgets/bases/base_changenotifier.dart';
 
 final accountViewProvider = ChangeNotifierProvider((ref) {
   return AccountViewController();
 });
 
-class AccountViewController extends ChangeNotifier {
+class AccountViewController extends BaseChangeNotifier {
   AccountViewController() {
     init();
   }

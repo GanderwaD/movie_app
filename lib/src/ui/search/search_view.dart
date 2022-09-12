@@ -9,16 +9,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_app/src/router/router_helper.dart';
-import 'package:movie_app/src/ui/account/account_view.dart';
+import 'package:movie_app/src/ui/account/auth_checker.dart';
 
 import '../../router/router_constants.dart';
 import '../../router/router_object.dart';
 import '../../utils/keyboard_utils.dart';
-import '../widgets/base_scaffold.dart';
-import '../widgets/paginated_list/paginated_list.dart';
-import '../widgets/text_widget/text_size.dart';
-import '../widgets/text_widget/text_widget.dart';
-import '../widgets/theme/colors.dart';
+import '../shared/widgets/bases/base_scaffold.dart';
+import '../shared/widgets/paginated_list/paginated_list.dart';
+import '../shared/widgets/text_widget/text_size.dart';
+import '../shared/widgets/text_widget/text_widget.dart';
+import '../shared/widgets/theme/colors.dart';
 import 'search_controller.dart';
 
 class SearchView extends ConsumerWidget with RouterObject {
@@ -64,7 +64,7 @@ class SearchView extends ConsumerWidget with RouterObject {
                 centerTitle: true,
                 pinned: true,
                 leading: IconButton(
-                  onPressed: () => R.instance.add(object: AccountView()),
+                  onPressed: () => R.instance.add(object: AuthChecker()),
                   icon: const Icon(Icons.account_circle_outlined,
                       color: brushedSilver, size: 30.0),
                 ),

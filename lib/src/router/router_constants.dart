@@ -50,3 +50,7 @@ const String accountPath = '/account';
 ///all movies
 const String allMovieKey = 'all_movies_key';
 const String allMoviePath = '/allMovie';
+
+///auth checker
+const String authCheckerKey = 'auth_checker_key';
+const String authCheckerPath = '/authChecker';

@@ -13,7 +13,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/movie.dart';
 import '../../router/router_helper.dart';
 import '../movies/movie_service.dart';
-import '../widgets/paginated_list/paginated_list.dart';
+import '../shared/widgets/paginated_list/paginated_list.dart';
 
 final allMoviesProvider = ChangeNotifierProvider((ref) {
   var movieService = ref.read(movieServiceProvider);

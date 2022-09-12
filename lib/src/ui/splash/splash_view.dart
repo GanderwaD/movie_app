@@ -14,7 +14,7 @@ import '../../constants/app_path.dart';
 import '../../constants/widget_key_constants.dart';
 import '../../router/router_constants.dart';
 import '../../router/router_object.dart';
-import '../widgets/base_scaffold.dart';
+import '../shared/widgets/bases/base_scaffold.dart';
 import 'splash_controller.dart';
 
 class SplashView extends ConsumerWidget with RouterObject {

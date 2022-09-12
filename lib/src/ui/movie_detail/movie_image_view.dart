@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../router/router_constants.dart';
 import '../../router/router_object.dart';
-import '../widgets/image/cached_network_image.dart';
+import '../shared/widgets/image/cached_network_image.dart';
 
 class MovieImageView extends ConsumerWidget with RouterObject {
   const MovieImageView(

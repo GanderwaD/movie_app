@@ -9,7 +9,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../widgets/paginated_list/paginated_list.dart';
+import '../shared/widgets/paginated_list/paginated_list.dart';
 
 final searchProvider = ChangeNotifierProvider((ref) {
   return SearchController();

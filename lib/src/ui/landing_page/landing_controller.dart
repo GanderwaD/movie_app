@@ -12,7 +12,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/landing_item.dart';
 import '../../router/router_helper.dart';
 import '../home/home_view.dart';
-import '../widgets/page/page_slider_controller.dart';
+import '../shared/widgets/page/page_slider_controller.dart';
 
 final landingProvider = ChangeNotifierProvider((ref) {
   return LandingController();

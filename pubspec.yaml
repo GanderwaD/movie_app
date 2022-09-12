@@ -34,6 +34,8 @@ dependencies:
   font_awesome_flutter: ^10.1.0
   cupertino_icons: ^1.0.2
   firebase_core: ^1.22.0
+  firebase_auth: ^3.8.0
+  google_sign_in: ^5.4.1 
   flutter_svg: ^1.1.4
   cached_network_image: ^3.2.1
   backdrop: ^0.8.0

@@ -10,20 +10,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_app/src/ui/home/home_controller.dart';
 import 'package:movie_app/src/ui/movie_detail/movie_details_controller.dart';
-import 'package:movie_app/src/ui/widgets/base_scaffold.dart';
-import 'package:movie_app/src/ui/widgets/image/cached_network_image.dart';
-import 'package:movie_app/src/ui/widgets/theme/colors.dart';
+import 'package:movie_app/src/ui/shared/widgets/bases/base_scaffold.dart';
+import 'package:movie_app/src/ui/shared/widgets/image/cached_network_image.dart';
+import 'package:movie_app/src/ui/shared/widgets/theme/colors.dart';
 
 import '../../router/router_constants.dart';
 import '../../router/router_helper.dart';
 import '../../router/router_object.dart';
-import '../widgets/animations/slide_transform/default_transform.dart';
-import '../widgets/movie_box.dart';
-import '../widgets/page/page_slider.dart';
-import '../widgets/paginated_list/indicator/classic_indicator.dart';
-import '../widgets/paginated_list/paginated_list.dart';
-import '../widgets/text_widget/text_size.dart';
-import '../widgets/text_widget/text_widget.dart';
+import '../shared/widgets/animations/slide_transform/default_transform.dart';
+import '../shared/widgets/movie_box.dart';
+import '../shared/widgets/page/page_slider.dart';
+import '../shared/widgets/paginated_list/indicator/classic_indicator.dart';
+import '../shared/widgets/paginated_list/paginated_list.dart';
+import '../shared/widgets/text_widget/text_size.dart';
+import '../shared/widgets/text_widget/text_widget.dart';
 import 'movie_image_view.dart';
 
 class MovieDetailsView extends ConsumerWidget with RouterObject {
@@ -237,7 +237,8 @@ class MovieDetailsView extends ConsumerWidget with RouterObject {
                               textSize: TextSize.large,
                               fontFamily: 'SanFrancisco',
                             ),
-                            TextWidget("${controller.movieDetail.genres}"),
+                            TextWidget(controller.getTextWidgets(
+                                controller.movieDetail.genres!)),
                             const TextWidget(
                                 "-----------------------------------------------"),
                           ],

@@ -10,7 +10,6 @@
 import 'dart:convert';
 
 import 'movie_genres.dart';
-import 'backdrop_image.dart';
 
 class MovieDetail {
   int? budget;

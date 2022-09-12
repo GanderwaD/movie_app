@@ -8,13 +8,13 @@
  */
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:movie_app/src/ui/widgets/theme/colors.dart';
+import 'package:movie_app/src/ui/shared/widgets/theme/colors.dart';
 
-import '../widgets/navbar/navbar_item.dart';
-import '../widgets/page/page_slider_controller.dart';
-import '../widgets/paginated_list/paginated_list.dart';
-import '../widgets/text_widget/text_size.dart';
-import '../widgets/text_widget/text_widget.dart';
+import '../shared/widgets/navbar/navbar_item.dart';
+import '../shared/widgets/page/page_slider_controller.dart';
+import '../shared/widgets/paginated_list/paginated_list.dart';
+import '../shared/widgets/text_widget/text_size.dart';
+import '../shared/widgets/text_widget/text_widget.dart';
 
 final homeProvider = ChangeNotifierProvider((ref) {
   return HomeController();

@@ -10,8 +10,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_app/src/models/backdrop_image.dart';
 import 'package:movie_app/src/models/movie_details.dart';
+import 'package:movie_app/src/models/movie_genres.dart';
 import 'package:movie_app/src/ui/movie_detail/movie_detail_service.dart';
-import 'package:movie_app/src/ui/widgets/paginated_list/paginated_list.dart';
+import 'package:movie_app/src/ui/shared/widgets/paginated_list/paginated_list.dart';
 
 import '../../router/router_helper.dart';
 
@@ -41,6 +42,15 @@ class MovieDetailsController extends ChangeNotifier {
     await Future.wait([getMovieDetails(), getMovieImages()]);
   }
 
+  getTextWidgets(List<Genre> genres) {
+    String gens = '[';
+    for (var element in genres) {
+      gens += '${element.name}, ';
+    }
+    gens = gens.substring(0, gens.length - 2);
+    return '$gens]';
+  }
+
   Future getMovieDetails() async {
     setDetailsLoading(true);
     await Future.delayed(const Duration(milliseconds: 500));
@@ -56,7 +66,6 @@ class MovieDetailsController extends ChangeNotifier {
     setImagesLoading(false);
     notifyListeners();
   }
-
 
   goBack(context) {
     R.instance.popWidget(context);
