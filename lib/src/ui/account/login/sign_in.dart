@@ -237,8 +237,7 @@ class SignIn extends ConsumerWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),
                 child: GestureDetector(
-                  onTap: () => CustomSnackBar(
-                      context, const Text('Google button pressed')),
+                  onTap: () => controller.onTapGoogleSignIn(),
                   child: Container(
                     padding: const EdgeInsets.all(15.0),
                     decoration: const BoxDecoration(

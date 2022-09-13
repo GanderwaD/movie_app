@@ -25,6 +25,7 @@ class LoginController extends BaseChangeNotifier {
   bool obscureTextPassword = true;
   bool toggleLoginView = true;
   bool toggleLoginBtn = false;
+  bool isGoogleSignIn = false;
 
   @override
   void dispose() {
@@ -34,6 +35,18 @@ class LoginController extends BaseChangeNotifier {
   }
 
   void init() {}
+
+  onTapGoogleSignIn() async {
+    setGoogleLogin(true);
+    bool result = await ref.read(authProvider).signInWithGoogle();
+    setGoogleLogin(false);
+    if (result) {
+      R.instance.add(object: const ProfileView());
+    } else {
+      const MoviesView();
+    }
+    notifyListeners();
+  }
 
   void toggleSignInButton() async {
     setLoginBtn(true);
@@ -59,6 +72,11 @@ class LoginController extends BaseChangeNotifier {
 
   setLogin(bool val) {
     toggleLoginView = val;
+    notifyListeners();
+  }
+
+  setGoogleLogin(bool val) {
+    isGoogleSignIn = val;
     notifyListeners();
   }
 

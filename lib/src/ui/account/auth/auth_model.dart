@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class Authentication {
@@ -23,7 +22,8 @@ class Authentication {
   //  Trust me it will really clear all your concepts about futures
 
   //  SigIn the user using Email and Password
-  Future<bool> signInWithEmailAndPasswordService(String email, String password) async {
+  Future<bool> signInWithEmailAndPasswordService(
+      String email, String password) async {
     try {
       await _auth.signInWithEmailAndPassword(
         email: email,
@@ -36,7 +36,8 @@ class Authentication {
   }
 
   // SignUp the user using Email and Password
-  Future<bool> signUpWithEmailAndPasswordService(String email, String password) async {
+  Future<bool> signUpWithEmailAndPasswordService(
+      String email, String password) async {
     try {
       _auth.createUserWithEmailAndPassword(
         email: email,
@@ -49,7 +50,7 @@ class Authentication {
   }
 
   //  SignIn the user Google
-  Future<void> signInWithGoogle(BuildContext context) async {
+  Future<bool> signInWithGoogle() async {
     // Trigger the authentication flow
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
@@ -65,26 +66,22 @@ class Authentication {
 
     try {
       await _auth.signInWithCredential(credential);
-    } on FirebaseAuthException catch (e) {
-      await showDialog(
-        context: context,
-        builder: (ctx) => AlertDialog(
-          title: const Text('Error Occurred'),
-          content: Text(e.toString()),
-          actions: [
-            TextButton(
-                onPressed: () {
-                  Navigator.of(ctx).pop();
-                },
-                child: const Text("OK"))
-          ],
-        ),
-      );
+      return true;
+    } catch (e) {
+      return false;
     }
   }
 
   //  SignOut the current user
   Future<void> signOut() async {
-    await _auth.signOut();
+    User user = _auth.currentUser!;
+     
+    for (var element in user.providerData)  {
+      if(element.providerId == "google.com"){        
+        await GoogleSignIn().signOut();
+      }
+    }
+     await _auth.signOut();  
+
   }
 }
