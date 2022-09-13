@@ -8,8 +8,8 @@
  */
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../app_config.dart';
 
+import '../../../app_config.dart';
 import '../../models/movie.dart';
 
 final movieServiceProvider = Provider<MovieService>((ref) {

@@ -10,35 +10,37 @@ import '../enums/refresh_status.dart';
 import '../enums/refresh_style.dart';
 import '../paginated_list.dart';
 import 'slivers.dart';
+
 typedef VoidFutureCallBack = Future<void> Function();
 typedef OffsetCallBack = void Function(double offset);
 typedef ModeChangeCallBack<T> = void Function(T? mode);
+
 abstract class RefreshIndicator extends StatefulWidget {
-  
   final RefreshStyle? refreshStyle;
-  
+
   final double height;
-  
+
   final double offset;
-  
+
   final Duration completeDuration;
   const RefreshIndicator(
       {Key? key,
       this.height = 60.0,
       this.offset = 0.0,
       this.completeDuration = const Duration(milliseconds: 500),
-      this.refreshStyle = RefreshStyle.Follow})
+      this.refreshStyle = RefreshStyle.follow})
       : super(key: key);
 }
+
 abstract class LoadIndicator extends StatefulWidget {
   final LoadStyle loadStyle;
-  final double height;  
+  final double height;
   final VoidCallback? onClick;
 
   const LoadIndicator(
       {Key? key,
       this.onClick,
-      this.loadStyle = LoadStyle.ShowAlways,
+      this.loadStyle = LoadStyle.showAlways,
       this.height = 60.0})
       : super(key: key);
 }
@@ -49,6 +51,7 @@ abstract class RefreshIndicatorState<T extends RefreshIndicator>
   bool _inVisual() {
     return _position!.pixels < 0.0;
   }
+
   @override
   double _calculateScrollOffset() {
     return (floating
@@ -60,13 +63,14 @@ abstract class RefreshIndicatorState<T extends RefreshIndicator>
             : 0.0) -
         (_position?.pixels as num);
   }
+
   @override
   void _handleOffsetChange() {
     super._handleOffsetChange();
     final double overscrollPast = _calculateScrollOffset();
     onOffsetChange(overscrollPast);
   }
-  
+
   @override
   void _dispatchModeByOffset(double offset) {
     if (mode == RefreshStatus.twoLeveling) {
@@ -81,18 +85,16 @@ abstract class RefreshIndicatorState<T extends RefreshIndicator>
       return;
     }
     if (floating) return;
-    
+
     if (offset == 0.0) {
       mode = RefreshStatus.idle;
     }
-    
+
     if (_position!.extentBefore == 0.0 &&
         widget.refreshStyle == RefreshStyle.Front) {
       _position!.context.setIgnorePointer(false);
     }
-    
-    
-    
+
     if ((configuration!.enableBallisticRefresh && activity!.velocity < 0.0) ||
         activity is DragScrollActivity ||
         activity is DrivenScrollActivity) {
@@ -117,11 +119,8 @@ abstract class RefreshIndicatorState<T extends RefreshIndicator>
       } else if (refresher!.enableTwoLevel && !refresher!.enablePullDown) {
         mode = RefreshStatus.idle;
       }
-    }
-    
-    else if (activity is BallisticScrollActivity) {
+    } else if (activity is BallisticScrollActivity) {
       if (RefreshStatus.canRefresh == mode) {
-        
         floating = true;
         update();
         readyToRefresh().then((_) {
@@ -130,7 +129,6 @@ abstract class RefreshIndicatorState<T extends RefreshIndicator>
         });
       }
       if (mode == RefreshStatus.canTwoLevel) {
-        
         floating = true;
         update();
         if (!mounted) return;
@@ -138,6 +136,7 @@ abstract class RefreshIndicatorState<T extends RefreshIndicator>
       }
     }
   }
+
   @override
   void _handleModeChange() {
     if (!mounted) {
@@ -158,7 +157,7 @@ abstract class RefreshIndicatorState<T extends RefreshIndicator>
               .setCanDrag(configuration!.enableScrollWhenRefreshCompleted);
         }
         update();
-       
+
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (!mounted) {
             return;
@@ -211,19 +210,21 @@ abstract class RefreshIndicatorState<T extends RefreshIndicator>
     }
     onModeChange(mode);
   }
-  
+
   @override
   Future<void> readyToRefresh() {
     return Future.value();
   }
-  
+
   @override
   Future<void> endRefresh() {
     return Future.delayed(widget.completeDuration);
   }
+
   bool needReverseAll() {
     return true;
   }
+
   @override
   void resetValue() {}
   @override
@@ -246,9 +247,9 @@ abstract class RefreshIndicatorState<T extends RefreshIndicator>
         ));
   }
 }
+
 abstract class LoadIndicatorState<T extends LoadIndicator> extends State<T>
     with IndicatorStateMixin<T, LoadStatus>, LoadingProcessor {
-  
   bool _isHide = false;
   bool _enableLoading = false;
   LoadStatus? _lastMode = LoadStatus.idle;
@@ -258,6 +259,7 @@ abstract class LoadIndicatorState<T extends LoadIndicator> extends State<T>
         math.max(_position!.pixels - _position!.maxScrollExtent, 0.0);
     return overScrollPastEnd;
   }
+
   void enterLoading() {
     setState(() {
       floating = true;
@@ -270,11 +272,12 @@ abstract class LoadIndicatorState<T extends LoadIndicator> extends State<T>
       mode = LoadStatus.loading;
     });
   }
+
   @override
   Future endLoading() {
-    
     return Future.delayed(const Duration(milliseconds: 0));
   }
+
   void finishLoading() {
     if (!floating) {
       return;
@@ -283,7 +286,7 @@ abstract class LoadIndicatorState<T extends LoadIndicator> extends State<T>
       if (!mounted) {
         return;
       }
-      
+
       if (mounted) Scrollable.of(context)!.position.correctBy(0.00001);
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (mounted && _position?.outOfRange == true) {
@@ -295,6 +298,7 @@ abstract class LoadIndicatorState<T extends LoadIndicator> extends State<T>
       });
     });
   }
+
   bool _checkIfCanLoading() {
     if (_position!.maxScrollExtent - _position!.pixels <=
             configuration!.footerTriggerDistance &&
@@ -316,6 +320,7 @@ abstract class LoadIndicatorState<T extends LoadIndicator> extends State<T>
     }
     return false;
   }
+
   @override
   void _handleModeChange() {
     if (!mounted || _isHide) {
@@ -325,8 +330,6 @@ abstract class LoadIndicatorState<T extends LoadIndicator> extends State<T>
     if (mode == LoadStatus.idle ||
         mode == LoadStatus.failed ||
         mode == LoadStatus.noMore) {
-      
-      
       if (_position!.activity!.velocity < 0 &&
           _lastMode == LoadStatus.loading &&
           !_position!.outOfRange &&
@@ -346,7 +349,7 @@ abstract class LoadIndicatorState<T extends LoadIndicator> extends State<T>
       if (refresher!.onLoading != null) {
         refresher!.onLoading!();
       }
-      if (widget.loadStyle == LoadStyle.ShowWhenLoading) {
+      if (widget.loadStyle == LoadStyle.showWhenLoading) {
         floating = true;
       }
     } else {
@@ -355,6 +358,7 @@ abstract class LoadIndicatorState<T extends LoadIndicator> extends State<T>
     _lastMode = mode;
     onModeChange(mode);
   }
+
   @override
   void _dispatchModeByOffset(double offset) {
     if (!mounted || _isHide || LoadStatus.loading == mode || floating) {
@@ -375,6 +379,7 @@ abstract class LoadIndicatorState<T extends LoadIndicator> extends State<T>
       }
     }
   }
+
   @override
   void _handleOffsetChange() {
     if (_isHide) {
@@ -384,9 +389,9 @@ abstract class LoadIndicatorState<T extends LoadIndicator> extends State<T>
     final double overscrollPast = _calculateScrollOffset();
     onOffsetChange(overscrollPast);
   }
+
   void _listenScrollEnd() {
     if (!_position!.isScrollingNotifier.value) {
-      
       if (_isHide || mode == LoadStatus.loading || mode == LoadStatus.noMore) {
         return;
       }
@@ -403,32 +408,33 @@ abstract class LoadIndicatorState<T extends LoadIndicator> extends State<T>
       }
     }
   }
+
   @override
   void _onPositionUpdated(ScrollPosition newPosition) {
     _position?.isScrollingNotifier.removeListener(_listenScrollEnd);
     newPosition.isScrollingNotifier.addListener(_listenScrollEnd);
     super._onPositionUpdated(newPosition);
   }
+
   @override
   void didChangeDependencies() {
-    
     super.didChangeDependencies();
     _lastMode = mode;
   }
+
   @override
   void dispose() {
-    
     _position?.isScrollingNotifier.removeListener(_listenScrollEnd);
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
-    
     return SliverLoading(
         hideWhenNotFull: configuration!.hideFooterWhenNotFull,
-        floating: widget.loadStyle == LoadStyle.ShowAlways
+        floating: widget.loadStyle == LoadStyle.showAlways
             ? true
-            : widget.loadStyle == LoadStyle.HideAlways
+            : widget.loadStyle == LoadStyle.hideAlways
                 ? false
                 : floating,
         shouldFollowContent:
@@ -453,6 +459,7 @@ abstract class LoadIndicatorState<T extends LoadIndicator> extends State<T>
         ));
   }
 }
+
 mixin IndicatorStateMixin<T extends StatefulWidget, V> on State<T> {
   PaginatedList? refresher;
   RefreshConfiguration? configuration;
@@ -464,13 +471,13 @@ mixin IndicatorStateMixin<T extends StatefulWidget, V> on State<T> {
   get mode => _mode?.value;
   RefreshNotifier<V?>? _mode;
   ScrollActivity? get activity => _position!.activity;
-  
-  
+
   ScrollPosition? _position;
-  
+
   void update() {
     if (mounted) setState(() {});
   }
+
   void _handleOffsetChange() {
     if (!mounted) {
       return;
@@ -481,12 +488,14 @@ mixin IndicatorStateMixin<T extends StatefulWidget, V> on State<T> {
     }
     _dispatchModeByOffset(overscrollPast);
   }
+
   void disposeListener() {
     _mode?.removeListener(_handleModeChange);
     _position?.removeListener(_handleOffsetChange);
     _position = null;
     _mode = null;
   }
+
   void _updateListener() {
     configuration = RefreshConfiguration.of(context);
     refresher = PaginatedList.of(context);
@@ -507,71 +516,71 @@ mixin IndicatorStateMixin<T extends StatefulWidget, V> on State<T> {
       _position?.addListener(_handleOffsetChange);
     }
   }
+
   @override
   void initState() {
-    
     if (V == RefreshStatus) {
       PaginatedList.of(context)?.controller.headerMode?.value =
           RefreshStatus.idle;
     }
     super.initState();
   }
+
   @override
   void dispose() {
-    
-    
     disposeListener();
     super.dispose();
   }
+
   @override
   void didChangeDependencies() {
-    
     _updateListener();
     super.didChangeDependencies();
   }
+
   @override
   void didUpdateWidget(T oldWidget) {
-    
-    
-    
     _updateListener();
     super.didUpdateWidget(oldWidget);
   }
+
   void _onPositionUpdated(ScrollPosition newPosition) {
     refresher!.controller.onPositionUpdated(newPosition);
   }
+
   void _handleModeChange();
   double _calculateScrollOffset();
   void _dispatchModeByOffset(double offset);
   Widget buildContent(BuildContext context, V mode);
 }
+
 abstract class RefreshProcessor {
-  
   void onOffsetChange(double offset) {}
-  
+
   void onModeChange(RefreshStatus? mode) {}
-  
+
   Future readyToRefresh() {
     return Future.value();
   }
-  
+
   Future endRefresh() {
     return Future.value();
   }
-  
+
   void resetValue() {}
 }
+
 abstract class LoadingProcessor {
   void onOffsetChange(double offset) {}
   void onModeChange(LoadStatus? mode) {}
-  
+
   Future readyToLoad() {
     return Future.value();
   }
-  
+
   Future endLoading() {
     return Future.value();
   }
-  
+
   void resetValue() {}
 }

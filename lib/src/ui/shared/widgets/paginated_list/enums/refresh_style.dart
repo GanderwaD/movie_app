@@ -1,6 +1,6 @@
 enum RefreshStyle {
   // indicator box always follow content
-  Follow,
+  follow,
   // indicator box follow content,When the box reaches the top and is fully visible, it does not follow content.
   UnFollow,
 

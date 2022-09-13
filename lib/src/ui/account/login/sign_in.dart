@@ -98,7 +98,9 @@ class SignIn extends ConsumerWidget {
                             ),
                           ),
                           onSubmitted: (_) {
-                            ref.read(loginControllerProvider).toggleSignInButton();
+                            ref
+                                .read(loginControllerProvider)
+                                .toggleSignInButton();
                           },
                           textInputAction: TextInputAction.go,
                         ),
@@ -129,15 +131,19 @@ class SignIn extends ConsumerWidget {
                     child: MaterialButton(
                       highlightColor: Colors.transparent,
                       splashColor: americanBlue,
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
                             vertical: 10.0, horizontal: 42.0),
-                        child: TextWidget(
-                          'LOGIN',
-                          color: brushedSilver,
-                          fontFamily: 'FoxCavalier',
-                          textSize: TextSize.xxlLarge,
-                        ),
+                        child: controller.toggleLoginBtn
+                            ? const Center(
+                                child: CircularProgressIndicator(),
+                              )
+                            : const TextWidget(
+                                'LOGIN',
+                                color: brushedSilver,
+                                fontFamily: 'FoxCavalier',
+                                textSize: TextSize.xxlLarge,
+                              ),
                       ),
                       onPressed: () => controller.toggleSignInButton(),
                     ),

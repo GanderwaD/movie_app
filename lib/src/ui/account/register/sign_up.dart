@@ -27,7 +27,7 @@ class SignUp extends ConsumerWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.0),
                 ),
-                child: Container(
+                child: SizedBox(
                   width: 300.0,
                   height: 360.0,
                   child: Column(

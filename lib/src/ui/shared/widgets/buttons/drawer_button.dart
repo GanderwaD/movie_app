@@ -56,7 +56,7 @@ class DrawerButton extends StatelessWidget {
                           width: 40.0,
                           height: 40.0,
                           padding: const EdgeInsets.all(8.0),
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                             color: Colors.cyan,
                           ),
@@ -69,11 +69,11 @@ class DrawerButton extends StatelessWidget {
                         ),
                     Container(width: 16.0),
                     Expanded(
-                      child: text ?? TextWidget(''),
+                      child: text ?? const TextWidget(''),
                     ),
                     endingIcon ?? const SizedBox.shrink(),
                     divider
-                        ? Icon(Icons.arrow_forward_ios,
+                        ? const Icon(Icons.arrow_forward_ios,
                             size: 20.0, color: Colors.grey)
                         : const SizedBox.shrink(),
                     Container(width: 20.0),

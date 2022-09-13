@@ -10,7 +10,6 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:movie_app/src/ui/account/account_view.dart';
 import 'package:movie_app/src/ui/account/auth_checker.dart';
 
 import '../../router/router_constants.dart';
@@ -54,7 +53,7 @@ class AllMovies extends ConsumerWidget with RouterObject {
       expandedHeight: 0,
       pinned: true,
       leading: IconButton(
-        onPressed: () => R.instance.add(object: AuthChecker()),
+        onPressed: () => R.instance.add(object: const AuthChecker()),
         icon: const Icon(Icons.account_circle_outlined,
             color: brushedSilver, size: 30.0),
       ),

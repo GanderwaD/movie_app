@@ -5,7 +5,6 @@
  */
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart'
     hide RefreshIndicator, RefreshIndicatorState;
 
@@ -62,7 +61,7 @@ class ClassicHeader extends RefreshIndicator {
 
   const ClassicHeader({
     Key? key,
-    RefreshStyle refreshStyle = RefreshStyle.Follow,
+    RefreshStyle refreshStyle = RefreshStyle.follow,
     double height = 60.0,
     Duration completeDuration = const Duration(milliseconds: 600),
     this.outerBuilder,
@@ -91,7 +90,6 @@ class ClassicHeader extends RefreshIndicator {
 
   @override
   State createState() {
-    // TODO: implement createState
     return _ClassicHeaderState();
   }
 }
@@ -182,9 +180,9 @@ class _ClassicHeaderState extends RefreshIndicatorState<ClassicHeader> {
     );
     return widget.outerBuilder != null
         ? widget.outerBuilder!(container)
-        : Container(
-            child: Center(child: container),
+        : SizedBox(
             height: widget.height,
+            child: Center(child: container),
           );
   }
 }
@@ -225,7 +223,7 @@ class ClassicFooter extends LoadIndicator {
   const ClassicFooter({
     Key? key,
     VoidCallback? onClick,
-    LoadStyle loadStyle = LoadStyle.ShowAlways,
+    LoadStyle loadStyle = LoadStyle.showAlways,
     double height = 60.0,
     this.outerBuilder,
     this.textStyle = const TextStyle(color: Colors.grey),
@@ -278,10 +276,10 @@ class _ClassicFooterState extends LoadIndicatorState<ClassicFooter> {
   Widget _buildIcon(LoadStatus? mode) {
     Widget? icon = mode == LoadStatus.loading
         ? widget.loadingIcon ??
-           const SizedBox(
+            const SizedBox(
               width: 25.0,
               height: 25.0,
-              child:  const CupertinoActivityIndicator(),
+              child: CupertinoActivityIndicator(),
             )
         : mode == LoadStatus.noMore
             ? widget.noMoreIcon
@@ -295,13 +293,11 @@ class _ClassicFooterState extends LoadIndicatorState<ClassicFooter> {
 
   @override
   Future endLoading() {
-    // TODO: implement endLoading
     return Future.delayed(widget.completeDuration);
   }
 
   @override
   Widget buildContent(BuildContext context, LoadStatus? mode) {
-    // TODO: implement buildChild
     Widget textWidget = _buildText(mode);
     Widget iconWidget = _buildIcon(mode);
     List<Widget> children = <Widget>[iconWidget, textWidget];

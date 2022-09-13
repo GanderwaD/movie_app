@@ -76,7 +76,7 @@ class CustomHeader extends RefreshIndicator {
     this.onResetValue,
     double height = 60.0,
     Duration completeDuration: const Duration(milliseconds: 600),
-    RefreshStyle refreshStyle: RefreshStyle.Follow,
+    RefreshStyle refreshStyle: RefreshStyle.follow,
   }) : super(
             key: key,
             completeDuration: completeDuration,
@@ -156,7 +156,7 @@ class CustomFooter extends LoadIndicator {
     this.onOffsetChange,
     this.readyLoading,
     this.endLoading,
-    LoadStyle loadStyle = LoadStyle.ShowAlways,
+    LoadStyle loadStyle = LoadStyle.showAlways,
     required this.builder,
     Function? onClick,
   }) : super(

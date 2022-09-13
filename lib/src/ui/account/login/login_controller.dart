@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../router/router_helper.dart';
 import '../../movies/movies_view.dart';
 import '../../shared/widgets/bases/base_changenotifier.dart';
-import '../../shared/widgets/dialog/app_dialog.dart';
 import '../auth/auth_provider.dart';
 import '../profile/profile_view.dart';
 
@@ -38,11 +37,12 @@ class LoginController extends BaseChangeNotifier {
 
   void toggleSignInButton() async {
     setLoginBtn(true);
-    bool result = await ref.read(authProvider).signInWithEmailAndPasswordService(
-          loginEmailController.text,
-          loginPasswordController.text,
-        );
-    appDialog(result ? "success" : "unsuccess", confirmBtn: "ok");
+    bool result =
+        await ref.read(authProvider).signInWithEmailAndPasswordService(
+              loginEmailController.text,
+              loginPasswordController.text,
+            );
+    setLoginBtn(false);
     if (result) {
       R.instance.add(object: const ProfileView());
     } else {

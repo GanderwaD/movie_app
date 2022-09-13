@@ -116,7 +116,7 @@ class TwoLevelHeader extends StatelessWidget {
     // TODO: implement build
     return ClassicHeader(
       refreshStyle: displayAlignment == TwoLevelDisplayAlignment.fromBottom
-          ? RefreshStyle.Follow
+          ? RefreshStyle.follow
           : RefreshStyle.Behind,
       height: height,
       refreshingIcon: refreshingIcon,
@@ -161,7 +161,8 @@ class TwoLevelHeader extends StatelessWidget {
                 ? twoLevelWidget
                 : Container(
                     decoration: !isTwoLevel
-                        ? (decoration ?? const BoxDecoration(color: Colors.redAccent))
+                        ? (decoration ??
+                            const BoxDecoration(color: Colors.redAccent))
                         : null,
                     alignment: Alignment.bottomCenter,
                     padding: const EdgeInsets.only(bottom: 15),

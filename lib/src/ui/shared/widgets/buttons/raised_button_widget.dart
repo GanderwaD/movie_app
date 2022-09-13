@@ -52,7 +52,7 @@ class RaisedButtonWidget extends StatelessWidget {
       height: height,
       child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            primary: bgColor,
+            backgroundColor: bgColor,
             padding: buttonPadding,
             side: borderSide ?? BorderSide.none,
             shape: ContinuousRectangleBorder(

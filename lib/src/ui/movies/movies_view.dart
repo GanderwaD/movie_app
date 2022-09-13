@@ -11,7 +11,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_app/src/router/router_helper.dart';
-import 'package:movie_app/src/ui/account/account_view.dart';
 import 'package:movie_app/src/ui/account/auth_checker.dart';
 import 'package:movie_app/src/ui/movie_detail/movie_details_view.dart';
 
@@ -20,7 +19,6 @@ import '../../router/router_object.dart';
 import '../home/home_controller.dart';
 import '../shared/widgets/animations/slide_transform/default_transform.dart';
 import '../shared/widgets/bases/base_scaffold.dart';
-import '../shared/widgets/drawer.dart';
 import '../shared/widgets/movie_box.dart';
 import '../shared/widgets/page/page_slider.dart';
 import '../shared/widgets/paginated_list/indicator/classic_indicator.dart';

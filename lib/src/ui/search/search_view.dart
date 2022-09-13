@@ -64,7 +64,7 @@ class SearchView extends ConsumerWidget with RouterObject {
                 centerTitle: true,
                 pinned: true,
                 leading: IconButton(
-                  onPressed: () => R.instance.add(object: AuthChecker()),
+                  onPressed: () => R.instance.add(object: const AuthChecker()),
                   icon: const Icon(Icons.account_circle_outlined,
                       color: brushedSilver, size: 30.0),
                 ),

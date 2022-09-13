@@ -7,6 +7,7 @@ import '../enums/load_status.dart';
 import '../enums/refresh_status.dart';
 import '../enums/refresh_style.dart';
 import '../paginated_list.dart';
+
 class SliverRefresh extends SingleChildRenderObjectWidget {
   const SliverRefresh({
     Key? key,
@@ -30,6 +31,7 @@ class SliverRefresh extends SingleChildRenderObjectWidget {
       refreshStyle: refreshStyle,
     );
   }
+
   @override
   void updateRenderObject(
       BuildContext context, covariant RenderSliverRefresh renderObject) {
@@ -46,6 +48,7 @@ class SliverRefresh extends SingleChildRenderObjectWidget {
       ..paintOffsetY = paintOffsetY;
   }
 }
+
 class RenderSliverRefresh extends RenderSliverSingleBoxAdapter {
   RenderSliverRefresh(
       {required double refreshIndicatorExtent,
@@ -70,6 +73,7 @@ class RenderSliverRefresh extends RenderSliverSingleBoxAdapter {
     _refreshIndicatorExtent = value;
     markNeedsLayout();
   }
+
   bool get hasLayoutExtent => _hasLayoutExtent;
   bool _hasLayoutExtent;
   set hasLayoutExtent(bool value) {
@@ -80,6 +84,7 @@ class RenderSliverRefresh extends RenderSliverSingleBoxAdapter {
     _hasLayoutExtent = value;
     markNeedsLayout();
   }
+
   double layoutExtentOffsetCompensation = 0.0;
   @override
   double get centerOffsetAdjustment {
@@ -90,6 +95,7 @@ class RenderSliverRefresh extends RenderSliverSingleBoxAdapter {
     }
     return 0.0;
   }
+
   @override
   void layout(Constraints constraints, {bool parentUsesSize = false}) {
     if (refreshStyle == RefreshStyle.Front) {
@@ -103,10 +109,12 @@ class RenderSliverRefresh extends RenderSliverSingleBoxAdapter {
       super.layout(constraints, parentUsesSize: parentUsesSize);
     }
   }
+
   set updateFlag(u) {
     _updateFlag = u;
     markNeedsLayout();
   }
+
   @override
   void debugAssertDoesMeetConstraints() {
     assert(geometry!.debugAssertIsValid(informationCollector: () sync* {
@@ -129,6 +137,7 @@ class RenderSliverRefresh extends RenderSliverSingleBoxAdapter {
       return true;
     }());
   }
+
   @override
   void performLayout() {
     if (_updateFlag) {
@@ -179,7 +188,7 @@ class RenderSliverRefresh extends RenderSliverSingleBoxAdapter {
           ),
           constraints.remainingPaintExtent);
       switch (refreshStyle) {
-        case RefreshStyle.Follow:
+        case RefreshStyle.follow:
           geometry = SliverGeometry(
             scrollExtent: layoutExtent,
             paintOrigin: -boxExtent - constraints.scrollOffset + layoutExtent,
@@ -232,14 +241,17 @@ class RenderSliverRefresh extends RenderSliverSingleBoxAdapter {
       geometry = SliverGeometry.zero;
     }
   }
+
   @override
   void paint(PaintingContext paintContext, Offset offset) {
     paintContext.paintChild(
         child!, Offset(offset.dx, offset.dy + paintOffsetY!));
   }
+
   @override
   void applyPaintTransform(RenderObject child, Matrix4 transform) {}
 }
+
 class SliverLoading extends SingleChildRenderObjectWidget {
   final bool? hideWhenNotFull;
   final bool? floating;
@@ -264,6 +276,7 @@ class SliverLoading extends SingleChildRenderObjectWidget {
         shouldFollowContent: shouldFollowContent,
         layoutExtent: layoutExtent);
   }
+
   @override
   void updateRenderObject(
       BuildContext context, covariant RenderSliverLoading renderObject) {
@@ -275,6 +288,7 @@ class SliverLoading extends SingleChildRenderObjectWidget {
       ..hideWhenNotFull = hideWhenNotFull;
   }
 }
+
 class RenderSliverLoading extends RenderSliverSingleBoxAdapter {
   RenderSliverLoading({
     RenderBox? child,
@@ -297,6 +311,7 @@ class RenderSliverLoading extends RenderSliverSingleBoxAdapter {
     _layoutExtent = extent;
     markNeedsLayout();
   }
+
   get layoutExtent => _layoutExtent;
   bool get hasLayoutExtent => _hasLayoutExtent!;
   bool? _hasLayoutExtent;
@@ -305,6 +320,7 @@ class RenderSliverLoading extends RenderSliverSingleBoxAdapter {
     _hasLayoutExtent = value;
     markNeedsLayout();
   }
+
   bool _computeIfFull(SliverConstraints cons) {
     final RenderViewport viewport = parent as RenderViewport;
     RenderSliver? sliverP = viewport.firstChild;
@@ -318,6 +334,7 @@ class RenderSliverLoading extends RenderSliverSingleBoxAdapter {
     }
     return totalScrollExtent > cons.viewportMainAxisExtent;
   }
+
   double? computePaintOrigin(double? layoutExtent, bool reverse, bool follow) {
     if (follow) {
       if (reverse) {
@@ -339,6 +356,7 @@ class RenderSliverLoading extends RenderSliverSingleBoxAdapter {
       }
     }
   }
+
   @override
   void debugAssertDoesMeetConstraints() {
     assert(geometry!.debugAssertIsValid(informationCollector: () sync* {
@@ -361,6 +379,7 @@ class RenderSliverLoading extends RenderSliverSingleBoxAdapter {
       return true;
     }());
   }
+
   @override
   void performLayout() {
     assert(constraints.growthDirection == GrowthDirection.forward);
@@ -415,6 +434,7 @@ class RenderSliverLoading extends RenderSliverSingleBoxAdapter {
     }
   }
 }
+
 class SliverRefreshBody extends SingleChildRenderObjectWidget {
   const SliverRefreshBody({
     Key? key,
@@ -424,6 +444,7 @@ class SliverRefreshBody extends SingleChildRenderObjectWidget {
   RenderSliverRefreshBody createRenderObject(BuildContext context) =>
       RenderSliverRefreshBody();
 }
+
 class RenderSliverRefreshBody extends RenderSliverSingleBoxAdapter {
   RenderSliverRefreshBody({
     RenderBox? child,

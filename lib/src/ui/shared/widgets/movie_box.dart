@@ -1,11 +1,10 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:movie_app/src/ui/shared/widgets/image/cached_network_image.dart';
-import 'package:movie_app/src/ui/shared/widgets/theme/colors.dart';
 
 import '../../../models/movie.dart';
+import 'image/cached_network_image.dart';
 import 'text_widget/text_widget.dart';
+import 'theme/colors.dart';
 
 class MovieBox extends StatelessWidget {
   final Movie movie;
