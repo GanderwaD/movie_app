@@ -82,10 +82,4 @@ class HomeController extends ChangeNotifier {
     currentNavBarIndex = index;
     notifyListeners();
   }
-
-  onRefresh() async {
-    await Future.delayed(const Duration(seconds: 1));
-    homePaginatedController.refreshCompleted();
-    notifyListeners();
-  }
 }

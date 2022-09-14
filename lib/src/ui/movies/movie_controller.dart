@@ -27,10 +27,11 @@ class MovieController extends ChangeNotifier {
   PaginatedController moviePaginatedController = PaginatedController();
   bool loadingPopularMovies = true;
   bool loadingTopMovies = true;
+  bool isRefresh = false;
   List<Movie> popularMovies = [];
   List<Movie> topMovies = [];
 
-  void init() async {
+  init() async {
     await Future.wait([getPopularMovies(), getTopMovies()]);
   }
 
@@ -58,10 +59,16 @@ class MovieController extends ChangeNotifier {
     notifyListeners();
   }
 
+  setRefresh(bool val) {
+    isRefresh = val;
+    notifyListeners();
+  }
+
   onRefresh() async {
-    await Future.delayed(const Duration(milliseconds: 500));
-    init();
+    setRefresh(true);
+    await init();
     moviePaginatedController.refreshCompleted();
+    setRefresh(false);
     notifyListeners();
   }
 }

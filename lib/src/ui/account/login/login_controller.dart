@@ -26,6 +26,7 @@ class LoginController extends BaseChangeNotifier {
   bool toggleLoginView = true;
   bool toggleLoginBtn = false;
   bool isGoogleSignIn = false;
+  bool isSignedIn = false;
 
   @override
   void dispose() {
@@ -36,19 +37,19 @@ class LoginController extends BaseChangeNotifier {
 
   void init() {}
 
-  onTapGoogleSignIn() async {
+  onTapGoogleSignIn(context) async {
     setGoogleLogin(true);
     bool result = await ref.read(authProvider).signInWithGoogle();
     setGoogleLogin(false);
     if (result) {
-      R.instance.add(object: const ProfileView());
-    } else {
-      const MoviesView();
+      R.instance.popWidget(context);
+      ref.read(authProvider).authStateChange;
+      setSignedIn(true);
     }
     notifyListeners();
   }
 
-  void toggleSignInButton() async {
+  void toggleSignInButton(context) async {
     setLoginBtn(true);
     bool result =
         await ref.read(authProvider).signInWithEmailAndPasswordService(
@@ -57,9 +58,9 @@ class LoginController extends BaseChangeNotifier {
             );
     setLoginBtn(false);
     if (result) {
-      R.instance.add(object: const ProfileView());
-    } else {
-      const MoviesView();
+      R.instance.popWidget(context);
+      ref.read(authProvider).authStateChange;
+      setSignedIn(true);
     }
     notifyListeners();
   }
@@ -77,6 +78,11 @@ class LoginController extends BaseChangeNotifier {
 
   setGoogleLogin(bool val) {
     isGoogleSignIn = val;
+    notifyListeners();
+  }
+
+  setSignedIn(bool val) {
+    isSignedIn = val;
     notifyListeners();
   }
 

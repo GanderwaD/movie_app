@@ -16,6 +16,7 @@ import 'package:movie_app/src/ui/movie_detail/movie_details_view.dart';
 
 import '../../router/router_constants.dart';
 import '../../router/router_object.dart';
+import '../account/login/login_controller.dart';
 import '../home/home_controller.dart';
 import '../shared/widgets/animations/slide_transform/default_transform.dart';
 import '../shared/widgets/bases/base_scaffold.dart';
@@ -39,20 +40,26 @@ class MoviesView extends ConsumerWidget with RouterObject {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final loginController = ref.watch(loginControllerProvider);
     final homeViewController = ref.watch(homeProvider);
     final movieController = ref.watch(movieControllerProvider);
     return BaseScaffold(
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
-          _getMovieSlider(context, homeViewController, movieController),
+          _getMovieSlider(context, homeViewController, movieController,
+              loginController, ref),
         ],
         body: _getBody(context, homeViewController, movieController),
       ),
     );
   }
 
-  _getMovieSlider(BuildContext context, HomeController homeViewController,
-      MovieController movieController) {
+  _getMovieSlider(
+      BuildContext context,
+      HomeController homeViewController,
+      MovieController movieController,
+      LoginController loginController,
+      WidgetRef ref) {
     return SliverAppBar(
       centerTitle: true,
       expandedHeight: 255,
@@ -99,7 +106,11 @@ class MoviesView extends ConsumerWidget with RouterObject {
                         },
                         child: Padding(
                           padding: const EdgeInsets.only(right: 5.0),
-                          child: MovieBox(movie: movie),
+                          child: movieController.isRefresh
+                              ? const Center(
+                                  child: CircularProgressIndicator(),
+                                )
+                              : MovieBox(movie: movie),
                         ),
                       );
                     },
@@ -140,7 +151,11 @@ class MoviesView extends ConsumerWidget with RouterObject {
                             R.instance.add(object: MovieDetailsView(movie.id));
                             log("box ${movie.id}");
                           },
-                          child: MovieBox(movie: movie),
+                          child: movieController.isRefresh
+                              ? const Center(
+                                  child: CircularProgressIndicator(),
+                                )
+                              : MovieBox(movie: movie),
                         );
                       },
                       //number of items in movie_view page

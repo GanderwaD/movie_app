@@ -6,14 +6,18 @@
  * Email : dev.ganderwa@gmail.com
  * ---------------------------
  */
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_app/src/router/router_helper.dart';
 import 'package:movie_app/src/ui/account/auth_checker.dart';
+import 'package:movie_app/src/ui/shared/widgets/movie_box.dart';
 
 import '../../router/router_constants.dart';
 import '../../router/router_object.dart';
 import '../../utils/keyboard_utils.dart';
+import '../movie_detail/movie_details_view.dart';
 import '../shared/widgets/bases/base_scaffold.dart';
 import '../shared/widgets/paginated_list/paginated_list.dart';
 import '../shared/widgets/text_widget/text_size.dart';
@@ -32,7 +36,7 @@ class SearchView extends ConsumerWidget with RouterObject {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final searchController = ref.watch(searchProvider);
+    final searchController = ref.watch(searchControllerProvider);
     return BaseScaffold(
       body: _getBody(context, searchController),
       // drawer: const Drawer(
@@ -58,6 +62,8 @@ class SearchView extends ConsumerWidget with RouterObject {
         child: PaginatedList(
           controller: searchController.searchPaginatedController,
           onRefresh: () => searchController.onRefresh(),
+          enablePullUp: true,
+          onLoading: () => searchController.setLoadMore(),
           child: CustomScrollView(
             slivers: [
               SliverAppBar(
@@ -86,6 +92,8 @@ class SearchView extends ConsumerWidget with RouterObject {
                   padding: const EdgeInsets.all(2.0),
                   child: TextFormField(
                     controller: searchController.textEditingController,
+                    onFieldSubmitted: (value) =>
+                        searchController.getSearch(value),
                     cursorColor: Colors.black,
                     decoration: InputDecoration(
                       fillColor: Colors.blue,
@@ -102,28 +110,27 @@ class SearchView extends ConsumerWidget with RouterObject {
                   ),
                 ),
               ),
-              // SliverGrid(
-              //   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              //       maxCrossAxisExtent: 200.0,
-              //       mainAxisSpacing: 6.0,
-              //       crossAxisSpacing: 6.0),
-              //   delegate: SliverChildBuilderDelegate(
-              //     (BuildContext context, int index) {
-              //       return GestureDetector(
-              //         onTap: () {
-              //           log("$index");
-              //           hideKeyboard(context);
-              //         },
-              //         child: Container(
-              //           alignment: Alignment.center,
-              //           color: modernGray,
-              //           child: Text('Movie Banner $index'),
-              //         ),
-              //       );
-              //     },
-              //     childCount: 10,
-              //   ),
-              // )
+              SliverGrid(
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: 200.0,
+                    childAspectRatio: 0.6,
+                    mainAxisSpacing: 6.0,
+                    crossAxisSpacing: 6.0),
+                delegate: SliverChildBuilderDelegate(
+                  (BuildContext context, int index) {
+                    var movie = searchController.search[index];
+                    return GestureDetector(
+                      onTap: () {
+                        R.instance.add(object: MovieDetailsView(movie.id));
+                        log("box ${movie.id}");
+                      },
+                      child: MovieBox(movie: movie),
+                    );
+                  },
+                  //number of items in movie_view page
+                  childCount: searchController.search.length,
+                ),
+              )
             ],
           ),
         ),

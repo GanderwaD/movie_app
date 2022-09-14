@@ -165,12 +165,12 @@ class MovieDetailsView extends ConsumerWidget with RouterObject {
                                 //   textSize: TextSize.large,
                                 // ),
                                 TextWidget(
-                                  "Budget: \n${controller.movieDetail.budget} \n------------------",
+                                  "Budget: \n\$${controller.movieDetail.budget} \n------------------",
                                   textSize: TextSize.large,
                                   fontFamily: 'SanFrancisco',
                                 ),
                                 TextWidget(
-                                  "Revenue: \n${controller.movieDetail.revenue} \n------------------",
+                                  "Revenue: \n\$${controller.movieDetail.revenue} \n------------------",
                                   textSize: TextSize.large,
                                   fontFamily: 'SanFrancisco',
                                 ),

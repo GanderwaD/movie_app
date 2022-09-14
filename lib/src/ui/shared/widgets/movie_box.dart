@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../../../models/movie.dart';
@@ -26,8 +25,8 @@ class MovieBox extends StatelessWidget {
             width: double.infinity,
           ),
           Positioned(
-            top: 10,
-            right: 10,
+            bottom: 42,
+            left: 2,
             child: _GetPopularity(
               voteAverage: movie.voteAverage,
               //voteCount: movie.voteCount,
@@ -86,15 +85,18 @@ class _GetPopularity extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: Container(
-        color: Colors.grey.shade200.withOpacity(0.3),
-        child: Column(
-          children: [
-            const Icon(
-              Icons.star,
-              color: goldGlaze,
-            ),
-            TextWidget("$voteAverage", color: Colors.white),
-          ],
+        color: americanBlue.withOpacity(0.8),
+        child: Padding(
+          padding: const EdgeInsets.all(3.0),
+          child: Row(
+            children: [
+              const Icon(
+                Icons.star,
+                color: goldGlaze,
+              ),
+              TextWidget("$voteAverage", color: Colors.white),
+            ],
+          ),
         ),
       ),
     );

@@ -37,9 +37,24 @@ class MovieDetailsController extends ChangeNotifier {
   List<BackdropImage> backdropImages = [];
   bool isDetailsLoading = false;
   bool isImagesLoading = false;
+  bool isRefresh = false;
 
-  void init() async {
+  init() async {
     await Future.wait([getMovieDetails(), getMovieImages()]);
+  }
+
+  Future getMovieDetails() async {
+    setDetailsLoading(true);
+    movieDetail = await _service.getMovieDetail(movieId);
+    setDetailsLoading(false);
+    notifyListeners();
+  }
+
+  Future getMovieImages() async {
+    setImagesLoading(true);
+    backdropImages = await _service.getMovieImages(movieId);
+    setImagesLoading(false);
+    notifyListeners();
   }
 
   getTextWidgets(List<Genre> genres) {
@@ -49,22 +64,6 @@ class MovieDetailsController extends ChangeNotifier {
     }
     gens = gens.substring(0, gens.length - 2);
     return '$gens]';
-  }
-
-  Future getMovieDetails() async {
-    setDetailsLoading(true);
-    await Future.delayed(const Duration(milliseconds: 500));
-    movieDetail = await _service.getMovieDetail(movieId);
-    setDetailsLoading(false);
-    notifyListeners();
-  }
-
-  Future getMovieImages() async {
-    setImagesLoading(true);
-    await Future.delayed(const Duration(milliseconds: 500));
-    backdropImages = await _service.getMovieImages(movieId);
-    setImagesLoading(false);
-    notifyListeners();
   }
 
   goBack(context) {
@@ -81,9 +80,13 @@ class MovieDetailsController extends ChangeNotifier {
     notifyListeners();
   }
 
+  setRefresh(bool val) {
+    isRefresh = val;
+    notifyListeners();
+  }
+
   onRefresh() async {
-    await Future.delayed(const Duration(milliseconds: 500));
-    init();
+    await init();
     movieDetailsPaginatedController.refreshCompleted();
     notifyListeners();
   }
