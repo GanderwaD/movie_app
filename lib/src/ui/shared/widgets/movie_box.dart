@@ -29,7 +29,6 @@ class MovieBox extends StatelessWidget {
             left: 2,
             child: _GetPopularity(
               voteAverage: movie.voteAverage,
-              //voteCount: movie.voteCount,
             ),
           ),
           Positioned(

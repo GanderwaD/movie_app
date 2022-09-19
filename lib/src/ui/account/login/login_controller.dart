@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../router/router_helper.dart';
-import '../../movies/movies_view.dart';
 import '../../shared/widgets/bases/base_changenotifier.dart';
-import '../auth/auth_provider.dart';
-import '../profile/profile_view.dart';
+import '../../../models/auth/auth_provider.dart';
 
 final loginControllerProvider = ChangeNotifierProvider((ref) {
   return LoginController(ref);

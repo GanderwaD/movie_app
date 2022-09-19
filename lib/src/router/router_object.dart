@@ -1,4 +1,3 @@
-
 abstract class RouterObject {
   String get routeKey;
   String get routePath;

@@ -5,8 +5,7 @@ import 'router_delegate.dart';
 class AppBackButtonDispatcher extends RootBackButtonDispatcher {
   final AppRouterDelegate _routerDelegate;
 
-  AppBackButtonDispatcher(this._routerDelegate)
-      : super();
+  AppBackButtonDispatcher(this._routerDelegate) : super();
 
   @override
   Future<bool> didPopRoute() {

@@ -1,4 +1,3 @@
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -48,7 +47,7 @@ class AppRouterDelegate extends RouterDelegate<RouterAction>
     }
 
     if (ref.read(routerProvider(ref)).barrierDismissible &&
-      Navigator.canPop(appNavigatorKey.currentContext!)) {
+        Navigator.canPop(appNavigatorKey.currentContext!)) {
       R.instance.popWidget(appNavigatorKey.currentContext!);
       return Future.value(true);
     }
@@ -75,9 +74,8 @@ class AppRouterDelegate extends RouterDelegate<RouterAction>
 
     return Future.value(true);
   }
-  
 
- @override
+  @override
   Future<void> setNewRoutePath(RouterAction configuration) {
     _pages.clear();
     _add(configuration);
@@ -109,8 +107,7 @@ class AppRouterDelegate extends RouterDelegate<RouterAction>
     return List.of(_pages);
   }
 
-
-   void _add(RouterAction routerAction) {
+  void _add(RouterAction routerAction) {
     final shouldAddPage = _pages.isEmpty ||
         (_pages.last.arguments as RouterAction).object!.routeKey !=
             routerAction.object!.routeKey;
@@ -120,6 +117,7 @@ class AppRouterDelegate extends RouterDelegate<RouterAction>
       );
     }
   }
+
   bool _remove(arguments) {
     if (_pages.isNotEmpty && _pages.length > 1) {
       // do something with not null arguments
@@ -130,7 +128,6 @@ class AppRouterDelegate extends RouterDelegate<RouterAction>
       return false;
     }
   }
-
 
   void _replace(RouterAction routerAction) {
     if (_pages.isNotEmpty) {

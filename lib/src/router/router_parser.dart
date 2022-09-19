@@ -8,7 +8,7 @@ class AppRouterParser extends RouteInformationParser<RouterAction> {
   Future<RouterAction> parseRouteInformation(
       RouteInformation routeInformation) async {
     //final uri = Uri.parse(routeInformation.location ?? '');
-    //if web platform is configured and deep linking configured 
+    //if web platform is configured and deep linking configured
     return RouterAction(object: const SplashView());
   }
 }

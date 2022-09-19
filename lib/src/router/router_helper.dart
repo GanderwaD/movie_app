@@ -5,9 +5,6 @@ import 'router.dart';
 import 'router_action.dart';
 import 'router_object.dart';
 
-
-
-
 class R {
   late WidgetRef ref;
   static final R _instance = R._internal();
@@ -33,7 +30,7 @@ class R {
 
   popWidget(BuildContext context) {
     updateBarrierState(true);
-    
+
     Navigator.of(context).pop();
   }
 

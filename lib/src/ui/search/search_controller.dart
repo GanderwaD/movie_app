@@ -24,27 +24,54 @@ class SearchController extends ChangeNotifier {
   }
 
   final SearchService _service;
-  final TextEditingController textEditingController = TextEditingController();
+  final TextEditingController searchTextEditingController =
+      TextEditingController();
 
   int page = 1;
-
+  bool isLoading = true;
   PaginatedController searchPaginatedController = PaginatedController();
-  List<Movie> search = [];
+  List<Movie> searchMoviesList = [];
   String? searchText;
 
-  void init() {}
+  void init() {
+    setLoading(true);
+  }
 
-  Future getSearch(String query) async {
-    search = await _service.getSearch(page, query);
-    searchText = query;
+  getSearchBar() async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    if (searchTextEditingController.hasListeners) {
+      searchTextEditingController.addListener(() {
+        if (searchTextEditingController.text.isNotEmpty &&
+            searchTextEditingController.text.trim().length > 2) {
+          getSearch(searchTextEditingController.text.trim());
+        }
+        if (searchTextEditingController.text.isEmpty) {
+          searchMoviesList.clear();
+          notifyListeners();
+        }
+      });
+    }
     notifyListeners();
   }
 
-  setLoadMore() async {
+  Future getSearch(String query) async {
+    setLoading(true);
+    searchMoviesList = await _service.getSearch(page, query);
+    setLoading(false);
+    notifyListeners();
+  }
+
+  onLoadMore() async {
+    setLoading(true);
     page++;
-    search.addAll(await _service.getSearch(page, searchText?? ''));
-    await Future.delayed(const Duration(milliseconds: 500));
+    searchMoviesList.addAll(await _service.getSearch(page, searchText ?? ''));
+    setLoading(false);
     searchPaginatedController.loadComplete();
+    notifyListeners();
+  }
+
+  setLoading(bool val) {
+    isLoading = val;
     notifyListeners();
   }
 

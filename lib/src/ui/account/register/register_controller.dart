@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../shared/widgets/bases/base_changenotifier.dart';
 import '../../shared/widgets/dialog/app_dialog.dart';
-import '../auth/auth_provider.dart';
+import '../../../models/auth/auth_provider.dart';
 
 final registerControllerProvider = ChangeNotifierProvider((ref) {
   return RegisterController(ref);

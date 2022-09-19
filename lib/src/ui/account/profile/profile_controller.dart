@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../router/router_helper.dart';
 import '../../shared/widgets/bases/base_changenotifier.dart';
-import '../auth/auth_provider.dart';
+import '../../../models/auth/auth_provider.dart';
 
 final profileViewProvider = ChangeNotifierProvider((ref) {
   return ProfileViewController(ref);

@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_app/src/ui/home/home_controller.dart';
 import 'package:movie_app/src/ui/movie_detail/movie_details_controller.dart';
+import 'package:movie_app/src/ui/person/actor_details_view.dart';
 import 'package:movie_app/src/ui/shared/widgets/bases/base_scaffold.dart';
 import 'package:movie_app/src/ui/shared/widgets/image/cached_network_image.dart';
 import 'package:movie_app/src/ui/shared/widgets/theme/colors.dart';
@@ -232,6 +233,10 @@ class MovieDetailsView extends ConsumerWidget with RouterObject {
                         ),
                         Column(
                           children: [
+                            ElevatedButton(
+                                onPressed: () => R.instance
+                                    .add(object: ActorDetailsView(movieId)),
+                                child: TextWidget("styledText")),
                             const TextWidget(
                               "Genres",
                               textSize: TextSize.large,

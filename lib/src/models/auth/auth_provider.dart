@@ -9,7 +9,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:movie_app/src/ui/account/auth/auth_model.dart';
+import 'package:movie_app/src/models/auth/auth_model.dart';
 
 final authProvider = Provider<Authentication>((ref) {
   return Authentication();

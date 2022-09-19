@@ -27,6 +27,10 @@ const String moviesPath = '/movies';
 const String movieDetailsKey = 'movieDetails_key';
 const String movieDetailsPath = '/movieDetails';
 
+///actor details view
+const String actorDetailsKey = 'actorDetails_key';
+const String actorDetailsPath = '/actorDetails';
+
 ///movie details view
 const String movieImageKey = 'movieImage_key';
 const String movieImagePath = '/movieImage';

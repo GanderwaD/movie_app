@@ -13,6 +13,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_app/src/router/router_helper.dart';
 import 'package:movie_app/src/ui/account/auth_checker.dart';
 import 'package:movie_app/src/ui/shared/widgets/movie_box.dart';
+import 'package:movie_app/src/ui/shared/widgets/paginated_list/indicator/classic_indicator.dart';
 
 import '../../router/router_constants.dart';
 import '../../router/router_object.dart';
@@ -38,10 +39,36 @@ class SearchView extends ConsumerWidget with RouterObject {
   Widget build(BuildContext context, WidgetRef ref) {
     final searchController = ref.watch(searchControllerProvider);
     return BaseScaffold(
-      body: _getBody(context, searchController),
-      // drawer: const Drawer(
-      //   child: GetDrawer(),
-      // ),
+      body: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) => [
+          _getAppbar(context, searchController),
+        ],
+        body: _getBody(context, searchController),
+      ),
+    );
+  }
+
+  _getAppbar(BuildContext context, SearchController controller) {
+    return SliverAppBar(
+      centerTitle: true,
+      pinned: true,
+      leading: IconButton(
+        onPressed: () => R.instance.add(object: const AuthChecker()),
+        icon: const Icon(Icons.account_circle_outlined,
+            color: brushedSilver, size: 30.0),
+      ),
+      flexibleSpace: Container(
+        decoration: const BoxDecoration(
+          gradient: deepMetalAppBarGradient,
+        ),
+      ),
+      title: const TextWidget(
+        'Search',
+        color: brushedSilver,
+        maxLines: 1,
+        fontFamily: 'FoxCavalier',
+        textSize: TextSize.xxlLarge,
+      ),
     );
   }
 
@@ -60,40 +87,21 @@ class SearchView extends ConsumerWidget with RouterObject {
       child: GestureDetector(
         onTap: () => hideKeyboard(context),
         child: PaginatedList(
+          header: const ClassicHeader(),
+          footer: const ClassicFooter(),
           controller: searchController.searchPaginatedController,
           onRefresh: () => searchController.onRefresh(),
           enablePullUp: true,
-          onLoading: () => searchController.setLoadMore(),
+          onLoading: () => searchController.onLoadMore(),
           child: CustomScrollView(
             slivers: [
-              SliverAppBar(
-                centerTitle: true,
-                pinned: true,
-                leading: IconButton(
-                  onPressed: () => R.instance.add(object: const AuthChecker()),
-                  icon: const Icon(Icons.account_circle_outlined,
-                      color: brushedSilver, size: 30.0),
-                ),
-                flexibleSpace: Container(
-                  decoration: const BoxDecoration(
-                    gradient: deepMetalAppBarGradient,
-                  ),
-                ),
-                title: const TextWidget(
-                  'Search',
-                  color: brushedSilver,
-                  maxLines: 1,
-                  fontFamily: 'FoxCavalier',
-                  textSize: TextSize.xxlLarge,
-                ),
-              ),
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.all(2.0),
                   child: TextFormField(
-                    controller: searchController.textEditingController,
-                    onFieldSubmitted: (value) =>
-                        searchController.getSearch(value),
+                    controller: searchController.searchTextEditingController,
+                    onEditingComplete: () => searchController.getSearchBar(),
+                    //onChanged: (value) => searchController.getSearchBar(),
                     cursorColor: Colors.black,
                     decoration: InputDecoration(
                       fillColor: Colors.blue,
@@ -110,27 +118,38 @@ class SearchView extends ConsumerWidget with RouterObject {
                   ),
                 ),
               ),
-              SliverGrid(
-                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 200.0,
-                    childAspectRatio: 0.6,
-                    mainAxisSpacing: 6.0,
-                    crossAxisSpacing: 6.0),
-                delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) {
-                    var movie = searchController.search[index];
-                    return GestureDetector(
-                      onTap: () {
-                        R.instance.add(object: MovieDetailsView(movie.id));
-                        log("box ${movie.id}");
-                      },
-                      child: MovieBox(movie: movie),
-                    );
-                  },
-                  //number of items in movie_view page
-                  childCount: searchController.search.length,
-                ),
-              )
+              searchController.isLoading
+                  ? const SliverToBoxAdapter(
+                      child: Center(
+                          heightFactor: 20,
+                          child: TextWidget(
+                            "Start Searching For Movies",
+                            color: frenchFuchsia,
+                          )),
+                    )
+                  : SliverGrid(
+                      gridDelegate:
+                          const SliverGridDelegateWithMaxCrossAxisExtent(
+                              maxCrossAxisExtent: 200.0,
+                              childAspectRatio: 0.6,
+                              mainAxisSpacing: 6.0,
+                              crossAxisSpacing: 6.0),
+                      delegate: SliverChildBuilderDelegate(
+                        (BuildContext context, int index) {
+                          var movie = searchController.searchMoviesList[index];
+                          return GestureDetector(
+                            onTap: () {
+                              R.instance
+                                  .add(object: MovieDetailsView(movie.id));
+                              log("box ${movie.id}");
+                            },
+                            child: MovieBox(movie: movie),
+                          );
+                        },
+                        //number of items in movie_view page
+                        childCount: searchController.searchMoviesList.length,
+                      ),
+                    )
             ],
           ),
         ),

@@ -6,7 +6,7 @@ import '../../router/router_object.dart';
 import '../shared/widgets/bases/base_scaffold.dart';
 import '../shared/widgets/text_widget/text_widget.dart';
 import 'account_view.dart';
-import 'auth/auth_provider.dart';
+import '../../models/auth/auth_provider.dart';
 import 'profile/profile_view.dart';
 
 class AuthChecker extends ConsumerWidget with RouterObject {

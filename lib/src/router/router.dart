@@ -20,14 +20,13 @@ class AppRouter extends ChangeNotifier {
   late AppRouterParser parser;
   late RouterAction _currentAction;
 
-   bool barrierDismissible = true;
+  bool barrierDismissible = true;
 
   AppRouter(WidgetRef ref) {
     R.instance.ref = ref;
     _currentAction = RouterAction(
-        object: const SplashView(), 
-        actionType: ActionType.replaceAll); 
-        //default first page
+        object: const SplashView(), actionType: ActionType.replaceAll);
+    //default first page
     delegate = AppRouterDelegate(ref);
     parser = AppRouterParser();
     backButtonDispatcher = AppBackButtonDispatcher(delegate);
@@ -35,7 +34,6 @@ class AppRouter extends ChangeNotifier {
   void resetCurrentAction() {
     _currentAction = RouterAction();
   }
-  
 
   RouterAction get currentAction => _currentAction;
   set currentAction(RouterAction action) {
@@ -43,11 +41,9 @@ class AppRouter extends ChangeNotifier {
     notifyListeners();
   }
 
-   ///carefully it disables android back button
+  ///carefully it disables android back button
   updateBarrierState(bool dismissible) {
     barrierDismissible = dismissible;
     notifyListeners();
   }
 }
-
-
