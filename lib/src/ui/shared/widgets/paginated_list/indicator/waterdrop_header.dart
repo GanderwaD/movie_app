@@ -161,7 +161,7 @@ class _WaterDropHeaderState extends RefreshIndicatorState<WaterDropHeader>
               children: <Widget>[
                 RotatedBox(
                   quarterTurns:
-                      Scrollable.of(context)!.axisDirection == AxisDirection.up
+                      Scrollable.of(context).axisDirection == AxisDirection.up
                           ? 10
                           : 0,
                   child: CustomPaint(
@@ -176,11 +176,11 @@ class _WaterDropHeaderState extends RefreshIndicatorState<WaterDropHeader>
                 ),
                 Container(
                   alignment:
-                      Scrollable.of(context)!.axisDirection == AxisDirection.up
+                      Scrollable.of(context).axisDirection == AxisDirection.up
                           ? Alignment.bottomCenter
                           : Alignment.topCenter,
                   margin:
-                      Scrollable.of(context)!.axisDirection == AxisDirection.up
+                      Scrollable.of(context).axisDirection == AxisDirection.up
                           ? const EdgeInsets.only(bottom: 12.0)
                           : const EdgeInsets.only(top: 12.0),
                   child: widget.idleIcon,

@@ -141,7 +141,7 @@ class RenderSliverRefresh extends RenderSliverSingleBoxAdapter {
   @override
   void performLayout() {
     if (_updateFlag) {
-      Scrollable.of(context)!.position.activity!.applyNewDimensions();
+      Scrollable.of(context).position.activity!.applyNewDimensions();
       _updateFlag = false;
     }
     final double layoutExtent =
