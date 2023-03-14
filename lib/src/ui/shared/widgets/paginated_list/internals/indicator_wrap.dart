@@ -240,7 +240,7 @@ abstract class RefreshIndicatorState<T extends RefreshIndicator>
         refreshStyle: widget.refreshStyle,
         child: RotatedBox(
           quarterTurns: needReverseAll() &&
-                  Scrollable.of(context)!.axisDirection == AxisDirection.up
+                  Scrollable.of(context).axisDirection == AxisDirection.up
               ? 10
               : 0,
           child: buildContent(context, mode),
@@ -287,7 +287,7 @@ abstract class LoadIndicatorState<T extends LoadIndicator> extends State<T>
         return;
       }
 
-      if (mounted) Scrollable.of(context)!.position.correctBy(0.00001);
+      if (mounted) Scrollable.of(context).position.correctBy(0.00001);
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (mounted && _position?.outOfRange == true) {
           activity!.delegate.goBallistic(0);
@@ -503,7 +503,7 @@ mixin IndicatorStateMixin<T extends StatefulWidget, V> on State<T> {
     RefreshNotifier<V>? newMode = V == RefreshStatus
         ? refresher!.controller.headerMode as RefreshNotifier<V>?
         : refresher!.controller.footerMode as RefreshNotifier<V>?;
-    final ScrollPosition newPosition = Scrollable.of(context)!.position;
+    final ScrollPosition newPosition = Scrollable.of(context).position;
     if (newMode != _mode) {
       _mode?.removeListener(_handleModeChange);
       _mode = newMode;
